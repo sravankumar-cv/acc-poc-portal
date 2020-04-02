@@ -1,5 +1,6 @@
 
 import React from 'react';
+import history from "../../history";
 import "./register-partner.css";
 //import { Container } from 'react-bootstrap';
 const emailRegex = RegExp(
@@ -32,14 +33,14 @@ export  default class registerPartner extends React.Component{
       email: null,
       phoneNumber:null,
       password: null,
-      file:null,
+      image:[],
       formErrors: {
         firstName: "",
         lastName: "",
         email: "",
         phoneNumber: "",
         password: "",
-        file:""
+        image:""
       }
     };
   }
@@ -54,8 +55,19 @@ export  default class registerPartner extends React.Component{
         Email: ${this.state.email}
         PhoneNumber:${this.state.phoneNumber}
         Password: ${this.state.password}
-        file:${this.state.file}
+        image:${this.state.image.name}
       `);
+      history.push({
+        pathname:'/partnerProfile',
+        state:{
+         firstName: this.state.firstName,
+          lastName: this.state.lastName,
+          email: this.state.email,
+          PhoneNumber:this.state.phoneNumber,
+          Password: this.state.password,
+          image:this.state.image.name
+        }
+    })  
       //redux action handler
     } else {
       console.error("FORM INVALID - DISPLAY ERROR MESSAGE");
@@ -64,7 +76,14 @@ export  default class registerPartner extends React.Component{
 
   handleChange = e => {
     e.preventDefault();
-    const { name, value,accept } = e.target;
+    if(e.target.files) {
+      const file=e.target.files[0];
+      if(file){
+        this.setState({[e.target.id]:file});
+      }
+    }
+    
+    const { name, value } = e.target;
     console.log(e.target.value);
     let formErrors = { ...this.state.formErrors };
 
@@ -91,9 +110,9 @@ export  default class registerPartner extends React.Component{
         formErrors.password =
           value.length < 6 ? "minimum 6 characaters required" : "";
         break;
-      case "pancardImg":
-        formErrors.file= accept!=='.jpg'?"only jpg file accepted":"";
-        break;
+      // case "pancardImg":
+      //   formErrors.file= accept!=='.jpg'?"only jpg file accepted":"";
+      //   break;
       default:
         break;
     }
@@ -179,8 +198,9 @@ export  default class registerPartner extends React.Component{
           <div className="myfile">
             <input type="file"
             name="pancardImg"
+            id="image"
             noValidate
-            accept='.jpg'
+            accept='image/*'
             onChange={this.handleChange}
             />
           </div>

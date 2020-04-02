@@ -177,7 +177,7 @@ render(){
         //Nav Bar 
         <React.Fragment>
         <Navbar bg="light" expand="lg">
-  <Navbar.Brand href="#home">Welcome {this.props.location.state.name}</Navbar.Brand>
+    <Navbar.Brand href="#home">{`Welcome ${this.props.location.state.firstName} ${this.props.location.state.lastName}`}</Navbar.Brand>
   <Navbar.Toggle aria-controls="basic-navbar-nav" />
   <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="mr-auto">
