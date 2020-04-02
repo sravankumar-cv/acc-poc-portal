@@ -7,6 +7,7 @@ import registerPartner from './components/register-partner/register-partner';
 import registerUser from "./components/register-user/register-user";
 import partnerProfile from './components/partner-profile/profile';
 import userprofile from './components/user-profile/userProfile';
+import Dashboard from './components/Dashboard/Dashboard';
 import history from './history';
 
 export default class Routes extends Component {
@@ -15,7 +16,7 @@ export default class Routes extends Component {
             <Router history={history}>
                  <Route  exact path="/" component={NavBar} />
                 <Switch>
-               
+                    <Route path="/dashboard" component={Dashboard}/>
                     <Route  path="/registerUser" component={registerUser} />
                     <Route  path="/registerPartner" component={registerPartner} />
                     <Route  path="/:partnerProfile" component={partnerProfile} />

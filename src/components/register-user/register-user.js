@@ -60,8 +60,8 @@ export  default class registerUser extends React.Component{
 
   handleChange = e => {
     e.preventDefault();
-    const { name, value, accept } = e.target;
-    console.log('file event is  ',e.target);
+    const { name, value } = e.target;
+    // console.log('event is  ',e.target);
     let formErrors = { ...this.state.formErrors };
 
     switch (name) {
