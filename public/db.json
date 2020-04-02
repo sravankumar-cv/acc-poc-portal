@@ -1,0 +1,33 @@
+{
+    "type":["CA(certified)","CA(practioner)","TAX","return expert","Consultant","Company Secretary","Cost Accountant",
+    "Auditor","START UP expert","LEGAL compliance"
+    ],
+    "Experise":[
+        "Accounting Service",
+        "Auditing and Assurance",
+        "company Registration",
+        "GST Direct Tax",
+        "Indirect Tax",
+        "govenment Registration",
+        "FEMA",
+        "Mergers and Acquisition",
+        "Start Up Service"
+    ],
+    "INDIVIDUAL":[
+        "TAX RETURNS",
+        "TDS",
+        "LEGAL",
+        "MISCELLENEOUS"
+    ],
+    "BUSINESS":[
+        "Business InCorporation",
+        "GST SERVICE",
+        "STARTUP Service",
+        "LEGAL Compliance Service",
+        "FILE TAX RETURNS",
+        "GOVERNMENT REGISTRATION",
+        "TRADEMARK",
+        "MISCELLENEOUS Service"
+    ]
+}
+    
