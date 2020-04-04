@@ -93,18 +93,16 @@ render(){
     const myExpertiseData=this.state.dataset.Experise;
     let mydata=[];
     let tempTypeData= myTypedata.map(val=>{
-       // console.log(val);
         return (
          <span className="myspans" id={Math.random()} key={Math.random()} onClick={(e)=>{
              if(!this.state.type.find(t=>{
                  return t===val;
              })){
-                console.log('inside if');
-                console.log('size of array becomes ',mydata.unshift(val));
-                console.log('aloo',mydata);
-                //console.log(typeof(mydata));
+                
+                console.log('size of array becomes ',mydata.push(val));
+               
+                
                 this.setState({type:mydata});
-                //console.log('state becomes after selection if value doesnt exist ',this.state);
              }
              else{
                  console.log('double click');
@@ -178,7 +176,7 @@ render(){
         <React.Fragment>
         <Navbar bg="light" expand="lg">
     <Navbar.Brand href="#home">{`Welcome ${this.props.location.state.firstName} ${this.props.location.state.lastName}`}</Navbar.Brand>
-  <Navbar.Toggle aria-controls="basic-navbar-nav" />
+  {/* <Navbar.Toggle aria-controls="basic-navbar-nav" />
   <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="mr-auto">
       <Nav.Link href="#home">Home</Nav.Link>
@@ -191,7 +189,7 @@ render(){
         <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
       </NavDropdown>
     </Nav>
-  </Navbar.Collapse>
+  </Navbar.Collapse> */}
 </Navbar>
 
 
