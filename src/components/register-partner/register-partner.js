@@ -58,7 +58,7 @@ export  default class registerPartner extends React.Component{
         image:${this.state.image.name}
       `);
       history.push({
-        pathname:'/partnerProfile',
+        pathname:'/finalsetpsforRegistration',
         state:{
          firstName: this.state.firstName,
           lastName: this.state.lastName,
@@ -178,7 +178,7 @@ export  default class registerPartner extends React.Component{
               onChange={this.handleChange}
             />
             {formErrors.email.length > 0 && (
-              <span className="errorMessage">{formErrors.email}</span>
+              <span className="errorMessage">{formErrors.phoneNumber}</span>
             )}
           </div>
           <div className="password">

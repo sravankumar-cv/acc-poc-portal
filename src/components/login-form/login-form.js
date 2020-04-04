@@ -36,39 +36,12 @@ class LoginForm extends React.Component {
         };
         this.handleOnChange = this.handleOnChange.bind(this);
         this.handleOnSubmit = this.handleOnSubmit.bind(this);
-        //this.Email_validator=this.Email_validator.bind(this);
-        // this.Password_validator=this.Password_validator.bind(this);
+        
     }
-    // Email_validator=()=>{
-    //     console.log('inside email validator');
-    //     let value=this.state.email;
-    //     let mailFormat = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/; 
-        
-    //     console.log('aloo ',mailFormat.test(value.toLowerCase()))
-        
-    //     return mailFormat.test(value.toLowerCase());
-
-    // }
-    // Password_validator=()=>{
-    //     console.log('inside password validator'); 
-    //     return true;
-    // }
+    
 
     handleOnSubmit=(event)=>{
-        //let errorMessege="";
-        // console.log('inside submit ');
         event.preventDefault();
-        // console.log('email id is ',this.state.email,' password is ',this.state.password);
-        // //console.log(event);
-        // console.log('value of email validator ',this.Email_validator());
-        // if(this.Email_validator()===false){
-        //     console.log('email is invalid');
-        //     errorMessege='invalid emailId';
-        // }
-        // else if(this.Email_validator()=== true){
-        //     //dispatch the loginEvent to backend API
-        //     alert('calling backend api');
-        // }
         if (formValid(this.state)) {
           console.log(`
             --SUBMITTING--
@@ -90,9 +63,6 @@ class LoginForm extends React.Component {
     handleOnChange=(e)=>{
       const { name, value } = e.target;
       let formErrors = { ...this.state.formErrors };
-        // this.setState({[event.target.name]:event.target.value});
-        // console.log(event.target.value);
-        // console.log(this.state.email);
         switch(name){
           case "email":
             formErrors.email = emailRegex.test(value)
@@ -112,7 +82,6 @@ class LoginForm extends React.Component {
 
     render() {
       const { formErrors } = this.state;
-      console.log('aloo ',this.props.user);
       if (this.props.user.length > 1) {
         return <Redirect to={{
           pathname:'/dashboard',

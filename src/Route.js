@@ -5,7 +5,7 @@ import homepage from "./components/Homepage/homepage";
 import NavBar from './components/headerComponents/nav';
 import registerPartner from './components/register-partner/register-partner';
 import registerUser from "./components/register-user/register-user";
-import partnerProfile from './components/partner-profile/profile';
+import FinalRegisterPage from './components/register-partner/finalRegisterPage';
 import userprofile from './components/user-profile/userProfile';
 import Dashboard from './components/Dashboard/Dashboard';
 import history from './history';
@@ -19,7 +19,7 @@ export default class Routes extends Component {
                     <Route path="/dashboard" component={Dashboard}/>
                     <Route  path="/registerUser" component={registerUser} />
                     <Route  path="/registerPartner" component={registerPartner} />
-                    <Route  path="/:partnerProfile" component={partnerProfile} />
+                    <Route  path="/:finalsetpsforRegistration" component={FinalRegisterPage} />
                     <Route  path="/:userProfile" component={userprofile} />
                     
                    

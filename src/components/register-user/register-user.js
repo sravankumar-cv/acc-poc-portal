@@ -53,6 +53,7 @@ export  default class registerUser extends React.Component{
         Password: ${this.state.password}
       `);
       //redux action handler
+        
     } else {
       console.error("FORM INVALID - DISPLAY ERROR MESSAGE");
     }
@@ -166,7 +167,7 @@ export  default class registerUser extends React.Component{
               onChange={this.handleChange}
             />
             {formErrors.email.length > 0 && (
-              <span className="errorMessage">{formErrors.email}</span>
+              <span className="errorMessage">{formErrors.phoneNumber}</span>
             )}
           </div>
           <div className="createAccount">
