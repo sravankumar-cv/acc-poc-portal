@@ -1,15 +1,14 @@
 import React from "react";
 import axios from "axios";
+import { connect } from "react-redux";
 import "./finalRegisterPartner.css";
 import history from "../../history";
-import {Navbar,Nav,NavDropdown ,Container, Row, Col,Button} from "react-bootstrap";
+import { RegisterPartner } from "../../REDUX/actions"
+import {Navbar,Container, Row, Col,Button} from "react-bootstrap";
 class FinalRegisterPage extends React.Component{
 constructor(props){
     super();
     this.state={
-        partnername:"",
-        partnerEmail:"",
-        partnerPhoneNo:"",
         dataset:{
             type:[],
             Experise:[],
@@ -17,9 +16,9 @@ constructor(props){
             BUSINESS:[]
         },
             type:[],
-            Experise:[],
-            INDIVIDUAL_VAL:{name:"",value:null},
-            BUSINESS_VAL:{name:"",value:null},
+            Expertise:[],
+            INDIVIDUAL_VAL:null,
+            BUSINESS_VAL:null,
         
         showIndividual:false,
         showBusiness:false,
@@ -31,15 +30,18 @@ constructor(props){
     }
     this.handleIndividual=this.handleIndividual.bind(this);
     this.handleBusiness=this.handleBusiness.bind(this);
-    this.handleFinisRegistration=this.handleFinisRegistration.bind(this);
+    this.handleFinishRegistration=this.handleFinishRegistration.bind(this);
     this.handleOnBusinessChange=this.handleOnBusinessChange.bind(this);
+    this.handleOnIndividualChange=this.handleOnIndividualChange.bind(this);
 }
 componentDidMount(){
     //console.log(this.props);
     // const { handle } = this.props.match.params
     // const { data } = this.props.location.state
     //console.log(this.props.match.params);
-    // console.log(this.props.location.state);
+    console.log('rendering final register',this.props.location.state);
+   
+   
     axios.get('./db.json').then((val)=>{
         //console.log(typeof(val));
         //console.log('the type are',val.data);
@@ -47,16 +49,8 @@ componentDidMount(){
     }).catch(err=>console.log(err));
     
 }
-handleOnBusinessChange=(businessName)=>{
-    this.state.dataset.BUSINESS.find(t=>{
-        return t===businessName;
-    })
-}
+
 handleIndividual=(event)=>{
-    console.log('inside handleindividual');
-    // const individual=this.state.dataset.INDIVIDUAL.map(values=>{
-    //     console.log(values);
-    // })
     if(this.state.showIndividual){
         this.setState({showIndividual:false});
     }
@@ -64,25 +58,54 @@ handleIndividual=(event)=>{
     this.setState({showIndividual:true});
     }
 handleBusiness=(event)=>{
-    console.log('inside handleBusiness');
     if(this.state.showBusiness){
         this.setState({showBusiness:false});
     }
     else
         this.setState({showBusiness:true});
 }
-handleFinisRegistration=(event)=>{
-    if(this.state.type.size()<1){
+handleFinishRegistration=(event)=>{
+    console.log('efvejvfejyvfejfvjeyfvejvfjevj',this.state)
+    if(this.state.type.length===0){
         this.setState({typeError:"please choose any type"});
     }
-    else if (this.state.Experise.size()<1){
+    else if (this.state.Expertise.length===0){
         this.setState({ExpertiseError:"please choose any expertise"});
     }
     else{
         //backend api call axios.post('some api endpoint').then(if promise resolve navigate to homepage)
         //page redirection   for now lets use react router to navigate to home page
-        history.push('/');
+        const finalRegisterData={
+            ...this.props.location.state,
+            type:this.state.type,
+            Expertise:this.state.Expertise,
+            INDIVIDUAL_VAL:this.state.INDIVIDUAL_VAL,
+            BUSINESS_VAL:this.state.BUSINESS_VAL
+        }
+        console.log('data to be sent to action',finalRegisterData);
+        //const data=new FormData();
+        //const payload={
+          //  ...finalRegisterData
+        //};
+       // data.append('filess',this.props.location.state.image);
+        //data.append("myjsondata",JSON.stringify(payload));
+        //console.log('final post request body is ',data);
+        //history.push('/');
+       this.props.RegisterPartner(finalRegisterData);
     }
+}
+handleOnIndividualChange=(event)=>{
+    
+    //this.setState({INDIVIDUAL_VAL:[...this.state.INDIVIDUAL_VAL,event.target.value]})
+    let name=event.target.name;
+    let obj={name:event.target.name,value:event.target.value}
+    this.setState({INDIVIDUAL_VAL:obj});
+}
+handleOnBusinessChange =(event)=>{
+    //this.setState({BUSINESS_VAL:[...this.state.BUSINESS_VAL,event.target.value]});
+    let name=event.target.name;
+    let obj={name:event.target.name,value:event.target.value}
+    this.setState({BUSINESS_VAL:obj});
 }
 render(){
     
@@ -91,18 +114,13 @@ render(){
     const businessData=this.state.dataset.BUSINESS;
     const myTypedata=this.state.dataset.type;
     const myExpertiseData=this.state.dataset.Experise;
-    let mydata=[];
     let tempTypeData= myTypedata.map(val=>{
         return (
          <span className="myspans" id={Math.random()} key={Math.random()} onClick={(e)=>{
              if(!this.state.type.find(t=>{
                  return t===val;
              })){
-                
-                console.log('size of array becomes ',mydata.push(val));
-               
-                
-                this.setState({type:mydata});
+                this.setState({type: [...this.state.type,val]});
              }
              else{
                  console.log('double click');
@@ -110,6 +128,7 @@ render(){
              
          }}> 
               {val}
+             
          </span>
        
         )
@@ -118,16 +137,12 @@ render(){
     let temExpertiseData=myExpertiseData.map(val=>{
         return (
             <span className="myspans" id={Math.random()} key={Math.random()} onClick={(e)=>{
-                console.log(e.target.id,"and value is ",val);
-                if(!this.state.type.find(t=>{
+                if(!this.state.Expertise.find(t=>{
                     return t===val;
                 })){
-                   const mydata=val;
-                   this.setState({type:mydata});
-                   console.log('state becomes after selection expertise if value doesnt exist ',this.state);
+                   this.setState({Expertise:[...this.state.Expertise,val]});
                 }
                 
-                console.log('state becomes withot after selection expertise ',this.state);
             }}> 
                  {val}
             </span>
@@ -135,20 +150,13 @@ render(){
         });
        let individualFinalData=[]
         if(this.state.showIndividual){
-            console.log('show individual is true');
             individualFinalData=individualData.map(values=>{
-                console.log(values);
                 return (
                     <Row style={{marginTop:"2px"}}>
                         <Col>{values} </Col>
                         
-                        <Col><input type={"text"} /></Col>
+                        <Col><input type ="number" onChange={this.handleOnIndividualChange}  name={values}/></Col>
                     </Row>
-                
-                    // <Col md={3}>
-                    //     <input type={"text"}/>
-                    // </Col>
-                    
                 );
             })
         }
@@ -162,7 +170,7 @@ render(){
                     <Row style={{marginTop:"2px"}}>
                         <Col>{values} </Col>
                         
-                        <Col><input type={"text"} onChange={() => this.handleOnBusinessChange({values})}/></Col>
+                        <Col><input type={"number"} onChange={this.handleOnBusinessChange} name={values}/></Col>
                     </Row>
                 )
             })
@@ -176,20 +184,7 @@ render(){
         <React.Fragment>
         <Navbar bg="light" expand="lg">
     <Navbar.Brand href="#home">{`Welcome ${this.props.location.state.firstName} ${this.props.location.state.lastName}`}</Navbar.Brand>
-  {/* <Navbar.Toggle aria-controls="basic-navbar-nav" />
-  <Navbar.Collapse id="basic-navbar-nav">
-    <Nav className="mr-auto">
-      <Nav.Link href="#home">Home</Nav.Link>
-      <Nav.Link href="#link">Link</Nav.Link>
-      <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-        <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-        <NavDropdown.Divider />
-        <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-      </NavDropdown>
-    </Nav>
-  </Navbar.Collapse> */}
+
 </Navbar>
 
 
@@ -199,17 +194,20 @@ render(){
     </Row>
     <Row>
         {tempTypeData}
+        
     </Row>
+    <Row>{this.state.typeError.length>1 ? this.state.typeError:""}</Row>
     <Row style={{marginTop:"30px"}}>
         <h3>Choose Your Expertise:</h3>
     </Row>
     <Row>
         {temExpertiseData}
-    </Row>
+     
+    </Row>  
+    <Row> {this.state.ExpertiseError.length>1 ? this.state.ExpertiseError:""}</Row>
     <Row style={{marginTop:"30px"}}>
         <Col style={{border:"2px solid black"}} xs={12} md={6}>
         <input type={"checkbox"} onChange={(event)=>{
-            console.log('changed individual',event);
             this.handleIndividual();
             //individualFinalData
         }}/> INDIVIDUAL
@@ -218,9 +216,7 @@ render(){
         
         </Col>
         <Col style={{border:"2px solid black"}}  xs={12} md={6}>
-        {/* <InputGroup.Checkbox style={{ marginLeft: '15px' }} >INDIVIDUAL </InputGroup.Checkbox> */}
         <input type={"checkbox"} onChange={(event)=>{
-            console.log('changed individual',event);
             this.handleBusiness();
         }}/> BUSINESS
 
@@ -233,9 +229,8 @@ render(){
     <Row style={{marginTop:"20px"}}>
         <Col>
             <Button onClick={(event)=>{
-                console.log(this.state.type);
-                history.push('/');
-                // {this.handleFinisRegistration(event)}
+                //history.push('/');
+                 {this.handleFinishRegistration(event)}
             }}>Finish Registration</Button>
         </Col>
     </Row>
@@ -247,4 +242,12 @@ render(){
 }
 
 }
-export default FinalRegisterPage;
+// const mapStateToProps = state => {
+//     return { user: state.user.RESPONSE };
+//   };
+  const mapDispacthToProps = dispatch => {
+    return {
+        RegisterPartner: partner => dispatch(RegisterPartner(partner)),
+    };
+  };
+export default connect(null,mapDispacthToProps)(FinalRegisterPage);

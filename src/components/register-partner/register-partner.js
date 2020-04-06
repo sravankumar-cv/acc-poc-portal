@@ -33,7 +33,7 @@ export  default class registerPartner extends React.Component{
       email: null,
       phoneNumber:null,
       password: null,
-      image:[],
+      image:null,
       formErrors: {
         firstName: "",
         lastName: "",
@@ -55,19 +55,35 @@ export  default class registerPartner extends React.Component{
         Email: ${this.state.email}
         PhoneNumber:${this.state.phoneNumber}
         Password: ${this.state.password}
-        image:${this.state.image.name}
+        image:${this.state.image}
       `);
-      history.push({
-        pathname:'/finalsetpsforRegistration',
-        state:{
-         firstName: this.state.firstName,
-          lastName: this.state.lastName,
-          email: this.state.email,
-          PhoneNumber:this.state.phoneNumber,
-          Password: this.state.password,
-          image:this.state.image.name
-        }
-    })  
+      
+    //   history.push({
+    //     pathname:'/finalsetpsforRegistration',
+    //     state:{
+    //      firstName: this.state.firstName,
+    //       lastName: this.state.lastName,
+    //       email: this.state.email,
+    //       PhoneNumber:this.state.phoneNumber,
+    //       Password: this.state.password,
+    //       image:this.state.image
+    //     }
+        
+       
+    // })
+    let temp={
+      firstName: this.state.firstName,
+       lastName: this.state.lastName,
+       email: this.state.email,
+       PhoneNumber:this.state.phoneNumber,
+       Password: this.state.password,
+       image:this.state.image
+     }
+     console.log(temp);
+     history.push({
+       pathname:'/finalsetpsforRegistration',
+       state:temp
+      } )
       //redux action handler
     } else {
       console.error("FORM INVALID - DISPLAY ERROR MESSAGE");
@@ -118,13 +134,19 @@ export  default class registerPartner extends React.Component{
     }
     this.setState({ formErrors, [name]: value }, () => console.log(this.state));
   }
+  handleFileChange=(event)=>{
+    console.log(event.target.files);
+    this.setState({image:event.target.files});
+  }
   render() {
     const { formErrors } = this.state;
     return (
       <div className="wrapper">
       <div className="form-wrapper">
         <h1>Create Account For Partner</h1>
-        <form onSubmit={this.handleSubmit} noValidate>
+        <form onSubmit={this.handleSubmit} noValidate 
+        id="registerPartner" 
+        name="registerPartner" enctype="multipart/form-data">
           <div className="firstName">
             <label htmlFor="firstName">First Name</label>
             <input
@@ -133,6 +155,7 @@ export  default class registerPartner extends React.Component{
               type="text"
               name="firstName"
               noValidate
+              required
               onChange={this.handleChange}
             />
             {formErrors.firstName.length > 0 && (
@@ -197,11 +220,12 @@ export  default class registerPartner extends React.Component{
           </div>
           <div className="myfile">
             <input type="file"
+            multiple
             name="pancardImg"
             id="image"
             noValidate
             accept='image/*'
-            onChange={this.handleChange}
+            onChange={this.handleFileChange}
             />
           </div>
           <div className="createAccount">

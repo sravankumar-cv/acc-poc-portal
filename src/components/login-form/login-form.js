@@ -49,7 +49,7 @@ class LoginForm extends React.Component {
             Password: ${this.state.password}
           `);
           const user={
-            Email: this.state.email,
+            email: this.state.email,
             Password: this.state.password
           }
           //redux action handler
@@ -79,14 +79,18 @@ class LoginForm extends React.Component {
         }
         this.setState({ formErrors, [name]: value }, () => console.log(this.state));
     }
-
+handleCheck=()=>{
+  
+}
     render() {
       const { formErrors } = this.state;
-      if (this.props.user.length > 1) {
+      if (this.props.user.Response_data > 1) {
         return <Redirect to={{
           pathname:'/dashboard',
           state:{userData:this.props.user}
         }}/>;
+      }else{
+
       }
         return (
             <React.Fragment>
@@ -161,7 +165,7 @@ class LoginForm extends React.Component {
     }
 }
 const mapStateToProps = state => {
-  return { user: state.user.Name };
+  return { user: state.user.RESPONSE };
 };
 const mapDispacthToProps = dispatch => {
   return {
