@@ -15,7 +15,7 @@ constructor(props){
             INDIVIDUAL:[],
             BUSINESS:[]
         },
-            type:[],
+            type:{category:""},
             Expertise:[],
             INDIVIDUAL_VAL:null,
             BUSINESS_VAL:null,
@@ -66,7 +66,7 @@ handleBusiness=(event)=>{
 }
 handleFinishRegistration=(event)=>{
     console.log('efvejvfejyvfejfvjeyfvejvfjevj',this.state)
-    if(this.state.type.length===0){
+    if(this.state.type.category.length<1){
         this.setState({typeError:"please choose any type"});
     }
     else if (this.state.Expertise.length===0){
@@ -91,7 +91,7 @@ handleFinishRegistration=(event)=>{
         //data.append("myjsondata",JSON.stringify(payload));
         //console.log('final post request body is ',data);
         //history.push('/');
-       this.props.RegisterPartner(finalRegisterData);
+      this.props.RegisterPartner(finalRegisterData);
     }
 }
 handleOnIndividualChange=(event)=>{
@@ -117,14 +117,14 @@ render(){
     let tempTypeData= myTypedata.map(val=>{
         return (
          <span className="myspans" id={Math.random()} key={Math.random()} onClick={(e)=>{
-             if(!this.state.type.find(t=>{
-                 return t===val;
-             })){
-                this.setState({type: [...this.state.type,val]});
-             }
-             else{
-                 console.log('double click');
-             }
+            if(this.state.type.category!==val){
+                this.setState({type: {category:val}});
+            }
+
+              else   console.log('clicked again');
+                //this.setState({type: [...this.state.type,val]});
+             
+           
              
          }}> 
               {val}

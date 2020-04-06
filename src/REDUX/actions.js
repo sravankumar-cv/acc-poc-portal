@@ -18,8 +18,18 @@ const LoginUser = user => {
 
 const RegisterPartner= partner=>{
   return dispatch =>{
+    console.log('inside action for partner ',partner);
     console.log('inside register partner...action handler...');
-    axios.post("http://localhost:8080/users",partner).then(
+    const temp={
+      name:partner.firstName,
+      email:partner.email,
+      phone_number:partner.PhoneNumber,
+      category:partner.type.category,
+      subcategory:partner.type.Expertise,
+      filess:partner.image,
+      role:"p"
+    }
+    axios.post("http://localhost:8080/users",temp).then(
       res=>{
         console.log(res);
         //dispatch({type:"REGISTER_PARTNER",payload:{Response_data:res.data.data,messege:res.message }})
