@@ -2,7 +2,7 @@ import React from "react";
 import "./login-form.css"
 import { Container, Row, Col } from "react-bootstrap";
 import {Link} from 'react-router-dom';
-import {Redirect} from "react-router";
+//import {Redirect} from "react-router";
 import { connect } from "react-redux";
 import { LoginUser } from "../../REDUX/actions"
 const emailRegex = RegExp(
@@ -50,13 +50,12 @@ class LoginForm extends React.Component {
           `);
           const user={
             email: this.state.email,
-            Password: this.state.password
+            password: this.state.password
           }
-          //redux action handler
+          //redux action handlercon
+         
           this.props.LoginUser(user);
-          
-        } else {
-          console.error("FORM INVALID - DISPLAY ERROR MESSAGE");
+         
         }
     }
     
@@ -84,14 +83,15 @@ handleCheck=()=>{
 }
     render() {
       const { formErrors } = this.state;
-      if (this.props.user.Response_data > 1) {
-        return <Redirect to={{
-          pathname:'/dashboard',
-          state:{userData:this.props.user}
-        }}/>;
-      }else{
+      console.log('bdwqvdjqwvjwvqwjvwqjvwqjcvwjcvqjc ',this.props.user);
+      // if (this.props.user.messege==="success !") {
+      //   return <Redirect to={{
+      //     pathname:'/dashboard',
+      //     state:{userData:this.props.user}
+      //   }}/>;
+      // }else{
 
-      }
+      // }
         return (
             <React.Fragment>
                 <Container>
@@ -165,11 +165,11 @@ handleCheck=()=>{
     }
 }
 const mapStateToProps = state => {
-  return { user: state.user.RESPONSE };
+  return { user: state.user.user };
 };
 const mapDispacthToProps = dispatch => {
   return {
-    LoginUser: user => dispatch(LoginUser(user)),
+    LoginUser:  user=> dispatch(LoginUser(user)),
   };
 };
 export default connect( mapStateToProps,mapDispacthToProps)(LoginForm)

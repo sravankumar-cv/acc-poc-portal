@@ -1,4 +1,5 @@
-
+import { connect } from "react-redux";
+import {RegisterUser} from "../../REDUX/actions"
 import React from 'react';
 const emailRegex = RegExp(
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
@@ -16,12 +17,12 @@ const formValid = ({ formErrors, ...rest }) => {
 
   // validate the form was filled out
   Object.values(rest).forEach(val => {
-    val === null && (valid = false);
+    val === null && (valid = true);
   });
 
   return valid;
 };
-export  default class registerUser extends React.Component{
+class registerUser extends React.Component{
   constructor(props){
     super();
     this.state = {
@@ -30,6 +31,7 @@ export  default class registerUser extends React.Component{
       email: null,
       password: null,
       phoneNumber:null,
+      image:null,
       formErrors: {
         firstName: "",
         lastName: "",
@@ -53,12 +55,27 @@ export  default class registerUser extends React.Component{
         Password: ${this.state.password}
       `);
       //redux action handler
+      const User={
+        name:this.state.firstName+this.state.lastName,
+        password:this.state.password,
+        email:this.state.email,
+        phone_number:this.state.phoneNumber,
+        files:this.state.image,
+        category:"",
+        subcategory:"",
+        role:"U"
+      }
+      console.log(User);
+      this.props.RegisterUser(User)
         
     } else {
       console.error("FORM INVALID - DISPLAY ERROR MESSAGE");
     }
   };
-
+  handleFileChange=(event)=>{
+    console.log(event.target.files[0]);
+    this.setState({image:event.target.files[0]});
+  }
   handleChange = e => {
     e.preventDefault();
     const { name, value } = e.target;
@@ -99,7 +116,7 @@ export  default class registerUser extends React.Component{
       <div className="wrapper">
       <div className="form-wrapper">
         <h1>Create Account For Users</h1>
-        <form onSubmit={this.handleSubmit} noValidate>
+        <form onSubmit={this.handleSubmit} noValidate  encType="multipart/form-data"> 
           <div className="firstName">
             <label htmlFor="firstName">First Name</label>
             <input
@@ -170,6 +187,15 @@ export  default class registerUser extends React.Component{
               <span className="errorMessage">{formErrors.phoneNumber}</span>
             )}
           </div>
+          <div className="myfile">
+            <input type="file"
+            multiple
+            name="filess"
+            id="image"
+            noValidate
+            onChange={this.handleFileChange}
+            />
+          </div>
           <div className="createAccount">
             <button type="submit">Create Account</button>
           </div>
@@ -179,3 +205,9 @@ export  default class registerUser extends React.Component{
     );
   };
 };
+const mapDispacthToProps = dispatch => {
+  return {
+    RegisterUser: User => dispatch(RegisterUser(User)),
+  };
+};
+export default connect(null,mapDispacthToProps)(registerUser);

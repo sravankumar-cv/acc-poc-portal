@@ -14,13 +14,13 @@ import {Badge} from "@material-ui/core";
 import NotificationIcon from '@material-ui/icons/Notifications'
 import Modal from '../demo/modal';
 import LoginForm from "../login-form/login-form";
-import {Navbar,Nav,NavDropdown,Form,FormControl,Button,Container,Row} from 'react-bootstrap'
+import {Navbar,Nav,NavDropdown,Container} from 'react-bootstrap'
 class NavBar extends React.Component {
     constructor() {
         super();
         this.state = {
             isShowing:false,
-            show:false
+            show:false,
         }
     }
     openModalHandler = () => {
@@ -67,16 +67,15 @@ class NavBar extends React.Component {
     }} color="primary" style={{cursor:"pointer",marginRight:"4rem"}}><NotificationIcon /></Badge>
   </Navbar.Collapse>
 </Navbar>
-        
-    </Container>
-  
-            <Modal
+{this.state.isShowing ?    <Modal
                 className="modal"
                 show={this.state.isShowing}
                 close={this.closeModalHandler}>
                     {/* Maybe aircrafts fly very high because they don't want to be seen in plane sight? */}
                     <LoginForm/>
-            </Modal>
+            </Modal>: ''}
+    
+            </Container>
             </React.Fragment>
         )
 

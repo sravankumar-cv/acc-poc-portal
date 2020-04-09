@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import "./finalRegisterPartner.css";
-import history from "../../history";
+//import history from "../../history";
 import { RegisterPartner } from "../../REDUX/actions"
 import {Navbar,Container, Row, Col,Button} from "react-bootstrap";
 class FinalRegisterPage extends React.Component{
@@ -97,13 +97,13 @@ handleFinishRegistration=(event)=>{
 handleOnIndividualChange=(event)=>{
     
     //this.setState({INDIVIDUAL_VAL:[...this.state.INDIVIDUAL_VAL,event.target.value]})
-    let name=event.target.name;
+    //let name=event.target.name;
     let obj={name:event.target.name,value:event.target.value}
     this.setState({INDIVIDUAL_VAL:obj});
 }
 handleOnBusinessChange =(event)=>{
     //this.setState({BUSINESS_VAL:[...this.state.BUSINESS_VAL,event.target.value]});
-    let name=event.target.name;
+    //let name=event.target.name;
     let obj={name:event.target.name,value:event.target.value}
     this.setState({BUSINESS_VAL:obj});
 }
@@ -228,10 +228,7 @@ render(){
 <Container fluid>
     <Row style={{marginTop:"20px"}}>
         <Col>
-            <Button onClick={(event)=>{
-                //history.push('/');
-                 {this.handleFinishRegistration(event)}
-            }}>Finish Registration</Button>
+            <Button onClick={this.handleFinishRegistration}>Finish Registration</Button>
         </Col>
     </Row>
 </Container>

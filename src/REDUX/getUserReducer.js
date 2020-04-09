@@ -1,11 +1,15 @@
 const initialState={
     Name:{},
-    RESPONSE:{}
+    
+    user:{id:"",messege:"",role:""}
 }
 const getUserReducer=(state=initialState,action)=>{
     switch(action.type){
       case "LOGIN":
-        return { ...state, RESPONSE: action.payload };
+         console.log('inside reducer.....',action.payload)
+         const d={...state,user:action.payload}
+         console.log('state is setting to ',d);
+        return { ...state, user:action.payload};
     default:
         return state  
     }
