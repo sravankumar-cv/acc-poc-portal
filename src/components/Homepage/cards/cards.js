@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useState}from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -13,7 +13,7 @@ import Avatar from '@material-ui/core/Avatar';
 import "./cards.css";
 const useStyles = makeStyles({
     root1: {
-        maxWidth: 400,
+        // maxWidth: 400,
     },
 
 });
@@ -34,9 +34,10 @@ const useStylesForAvatar = makeStyles((theme) => ({
     }
 }))
 
-const ImgMediaCard = () => {
+const ImgMediaCard = (props) => {
     const classesForCard = useStyles();
     const classesForAvatar = useStylesForAvatar();
+    const [data,setData]=useState({});
 
     // var kebab = document.querySelector('.kebab'),
     //      middle = document.querySelector('.middle'),
@@ -69,6 +70,7 @@ const ImgMediaCard = () => {
                     <Avatar
                         alt="Remy Sharp"
                         src="https://images.pexels.com/photos/531880/pexels-photo-531880.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                        // src={props.photo}
                         className={classesForAvatar.large}
                         variant="circle"
                     />
@@ -83,17 +85,27 @@ const ImgMediaCard = () => {
                     <div className="myCardContent">
                         <CardContent>
                             <Typography gutterBottom variant="h5" component="h2" align='left'>
-                                Saurabh Shrijan
+                               {props.name}
           </Typography>
                             <Typography gutterBottom variant="h5" component="h2" align='left'>
                                 <hr></hr>
                             </Typography>
-                            <Typography variant="body2" color="textSecondary" component="p" >
-                                Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                                across all continents except Antarctica
-                                Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                                across all continents except Antarctica
-          </Typography>
+                            <Typography variant="body2" color="textSecondary" component="h3" align ='left' >
+                                category:{props.category.length >0 ? props.category:"N.A"}
+                                </Typography>
+                                <br></br>
+                                <Typography variant="body2" color="textSecondary" component="h3" align ='left' >  
+                                Subcategory:{props.subcategory.length>0 ? props.subcategory:"N.A"}
+                                </Typography>
+                                <br></br>
+                                <Typography variant="body2" color="textSecondary" component="h3" align ='left' >  
+                                Role:{props.role}
+                                </Typography>
+                                <Typography variant="body2" color="textSecondary" component="h3" align ='left' >  
+                                verified:{props.verified ? "True" :"False"}
+                                </Typography>
+                                
+                           
                         </CardContent>
                     </div>
 
@@ -108,7 +120,7 @@ const ImgMediaCard = () => {
                                         id="upload"
                                         startIcon={<CloudUploadIcon />}
                                     >
-                                        Upload docs
+                                        Upload
                                     </Button>
                                 </Col>
                                 <Col xs={12} md={{span:6,offset:0}} sm={12} lg={6}>

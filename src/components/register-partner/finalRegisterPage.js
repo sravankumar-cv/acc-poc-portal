@@ -77,20 +77,13 @@ handleFinishRegistration=(event)=>{
         //page redirection   for now lets use react router to navigate to home page
         const finalRegisterData={
             ...this.props.location.state,
-            type:this.state.type,
-            Expertise:this.state.Expertise,
-            INDIVIDUAL_VAL:this.state.INDIVIDUAL_VAL,
-            BUSINESS_VAL:this.state.BUSINESS_VAL
+            category:this.state.type.category,
+            subcategory:this.state.Expertise,
+            role:"P",
+            // INDIVIDUAL_VAL:this.state.INDIVIDUAL_VAL,
+            // BUSINESS_VAL:this.state.BUSINESS_VAL
         }
         console.log('data to be sent to action',finalRegisterData);
-        //const data=new FormData();
-        //const payload={
-          //  ...finalRegisterData
-        //};
-       // data.append('filess',this.props.location.state.image);
-        //data.append("myjsondata",JSON.stringify(payload));
-        //console.log('final post request body is ',data);
-        //history.push('/');
       this.props.RegisterPartner(finalRegisterData);
     }
 }
@@ -183,7 +176,7 @@ render(){
         //Nav Bar 
         <React.Fragment>
         <Navbar bg="light" expand="lg">
-    <Navbar.Brand href="#home">{`Welcome ${this.props.location.state.firstName} ${this.props.location.state.lastName}`}</Navbar.Brand>
+    <Navbar.Brand href="#home">{`Welcome ${this.props.location.state.name}`}</Navbar.Brand>
 
 </Navbar>
 
