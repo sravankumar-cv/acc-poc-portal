@@ -21,15 +21,19 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import Badge from '@material-ui/core/Badge';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-
-import Homepage from "../../Homepage/homepage";
-
+import history from "../../../history";
+import FormDialog from "../../Login-PopUp/dialog";
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
+  },
+  grow:{
+      flexGrow:1
   },
   appBar: {
     transition: theme.transitions.create(['margin', 'width'], {
@@ -47,6 +51,8 @@ const useStyles = makeStyles((theme) => ({
   },
   menuButton: {
     marginRight: theme.spacing(2),
+    marginLeft: 0,
+    // width:'100%'
   },
   hide: {
     display: 'none',
@@ -96,10 +102,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 
-
-
-
-
 }));
 
 export default function PersistentDrawerLeft(){
@@ -109,6 +111,11 @@ export default function PersistentDrawerLeft(){
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
+  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+
+
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -116,7 +123,10 @@ export default function PersistentDrawerLeft(){
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  };
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -125,9 +135,64 @@ export default function PersistentDrawerLeft(){
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
-
+  const handleMobileMenuClose = () => {
+    setMobileMoreAnchorEl(null);
+  };
+const openContent =(val)=>{
+    return val;
+}
+let logedIn=false;
+const onAppBardChange=(parameter)=>{
+    logedIn=true
+    console.log('to be changed....',parameter);
+    console.log('value of logedIn',logedIn);
+}
   const menuId = 'primary-search-account-menu';
+ 
+
   const mobileMenuId = 'primary-search-account-menu-mobile';
+  const renderMobileMenu = (
+    <Menu
+      anchorEl={mobileMoreAnchorEl}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      id={mobileMenuId}
+      keepMounted
+      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      open={isMobileMenuOpen}
+      onClose={handleMobileMenuClose}
+    >
+      <MenuItem>
+        <IconButton aria-label="show 4 new mails" color="inherit">
+          <Badge badgeContent={4} color="secondary">
+            <MailIcon />
+          </Badge>
+        </IconButton>
+        <p>Messages</p>
+      </MenuItem>
+      <MenuItem>
+        <IconButton aria-label="show 11 new notifications" color="inherit">
+          <Badge badgeContent={11} color="secondary">
+            <NotificationsIcon />
+          </Badge>
+        </IconButton>
+        <p>Notifications</p>
+      </MenuItem>
+      <MenuItem onClick={handleProfileMenuOpen}>
+        <IconButton
+          aria-label="account of current user"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          <AccountCircle />
+        </IconButton>
+        <p>Profile</p>
+      </MenuItem>
+    </Menu>
+  );
+
+
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -151,7 +216,7 @@ export default function PersistentDrawerLeft(){
             POC Portal
           </Typography>
 
-
+          <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
@@ -185,9 +250,13 @@ export default function PersistentDrawerLeft(){
               <MoreIcon />
             </IconButton>
             </div>
-
+           
+        {logedIn ? <span>logout</span>:<FormDialog></FormDialog> }
+    
+        
         </Toolbar>
       </AppBar>
+      {renderMobileMenu}
       <Drawer
         className={classes.drawer}
         variant="persistent"
@@ -198,14 +267,16 @@ export default function PersistentDrawerLeft(){
         }}
       >
         <div className={classes.drawerHeader}>
+        <div>POC</div>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+              
+           {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
         </div>
         <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
+          {['Inbox',  'Become A Partner'].map((text, index) => (
+            <ListItem button key={text} onClick={(e)=>history.push('/registerPartner')}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
@@ -213,7 +284,7 @@ export default function PersistentDrawerLeft(){
         </List>
         <Divider />
         <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
+          {['Notifications', 'Trash', 'Spam'].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text} />
@@ -227,7 +298,8 @@ export default function PersistentDrawerLeft(){
         })}
       >
         <div className={classes.drawerHeader} />
-        <Homepage/>
+      
+        {/* <Homepage/> */}
       </main>
     </div>
   );

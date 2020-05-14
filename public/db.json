@@ -2,7 +2,7 @@
     "type":["CA(certified)","CA(practioner)","TAX","return expert","Consultant","Company Secretary","Cost Accountant",
     "Auditor","START UP expert","LEGAL compliance"
     ],
-    "Experise":[
+    "Expertise":[
         "Accounting Service",
         "Auditing and Assurance",
         "company Registration",
@@ -28,6 +28,23 @@
         "GOVERNMENT REGISTRATION",
         "TRADEMARK",
         "MISCELLENEOUS Service"
+    ],
+    "locations":[
+        "Bangalore",
+        "Pune",
+        "Mumbai",
+        "Kolkata",
+        "Chennai",
+        "Nagpur",
+        "Bhubaneswar",
+        "Mohali",
+        "Trivandrum",
+        "Ahmedabad",
+        "Patna",
+        "Lucknow",
+        "Indore",
+        "Raipur",
+        "Bhopal"
     ]
 }
     
