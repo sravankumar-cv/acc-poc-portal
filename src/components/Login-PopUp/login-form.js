@@ -16,7 +16,9 @@ const styles = theme => ({
   }
 });
 const emailRegex = RegExp(
-    /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+  /^([a-zA-Z0-9\'_]+)(\.[a-zA-Z0-9\'_]+)*@([a-zA-Z0-9]([a-zA-Z0-9]{0,61}[a-zA-Z0-9])?\.)([a-zA-Z]{2,3})$/
+  // /^([a-zA-Z0-9\'_]+)(\.[a-zA-Z0-9\'_]+)*@([a-zA-Z0-9]([a-zA-Z0-9]{0,61}[a-zA-Z0-9])?\.)*([a-zA-Z]{2,3})$/
+   // /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
   );
   const formValid = ({ formErrors, ...rest }) => {
     let valid = true;
@@ -91,7 +93,6 @@ handleOnChange=(e)=>{
 render(){
     const { classes } = this.props;
     const { formErrors } = this.state;
-  
     if(this.props.user.messege==="success !"){
       this.props.close();
       return (
@@ -99,8 +100,6 @@ render(){
       )
     }
     return(
-        
-           
                 <div className={classes.margin}>
                      <form onSubmit={this.handleOnSubmit}>
                     <Grid container spacing={10} alignItems="flex-end" style={{marginTop:"1rem"}}>

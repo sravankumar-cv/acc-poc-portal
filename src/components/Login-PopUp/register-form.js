@@ -16,12 +16,22 @@ const styles = theme => ({
   }
 });
 
+const nameRegex=RegExp(
+  
+   /^(([a-zA-Z]+\s)*[a-zA-Z]+){3,}$/
+);
+
 
 const emailRegex = RegExp(
-    /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+  /^([a-zA-Z0-9\'_]+)(\.[a-zA-Z0-9\'_]+)*@([a-zA-Z0-9]([a-zA-Z0-9]{0,61}[a-zA-Z0-9])?\.)([a-zA-Z]{2,3})$/
+   // /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
   );
   const phoneNumberRegex=RegExp(
-    /^[0][1-9]\d{9}$|^[1-9]\d{9}$/
+    /^[6-9]\d{9}$/
+    // /^[0][1-9]\d{9}$|^[1-9]\d{9}$/
+  );
+  const passwordRegex=RegExp(
+    /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{6,}$/
   );
   const formValid = ({ formErrors, ...rest }) => {
     let valid = true;
@@ -93,8 +103,10 @@ const emailRegex = RegExp(
         let formErrors = { ...this.state.formErrors };
         switch (name) {
           case "Name":
-            formErrors.Name =
-              value.length < 3 ? "minimum 3 characaters required" : "";
+            formErrors.Name = nameRegex.test(value)
+          ? ""
+          :"atleast 3 characters having alphabets and spaces only "
+//              value.length < 3 ? "minimum 3 characaters required" : "";
             break;
           case "email":
             formErrors.email = emailRegex.test(value)
@@ -102,13 +114,15 @@ const emailRegex = RegExp(
               : "invalid email address";
             break;
           case "password":
-            formErrors.password =
-              value.length < 6 ? "minimum 6 characaters required" : "";
+            formErrors.password = passwordRegex.test(value)
+            ? ""
+            : "min 6 characters, with at least a symbol, upper and lower case letters and a number ";
+            // value.length < 6 ? "min 6 characters, with at least a symbol, upper and lower case letters and a number " : "";
             break;
           case "phoneNumber":
             formErrors.phoneNumber = phoneNumberRegex.test(parseInt(value))
             ? ""
-            : "Enter 10 digit mobile number";
+            : "Enter vaid 10 digit mobile number";
             break;
           default:
             break;

@@ -1,4 +1,5 @@
 import axios from "axios";
+import log from '../components/logger.service'
 
 const LoginUser = user => {
     return dispatch => {
@@ -8,14 +9,17 @@ const LoginUser = user => {
         .then(res => {
           //console.log("the response data is line 1 ",res);
           if(res.data.status ===500){
+            log('user entered invalid Credentials')
             dispatch({type:"LOGIN",payload:{id:'',messege:'Invalid Credentials',role:''}});
           }
           //console.log("the response data is ",res.data.data[0]._id);
           else{
+            log('user logged in')
             dispatch({ type: "LOGIN", payload: {id:res.data.data[0]._id,messege:res.data.message,role:res.data.data[0].role}});
           }
         })
         .catch(err => {
+          log('error while logging')
           console.log(err);
         });
     //  

@@ -12,12 +12,21 @@ var dotenv=require('dotenv');
 dotenv.config();
 var dburl=process.env.dburl;
 console.log('dbname'+dburl);
-
+const shortid = require('shortid');
 mongoose.connect(dburl,{useNewUrlParser:true,useUnifiedTopology:true});
 console.log('db connected');
 
-// method to register users
+//method for frontend logging
+router.post('/log',(req,res)=>{
+	const fs = require('fs');
+	fs.appendFile('frontendLogger.txt',req.body.log + "\n", (err) => {
+	  if (err) {
+				console.log("logging request failed");
+			   }	
+	})
+})
 
+// method to register users
 router.post('/users',upload.array('files'),function(req,res){
 	console.log('request data for registration ',req.body);
 	//console.log(req.files);
@@ -36,9 +45,14 @@ router.post('/users',upload.array('files'),function(req,res){
 		 pancard=ar[1]!=null?ar[1].path:'';
 	}
 	
-	// var photo=ar[0]!=null?ar[0].path:'';
+	// var idGenerate= function(){
+	// 	randNum= Math.random().toString(20).substr(2, 6);
+	// 	return "YOL"+randNum;
+	// 	}
+
+		// var photo=ar[0]!=null?ar[0].path:'';
 	// var pancard=ar[1]!=null?ar[1].path:'';
-    var UserObj=new User({name:req.body.name,password:req.body.password,email:req.body.email,
+    var UserObj=new User({name:req.body.name,password:req.body.password,email:req.body.email, id:shortid.generate(), 
 	                phone_number:req.body.phone_number,photo:req.body.photo,role:req.body.role,
 					verified:false,created:new Date(),photo:photo,pancard:pancard,category:req.body.category,subcategory:req.body.subcategory});
     UserObj.save(function(err,response){
@@ -75,6 +89,7 @@ router.get('/users',function(req,res){
 	User.find({},function(err,response){
 		if(err){
 			res.json({status:500,message:err.message});
+			next(err)
 		}
 		else{
 			res.json({status:200,response});
@@ -94,10 +109,11 @@ router.get('/users/role/:role',function(req,res){
 });
 
 // get all users by id
-router.get('/users/:id',function(req,res){
+router.get('/users/:id',function(req,res,next){
 	User.find({_id:req.params.id},function(err,response){
 		if(err){
-			res.json({status:500,message:err.message});
+			err.status=500
+			next(err)
 		}
 		else{
 			res.json({status:200,response});
@@ -106,17 +122,21 @@ router.get('/users/:id',function(req,res){
 });
 
 //update user
-app.put('/users',function(req,res){
+app.put('/users',function(req,res,next){
 	id=req.body._id;
 	newdata={name:req.body.name,phone_number:req.body.phone_number,photo:req.body.photo}
 	User.findByIdAndUpdate({id},newdata,function(err,response){
 		if(err){
-			res.json({status:500,message:err.message});
-		    console.log(err);
+			err.status=500
+		    next(err)
 		}
 		else{
 			res.json({status:200,message: 'updated successfully'})
 		}
 	});
 });
+// app.get('/provider/:location',function(req,res,nex){
+// 	location=req.params.location
+// 	User.find({$and:[{role:'P'},{location:location}]})
+// })
   module.exports=router;
