@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles, useTheme, fade } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -25,6 +25,11 @@ import history from "../../../history";
 import FormDialog from "../../Login-PopUp/dialog";
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import InputBase from '@material-ui/core/InputBase';
+import SearchIcon from '@material-ui/icons/Search';
+import log from '../../logger.service'
+//import {connect} from "react-redux";
+//import {Homepage} from "mohityolojpack/src/components/Homepage/homepage.js";
 
 const drawerWidth = 240;
 
@@ -40,6 +45,30 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
+  },
+  search: {
+    position: 'relative',
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: fade(theme.palette.common.white, 0.15),
+    '&:hover': {
+      backgroundColor: fade(theme.palette.common.white, 0.25),
+    },
+    marginRight: theme.spacing(2),
+    marginLeft: 0,
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: theme.spacing(3),
+      width: 'auto',
+    },
+  },
+  searchIcon: {
+    padding: theme.spacing(0, 2),
+    height: '100%',
+    position: 'absolute',
+    pointerEvents: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -115,7 +144,10 @@ export default function PersistentDrawerLeft(){
 
 
 
-
+  // HandleOnChange=(event)=>{
+  //   console.log('search value is...',event.target.value);
+  //     this.setState({search:event.target.value.substr(0,10)});
+  // }
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -129,6 +161,7 @@ export default function PersistentDrawerLeft(){
   };
 
   const handleProfileMenuOpen = (event) => {
+    log('User clicked on profile')
     setAnchorEl(event.currentTarget);
   };
 
@@ -216,6 +249,22 @@ const onAppBardChange=(parameter)=>{
             POC Portal
           </Typography>
 
+          <div className={classes.search}>
+          
+              <SearchIcon />
+            
+            <InputBase
+              placeholder=" Search…"
+              //onChange={this.HandleOnChange.bind(this)}
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
+              inputProps={{ 'aria-label': 'search' }}
+              
+            />
+          </div>
+
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show 4 new mails" color="inherit">
@@ -274,10 +323,26 @@ const onAppBardChange=(parameter)=>{
           </IconButton>
         </div>
         <Divider />
+        {/* <List>
+          {['Inbox'].map((text) => (
+            <ListItem button key={text}>
+              <ListItemIcon><InboxIcon />}</ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItem>
+          ))}
+        </List> */}
         <List>
-          {['Inbox',  'Become A Partner'].map((text, index) => (
+          {['Inbox'].map((text, index) => (
+            <ListItem button key={text}>
+              <ListItemIcon>{index % 2 === 0 ? <InboxIcon />:<InboxIcon/>}</ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItem>
+          ))}
+        </List>
+        <List>
+          {['Become a Partner'].map((text, index) => (
             <ListItem button key={text} onClick={(e)=>history.push('/registerPartner')}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+              <ListItemIcon>{index % 2 === 0 ? <MailIcon />:<MailIcon/>}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
@@ -304,4 +369,5 @@ const onAppBardChange=(parameter)=>{
     </div>
   );
 }
+
 

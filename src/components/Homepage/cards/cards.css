@@ -21,6 +21,15 @@
     
 }
 
+.container {
+  padding: 10px;
+}
+
+ul li {
+  list-style: none;
+  
+}
+
 /* .CardAction{
     background-color: aqua;
     border-top: 2px solid black;
