@@ -52,6 +52,7 @@ web_modules/
 /uploads
 # Optional eslint cache
 .eslintcache
+*.ini
 
 # Microbundle cache
 .rpt2_cache/

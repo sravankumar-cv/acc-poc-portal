@@ -1,4 +1,0 @@
-Request from IP: 137.97.72.190 at 05/06/2020, 12:55:06
-Request from IP: 137.97.72.190 at 05/06/2020, 12:57:35
-user clicked on login at 05/06/2020, 12:57:41
-user clicked on login at 05/06/2020, 12:57:48

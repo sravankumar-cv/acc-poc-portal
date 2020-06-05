@@ -1,23 +1,40 @@
-var express=require('express');
-var app=express();
-var bodyParser = require('body-parser');
-var cors=require('cors');
-var router=require('./route/route.js');
-const myRequestLogger=require('./util/requestLogger');
-const myErrorLogger = require('./util/errorLogger');
+/**
+ * @fileoverview Server configuration file
+ */
+var app = require('express')(),
+    bodyParser = require('body-parser'),
+    cors = require("cors"),
+    chalk = require("chalk"),
+    compression = require("compression"),
+    helmet = require("helmet"),
+    serverPortConfiguration = require("./config/serverPortConfig"),
+    mongoDbConfig = require("./config/mongoDBConfig"),
+    winston = require("./config/serverPortConfig"),
+    user = require('./routers/users');
 
-const PORT=8080;
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+//Middlewares
 app.use(cors());
-app.use(myRequestLogger)
-app.use('/uploads',express.static('uploads'));
-app.use('/',router);
-app.use(myErrorLogger)
+mongoDbConfig.connect();
+app.options("*", cors());
+app.use(helmet());
+app.use(compression());
+app.use(helmet.xssFilter());
+app.use(helmet.noSniff());
+app.use(helmet.hidePoweredBy({setTo:"PHP 4.2.2"}));
+app.use(require("morgan")("combined", {stream: winston.stream}));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
 
-app.listen(PORT,(err)=>{
-    if(!err)
-    console.log('server started on port ',PORT);
-    else 
-        console.log(err);
+//Routes
+app.use('/api/user', user);
+
+app.use(function(err, req, res, next) {
+    console.log(err)
+    return res.status(500).send({ error: err });
 });
+
+app.use("*", (req,res)=> {
+    res.status(404).json("The route you requested has not been found");
+});
+
+app.listen(serverPortConfiguration.port,serverPortConfiguration.host,()=> console.log(`%s Sicarii running on ${serverPortConfiguration.port}`, chalk.green('✓')));
