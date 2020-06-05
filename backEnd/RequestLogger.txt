@@ -1,0 +1,6 @@
+Fri Jun 05 2020 GET /users
+Fri Jun 05 2020 POST /log
+Fri Jun 05 2020 GET /users
+Fri Jun 05 2020 POST /log
+Fri Jun 05 2020 POST /log
+Fri Jun 05 2020 POST /log
