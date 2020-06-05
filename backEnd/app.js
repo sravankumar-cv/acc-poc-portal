@@ -1,7 +1,8 @@
 /**
  * @fileoverview Server configuration file
  */
-var app = require('express')(),
+var express = require('express'),
+    app = express(),
     bodyParser = require('body-parser'),
     cors = require("cors"),
     chalk = require("chalk"),
@@ -10,11 +11,12 @@ var app = require('express')(),
     serverPortConfiguration = require("./config/serverPortConfig"),
     mongoDbConfig = require("./config/mongoDBConfig"),
     winston = require("./config/serverPortConfig"),
-    user = require('./routers/users');
+    auth = require('./routers/auth');
 
 //Middlewares
 app.use(cors());
 mongoDbConfig.connect();
+app.use(express.json());
 app.options("*", cors());
 app.use(helmet());
 app.use(compression());
@@ -26,7 +28,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
 //Routes
-app.use('/api/user', user);
+app.use('/api/auth', auth);
 
 app.use(function(err, req, res, next) {
     console.log(err)
