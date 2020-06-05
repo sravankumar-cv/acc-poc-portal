@@ -4,6 +4,7 @@
  */
 
 const userModel = require('../../model/userModel'),
+    uniqueIdGenerator = require('../../helpers/generateId'),
     passwordValidator = require('../../helpers/passwordValidations');
 
 /**
@@ -16,6 +17,7 @@ exports.userRegister = (req, res) => {
         } else {
             if(!users.length) {
                 userModel.create({
+                    userId: uniqueIdGenerator.generateUniqueId(),
                     name: req.body.name,
                     password: passwordValidator.generatePasswordHash(req.body.password),
                     email: req.body.email,
