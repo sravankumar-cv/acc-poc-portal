@@ -29,6 +29,8 @@ exports.userRegister = (req, res) => {
                         res.status(201).json('User successfully created');
                     }
                 })
+            } else {
+                res.status(400).json("User already exist");
             }
         }
     })

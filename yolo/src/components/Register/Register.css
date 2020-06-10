@@ -1,0 +1,10 @@
+.root {
+    /* flex-grow: 1; */
+    padding-top: 200px;
+    max-width: 70% !important;
+    width: 300px;
+    padding-left: 300px;
+}
+.MuiFormControl-fullWidth {
+    padding-bottom: 50px;
+}

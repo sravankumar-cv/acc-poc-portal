@@ -12,6 +12,7 @@ var express = require('express'),
     mongoDbConfig = require("./config/mongoDBConfig"),
     winston = require("./config/serverPortConfig"),
     auth = require('./routers/auth'),
+    common = require('./routers/common'),
     user = require('./routers/user');
 
 //Middlewares
@@ -31,6 +32,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 //Routes
 app.use('/api/auth', auth);
 app.use('/api/user', user);
+app.use('/api/common', common);
 
 app.use(function(err, req, res, next) {
     console.log(err)
