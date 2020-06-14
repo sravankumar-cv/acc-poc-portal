@@ -21,7 +21,8 @@ exports.userRegister = (req, res) => {
                     name: req.body.name,
                     password: passwordValidator.generatePasswordHash(req.body.password),
                     email: req.body.email,
-                    phone_number: req.body.phone_number
+                    phone_number: req.body.phone_number,
+                    role: 1
                 }, (error, newUser) => {
                     if(error) {
                         res.status(400).json(error);

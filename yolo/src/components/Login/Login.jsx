@@ -43,7 +43,22 @@ export default class Login extends React.Component {
     }
 
     login = (e) => {
-        console.log(e);
+        e.preventDefault();
+        this.props.userLogin(this.state.email, this.state.password);
+        store.subscribe(()=> {
+            if(store.getState().userLogin.error) {
+                this.setState({
+                    open: true
+                })
+                this.setState({
+                    errorMessage: store.getState().userLogin.error
+                })
+            }
+            if(store.getState().userLogin.success.status === true) {
+                window.localStorage.setItem('token', store.getState().userLogin.success.token);
+                history.push('/dashboard');
+            }
+        })
     }
 
     change = (e) => {
@@ -68,7 +83,79 @@ export default class Login extends React.Component {
         return(
             <div>
                 <Header />
-                Login
+                <Grid container
+                    className="rootLoginHead"
+                    alignItems="center"
+                    justify="center"
+                    alignContent="center">
+                    <Grid item
+                        xs={12} 
+                        alignContent="center" 
+                        container
+                        justify="center" 
+                        alignItems="center"
+                    >
+                        <Container fixed>
+                            <Card>
+                                <CardHeader title="Please Login to Yolo"/>
+                                <CardContent>
+                                    <form noValidate autoCapitalize="off" onSubmit={(e) => this.login(e)}>
+                                        <TextField
+                                            id="email"
+                                            label="Enter your Email Address"
+                                            name="email"
+                                            type="email"
+                                            fullWidth
+                                            className="labelRoot"
+                                            error={this.state.errors.email}
+                                            helperText={this.state.errors.email}
+                                            autoFocus
+                                            required
+                                            onChange={(e)=> this.change(e)}
+                                            value={this.state.email}
+                                        />
+                                        <TextField
+                                            id="password"
+                                            label="Enter your password"
+                                            name="password"
+                                            fullWidth
+                                            type="password"
+                                            error={this.state.errors.password}
+                                            helperText={this.state.errors.password}
+                                            autoFocus
+                                            required
+                                            onChange={(e)=> this.change(e)}
+                                            style={{marginBottom: 50}}
+                                            value={this.state.password}
+                                    />
+                                    <Button variant="contained" type="submit">Login</Button>
+                                   </form>
+                                </CardContent>
+                                <CardActions>
+                                    <label>New to Yolo ?</label>
+                                    <Link onClick={this.navigateToRegister}>Sign Up</Link>
+                                </CardActions>
+                            </Card>
+                        </Container>
+                    </Grid>
+                </Grid>
+                <Snackbar
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'center',
+                    }}
+                    open={this.state.open}
+                    autoHideDuration={5000}
+                    onClose={(e,r)=>this.handleClose(e,r)}
+                    message={this.state.errorMessage}
+                    action={
+                    <React.Fragment>
+                        <Button color="secondary" size="small" onClick={(e,r)=>this.handleClose(e,r)}>
+                        Hide
+                        </Button>
+                    </React.Fragment>
+                    }
+                />
             </div>
         )
     }

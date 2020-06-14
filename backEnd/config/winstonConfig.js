@@ -1,5 +1,6 @@
 /**
  * @fileoverview Winston configuration and error handlers
+ * @author Jithin Zacharia
  */
 var appRoot = require("app-root-path");
 var winston = require("winston");

@@ -18,10 +18,11 @@ const privateCertFile = fs.readFileSync('./config/private.key', 'utf-8'),
  * @param {role} role of the current user
  * @returns {String}
  */
-exports.generateJWT = (email, userid) => {
+exports.generateJWT = (email, userid, role) => {
     var payload = {
         email: email,
         userid: userid,
+        role: role
     }
     const token = jwt.sign(payload, privateCertFile, options.signOptions);
     return token;

@@ -19,7 +19,6 @@ export function registerUser (name, email, password, phone_number) {
                 role: 1
             })
         }).then(res=>{
-            console.log(res);
             if(res.status === 201) {
                 return res.json().then(res=>{
                     dispatch(loading(false));

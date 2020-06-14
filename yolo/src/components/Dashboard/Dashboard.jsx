@@ -1,9 +1,13 @@
 import React from 'react';
+import ProcHeader from '../../containers/procHeaderContainer';
 
 export default class Dashboard extends React.Component {
     render() {
         return(
-            <div>Dashboard</div>
+            <div>
+                <ProcHeader />
+                sdsdfsdf
+            </div>
         )
     }
 }

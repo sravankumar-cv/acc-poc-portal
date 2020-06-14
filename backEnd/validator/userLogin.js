@@ -1,7 +1,9 @@
-const { check } = require('express-validator');
+const joi = require('joi');
 
-exports.loginUser = [
-    check('email').normalizeEmail().isEmail(),
-    check('password').exists(),
-    check('role').exists()
-]
+const userLoginSchema = joi.object().keys({
+    email: joi.string().exist().normalize().email(),
+    password: joi.string().exist().required(),
+    role: joi.number().required().exist().valid([1,2,3])
+})
+
+module.exports = userLoginSchema;

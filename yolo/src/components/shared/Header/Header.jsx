@@ -3,9 +3,7 @@ import { history } from '../../../store';
 import { 
     AppBar, Toolbar, 
     Typography, CssBaseline,
-    Link, Button, IconButton, Icon, 
-    makeStyles, Avatar, Popover,
-    List, ListItemIcon, ListItem, Divider, ListItemText
+    Link, Button, makeStyles
 } from '@material-ui/core';
 
 export default function Header() {
@@ -82,7 +80,7 @@ export default function Header() {
             <CssBaseline />
             <AppBar>
                 <Toolbar>
-                <Typography variant="h6">Yolo Network</Typography>
+                <Typography variant="h6">Yoloj Platform</Typography>
                 <Link
                     underline='hover'
                 >Button
@@ -93,69 +91,14 @@ export default function Header() {
                             <div>
                                 <Button className={[classes.margin, classes.btnColorWhite]}>Create your Provider</Button>
                                 <Button className={[classes.margin, classes.btnColorWhite]}>Help</Button>
+                                {
+                                    renderRegister()
+                                }
+                                {
+                                    renderLogin()
+                                }
                             </div>
                     }
-                    {
-                        renderRegister()
-                    }
-                    {
-                        renderLogin()
-                    }
-                    {
-                        isLoggedIn ? <div>
-                            <IconButton onClick={handleClick}>
-                                <Avatar>U</Avatar>
-                                <Popover
-                                    id={id}
-                                    open={open}
-                                    anchorEl={anchorEl}
-                                    onClose={handleClose}
-                                    anchorOrigin={{
-                                        vertical: 'bottom',
-                                        horizontal: 'center',
-                                    }}
-                                    transformOrigin={{
-                                        vertical: 'top',
-                                        horizontal: 'center',
-                                    }}
-                                >
-                                    <div className={classes.popoverRoot}>
-                                        <List component="nav">
-                                            <ListItem button>
-                                                <ListItemIcon>
-                                                    <Icon className="fa fa-cog"></Icon>
-                                                </ListItemIcon>
-                                                <ListItemText primary="Settings"/>
-                                            </ListItem>
-                                            <ListItem button>
-                                                <ListItemIcon>
-                                                    <Icon className="fa fa-cog"></Icon>
-                                                </ListItemIcon>
-                                                <ListItemText primary="Get Help"/>
-                                            </ListItem>
-                                            <ListItem button>
-                                                <ListItemIcon>
-                                                    <Icon className="fa fa-cog" aria-hidden="true"></Icon>
-                                                </ListItemIcon>
-                                                <ListItemText primary="Demo"/>
-                                            </ListItem>
-                                        </List>
-                                        <Divider />
-                                        <List component="nav">
-                                            <ListItem button>
-                                                <ListItemIcon>
-                                                    <Icon className="fa fa-sign-out" aria-hidden="true"></Icon>
-                                                </ListItemIcon>
-                                                <ListItemText primary="Trash" />
-                                            </ListItem>
-                                        </List>
-                                    </div>
-                                </Popover>
-                            </IconButton>
-                        </div>
-                        : null
-                    }
-                    
                 </div>
                 </Toolbar>
             </AppBar>

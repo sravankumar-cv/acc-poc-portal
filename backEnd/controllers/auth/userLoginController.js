@@ -21,8 +21,9 @@ exports.userLogin = (req, res) => {
                 res.status(401).json("Passwords does not match");
             } else {
                 let token = JWTCertifier.generateJWT(
-                    user.email,
-                    user.name
+                    user[0].email,
+                    user[0].name,
+                    1
                 )
                 res.status(200).json({
                     token,

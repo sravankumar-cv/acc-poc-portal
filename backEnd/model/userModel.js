@@ -48,7 +48,7 @@ const userSchema = new mongoose.Schema({
 		type: String,
 		required: false 
 	},
-    role: { 
+    role: {
 		type: Number, 
 		required: true,
 		default: 1
@@ -65,6 +65,11 @@ const userSchema = new mongoose.Schema({
 	pancard:{
 		type:String,
 		required:false
+	},
+	idType:{
+		type: String,
+		required: false,
+		enum: ['PAN', 'SSN', 'ITIN']
 	},
 	category: {
 		type: String,

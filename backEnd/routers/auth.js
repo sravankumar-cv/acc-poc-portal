@@ -1,13 +1,22 @@
-const router = require('express').Router();
-const userRegisterController = require('../controllers/auth/userRegisterController');
-const userLoginController = require('../controllers/auth/userLoginController');
-const userLogoutController = require('../controllers/auth/userLogoutController');
-const validator = require('../validator/userRegister');
-const loginValidator = require('../validator/userLogin');
-const JWTCertifier = require('../helpers/JWTCertifier');
+const router = require('express').Router(),
+    userRegisterController = require('../controllers/auth/userRegisterController'),
+    userLoginController = require('../controllers/auth/userLoginController'),
+    userLogoutController = require('../controllers/auth/userLogoutController'),
+    providerLoginController = require('../controllers/auth/providerLoginContoller'),
+    providerRegisterController = require('../controllers/auth/providerRegisterController'),
+    providerLogoutController = require('../controllers/auth/providerLogoutContoller'),
+    validatorMiddleware = require('../validator/middleware'),
+    registerValidator = require('../validator/userRegister'),
+    loginValidator = require('../validator/userLogin'),
+    providerRegisterValdator = require('../validator/providerRegisterSchema'),
+    providerLoginValidator = require('../validator/providerLoginSchema'),
+    JWTCertifier = require('../helpers/JWTCertifier');
 
-router.post('/register', validator.registerUser, userRegisterController.userRegister);
-router.post('/login', loginValidator.loginUser, userLoginController.userLogin);
+router.post('/register', validatorMiddleware(registerValidator),  userRegisterController.userRegister);
+router.post('/login', validatorMiddleware(loginValidator) ,userLoginController.userLogin);
 router.post('/logout', JWTCertifier.verifyJWT, userLogoutController.userLogout);
+router.post('/provider/register', validatorMiddleware(providerRegisterValdator), providerRegisterController.registerPartner);
+router.post('/provider/login', validatorMiddleware(providerLoginValidator), providerLoginController.partnerLogin);
+router.post('/provider/logout', JWTCertifier.verifyJWT, providerLogoutController.partnerLogout);
 
 module.exports = router;

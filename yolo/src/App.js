@@ -4,8 +4,13 @@ import { history } from './store';
 import ProtectedRoute from './utils/guards';
 import LoginContainer from './containers/userLoginContainer';
 import RegisterContainer from './containers/userRegisterContainer';
+import ProviderLoginContainer from './containers/providerLoginContainer';
+import ProviderRegisterContainer from './containers/providerRegisterContainer';
+import ProviderDashboardContainer from './containers/providerDashboardContainer';
+import AdminLoginContainer from './containers/adminLoginContainer';
 import NotFound from './components/NotFound/NotFound';
-import Home from './components/Home/Home';
+import HomeContainer from './containers/homeContainer';
+import AdminDashboardContainer from './containers/adminDashboardContainer';
 import Dashboard from './components/Dashboard/Dashboard';
 import './App.css';
 
@@ -16,10 +21,15 @@ function App() {
       <div className="App-intro">
         <Router history={ history }>
           <Switch>
-            <Route exact path="/" component={ Home } />
+            <Route exact path="/" component={ HomeContainer } />
             <Route exact path="/register" component={ RegisterContainer } />
             <Route exact path="/login" component={ LoginContainer } />
+            <Route exact path="/provider/login" component = {ProviderLoginContainer} />
+            <Route exact path="/provider/register" component = {ProviderRegisterContainer} />
+            <Route exact path="/admin/login" component={AdminLoginContainer} />
             <ProtectedRoute path="/dashboard" component={ Dashboard } />
+            <ProtectedRoute path="/provider/dashboard" component= {ProviderDashboardContainer} />
+            <ProtectedRoute path="/admin/dashboard" component= {AdminDashboardContainer} />
             <Route path="*" component={ NotFound } />
           </Switch>
         </Router>

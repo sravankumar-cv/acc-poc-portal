@@ -37,7 +37,6 @@ export default class Register extends React.Component {
     }
 
     componentDidMount() {
-        document.title = 'Yolo - Register';
         this.props.getCountries();
         store.subscribe(()=>{
             this.setState({countries: store.getState().getCountries.countries});
@@ -69,8 +68,9 @@ export default class Register extends React.Component {
                 this.setState({
                     errorMessage: store.getState().userRegister.error
                 })
+            } else{ 
+                history.push('/login');
             }
-            console.log(store.getState().userRegister.error);
         })
     }
 
@@ -91,7 +91,8 @@ export default class Register extends React.Component {
                 errors.confirm_password = (this.state.password === value) ? '' : 'Confirm Password should be equal to password';
                 break;
             case 'phone_number':
-                errors.phone_number = value.match(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/) ? '' : 'Invalid phone number.'
+                errors.phone_number = value.match(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/) ? '' : 'Invalid phone number.';
+                break;
             default:
                 break;
         }
@@ -105,7 +106,7 @@ export default class Register extends React.Component {
             <div>
                 <Header />
                 <Grid container 
-                        className="root" 
+                        className="rootHead" 
                         alignContent="center" 
                         container 
                         direction="row" 
@@ -170,17 +171,18 @@ export default class Register extends React.Component {
                                         required
                                         onChange={(e)=> this.change(e)}
                                    />
-                                   <div style={{display: 'inline-flex'}}>
+                                   <div>
                                        <div>
                                        <InputLabel id="demo-simple-select-label">Code</InputLabel>
                                             <Select
                                                 labelId="demo-simple-select-label"
                                                 id="demo-simple-select"
                                                 value={this.state.country_code}
+                                                style={{minWidth:650}}
                                             >
                                                 {
                                                     (this.state.countries && this.state.countries.length) ? this.state.countries.map((item, index)=>{
-                                                    return <MenuItem key={index} value={item.dial_code} onClick={(e)=> this.handleAccessCode(e)}>{item.dial_code}</MenuItem>
+                                                    return <MenuItem key={index} value={item.dial_code} autoWidth={true} onClick={(e)=> this.handleAccessCode(e)}>{item.dial_code}</MenuItem>
                                                     }) : <span>Loading</span>
                                                 }
                                             </Select>
@@ -192,6 +194,7 @@ export default class Register extends React.Component {
                                             name="phone_number"
                                             fullWidth
                                             type="number"
+                                            className="phoneNumber"
                                             error={this.state.errors.phone_number}
                                             helperText={this.state.errors.phone_number}
                                             autoFocus
@@ -199,13 +202,13 @@ export default class Register extends React.Component {
                                             onChange={(e)=> this.change(e)}
                                            />
                                        </div>
-                                   </div>
-                                   <Button variant="contained" type="submit">Sign Up</Button>
+                                   </div><br />
+                                   <Button variant="contained" type="submit" color="primary">Create a Free Account</Button>
                                </form>
                             </CardContent>
                             <CardActions>
                                 <label>Already have an account ? </label>
-                                <Link onClick={this.navigateToLogin}>Login</Link>
+                                <Link href="#" onClick={this.navigateToLogin}>Link</Link>
                             </CardActions>
                         </Card>
                     </Container>

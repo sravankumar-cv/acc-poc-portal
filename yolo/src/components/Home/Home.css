@@ -1,0 +1,44 @@
+.rootPaper {
+    margin-top: 100px;
+    height: 60px;
+    width: 60%;
+    margin-left: 250px;
+}
+.rootSearch {
+    padding: '2px 4px';
+    display: 'flex';
+    padding-top: 100px;
+    align-items: 'center';
+    margin-top: 50px;
+    padding-top:50px;
+    top:3;
+    width: 400
+}
+.cardRoot {
+    max-width: 345px;
+    display: inline;
+}
+
+.media {
+    height: 140px;
+}
+
+.rootGridList {
+    display: 'flex';
+    flex-wrap: 'wrap';
+    justify-content: 'space-around';
+    overflow: 'hidden',
+}
+
+.gridList {
+    width: 500;
+    height: 450,
+}
+.icon {
+    color: 'rgba(255, 255, 255, 0.54)',
+}
+
+.rootGrid {
+    margin-right: 30px;
+    margin-bottom: 30px;
+}

@@ -7,14 +7,15 @@ import {
 export function userLogin (email, password) {
     return(dispatch) => {
         dispatch(loading(true));
-        return fetch('/api/auth/register', {
+        return fetch('/api/auth/login', {
             method: 'POST',
             headers: {
                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 email: email,
-                password: password
+                password: password,
+                role: 1
             })
         }).then(res=> {
             if(res.status === 200) {
