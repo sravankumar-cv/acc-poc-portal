@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Mongoose model for business types
+ */
+
 const mongoose = require('mongoose');
 
 const businessTypeSchema = new mongoose.Schema({

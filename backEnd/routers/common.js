@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Express router for common data services routes.
+ */
+
 const router = require('express').Router(),
     getAllCountriesController = require('../controllers/common/getCountiesController'),
     getFinancialServiceController = require('../controllers/common/getFinanicalSerivicesController'),

@@ -1,5 +1,5 @@
 /**
- * @fileoverview Password validations
+ * @fileoverview Password based validations
  */
 
 const bcrypt = require('bcrypt'),

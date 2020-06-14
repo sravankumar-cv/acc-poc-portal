@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Mongoose model for adding user data.
+ */
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({

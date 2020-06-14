@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Mongoose model for admin data.
+ */
 const mongoose = require('mongoose');
 
 const adminSchema = new mongoose.Schema({
@@ -8,7 +11,7 @@ const adminSchema = new mongoose.Schema({
     name: { 
 		type: String,
 		required: true,
-		min: [3, "Invalid name passed"],
+		min: [3, "Invalid name passed. Please try again later."],
         validate: {
             validator: (name)=> {
                 if(name.length > 3) {

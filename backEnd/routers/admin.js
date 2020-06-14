@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Express router for admin routes.
+ */
 const router = require('express').Router(),
         adminRegisterController = require('../controllers/admin/adminRegisterController'),
         adminLoginController = require('../controllers/admin/adminLoginController'),

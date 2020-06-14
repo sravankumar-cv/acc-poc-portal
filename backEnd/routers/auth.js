@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Express router for user authentication routes.
+ */
 const router = require('express').Router(),
     userRegisterController = require('../controllers/auth/userRegisterController'),
     userLoginController = require('../controllers/auth/userLoginController'),

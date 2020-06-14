@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Mongoose model for country data.
+ */
+
 const mongoose = require('mongoose');
 
 const countrySchema = new mongoose.Schema({
