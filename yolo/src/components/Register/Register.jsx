@@ -107,8 +107,7 @@ export default class Register extends React.Component {
                 <Header />
                 <Grid container 
                         className="rootHead" 
-                        alignContent="center" 
-                        container 
+                        alignContent="center"  
                         direction="row" 
                         justify="center" 
                         alignItems="center">

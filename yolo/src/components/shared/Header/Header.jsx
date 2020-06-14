@@ -61,9 +61,11 @@ export default function Header() {
         title: {
           flexGrow: 1,
         },
-      }));
-      const classes = useStyles();
-      const [anchorEl, setAnchorEl] = React.useState(null);
+    }));
+
+    const classes = useStyles();
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };

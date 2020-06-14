@@ -1,9 +1,9 @@
 import React from 'react';
 import { 
     Grid, Container,
-    Card, InputLabel, TextField, 
+    Card, TextField, 
     CardHeader, CardContent,
-    CardActions, Button, Link, Snackbar
+    Button, Snackbar
 } from '@material-ui/core';
 import Header from '../shared/Header/Header';
 import { history, store } from '../../store';

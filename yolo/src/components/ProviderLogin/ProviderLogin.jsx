@@ -116,7 +116,6 @@ export default class ProviderLogin extends React.Component {
                                             label="Enter your password"
                                             name="password"
                                             fullWidth
-                                            style={{marginBottom: 50}}
                                             type="password"
                                             error={this.state.errors.password}
                                             helperText={this.state.errors.password}

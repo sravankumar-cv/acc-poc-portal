@@ -12,7 +12,6 @@ function Connection(){
     useUnifiedTopology: true
   });
   mongoose.connection.on("error", (err)=>{
-    console.log(err);
     console.log("%s Unable to connect to MongoDB", chalk.red("✗"));
     process.exit();
   });

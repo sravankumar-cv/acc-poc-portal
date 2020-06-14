@@ -1,15 +1,14 @@
 import React from 'react';
 import Header from '../shared/Header/Header';
-import { Typography, InputBase, 
-    Button, Icon, Paper,
+import { InputBase, 
+    Button, Paper,
     Snackbar, Grid,
     Card, CardActions, 
-    CardHeader, CardActionArea, 
+    CardActionArea, 
     CardMedia, CardContent
 } from '@material-ui/core';
 import './Home.css';
-import { AutoComplete, Rating } from '@material-ui/lab';
-import defaultImge from '../../assets/Facebook_headquarters_building.jpg'
+import { Rating } from '@material-ui/lab';
 import { store, history } from '../../store';
 
 export default class Home extends React.Component {

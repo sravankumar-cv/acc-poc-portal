@@ -15,14 +15,6 @@ class RegisterContainer extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        isLoading: state.userRegister.isLoading,
-        error: state.userRegister.error,
-        success: state.userRegister.success
-    }
-}
-
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
        userRegister: userRegisterReducer.registerUser,
@@ -30,4 +22,4 @@ const mapDispatchToProps = (dispatch) => {
     }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RegisterContainer);
+export default connect(null, mapDispatchToProps)(RegisterContainer);

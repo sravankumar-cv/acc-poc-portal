@@ -1,4 +1,6 @@
-import { GET_COUNTRIES_LIST, GET_COUNTRIES_LOADING_TOGGLE, GET_COUNTRIES_NETWORK_ACCESS_FAILURE, GET_COUNTRIES_NETWORK_ACCESS_SUCCESS
+import { GET_COUNTRIES_LOADING_TOGGLE, 
+    GET_COUNTRIES_NETWORK_ACCESS_FAILURE, 
+    GET_COUNTRIES_NETWORK_ACCESS_SUCCESS
 } from '../types/utils';
 
 export function getCountriesList () {
@@ -12,7 +14,6 @@ export function getCountriesList () {
         }).then(res=> {
             if(res.status === 200) {
                 return res.json().then(res=> {
-                    console.log(res);
                     dispatch(loading(false));
                     dispatch(isSuccess(res));
                 })

@@ -10,8 +10,8 @@
 - Authentication and API security is managed by `JWT` tokens.
 - Before starting your server instance, run following commands to dump data to MongoDB
 
-```mongoimport --db poc --collection countries --file ~/infi/accelerate-POC-portal/backEnd/countries.json --jsonArray```
-```mongoimport --db poc --collection businesstypes --file ~/infi/accelerate-POC-portal/backEnd/businessTypes.json --jsonArray```
+```mongoimport --db poc --collection countries --file ~/infi/accelerate-POC-portal/backEnd/countries.json --jsonArray```<br/>
+```mongoimport --db poc --collection businesstypes --file ~/infi/accelerate-POC-portal/backEnd/businessTypes.json --jsonArray```<br />
 ```jithin$ mongoimport --db poc --collection services --file ~/infi/accelerate-POC-portal/backEnd/financialServices.json --jsonArray```
 
 - Start your Db instance by `npm start` or `node app.js` or using `pm2`
