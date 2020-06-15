@@ -23,6 +23,9 @@ export function userLogin (email, password) {
                     dispatch(loading(false));
                     dispatch(isSuccess(res));
                 })
+            } else if(res.status === 500) {
+                dispatch(loading(false));
+                dispatch(isError('Something went wrong from our end. Please try again later.'))
             } else {
                 dispatch(loading(false));
                 return res.json().then(res=> {
