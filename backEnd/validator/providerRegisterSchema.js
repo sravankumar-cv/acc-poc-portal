@@ -12,7 +12,7 @@ const providerRegisterSchema = joi.object().keys({
     idType: joi.string().required().exist(),
     servicesOffered: joi.array().required().exist(),
     providerIdentityImg: joi.string().required().exist(),
-    partnerType: joi.array().required().exist(),
+    partnerType: joi.string().required().exist(),
     role: joi.number().optional().valid(2)
 })
 

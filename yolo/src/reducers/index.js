@@ -11,6 +11,10 @@ import loginProviderReduer from './providerLogin';
 import searchProviderByNameReducer from './searchProvidersByName';
 import adminLoginReducer from './adminLogin';
 import getUserDetailsReducer from './getUserDetails';
+import utilsReducer from './utils';
+import getUnapprovedProvidersReducer from './getUnapprovedList';
+import approveProviderReducer from './approveProvider';
+import updateUserReducer from './userUpdate';
 
 export default combineReducers({
     getCountries: getCountriesReducer,
@@ -23,5 +27,9 @@ export default combineReducers({
     providerLogin: loginProviderReduer,
     searchProviderByName: searchProviderByNameReducer,
     adminLogin: adminLoginReducer,
-    getUserDetails: getUserDetailsReducer
+    getUserDetails: getUserDetailsReducer,
+    utils: utilsReducer,
+    getUnapproved: getUnapprovedProvidersReducer,
+    approveProvider: approveProviderReducer,
+    userUpdate: updateUserReducer
 });

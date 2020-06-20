@@ -1,12 +1,12 @@
 import React from 'react';
-import Header from '../shared/Header/Header';
+import HeaderContainer from '../../containers/headerContainer';
 
 export default class NotFound extends React.Component {
 
     render() {
         return(
             <div>
-                <Header />
+                <HeaderContainer />
                 Not Found
             </div>
         )

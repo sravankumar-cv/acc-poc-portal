@@ -90,7 +90,7 @@ const partnerSchema = new mongoose.Schema({
         enum: [
             'CA(Certified)', 'CA(Practioner)', 
             'TAX Filing Expert', 'Consultant',
-            'TAX Consultant',
+            'TAX Consultant', 'Startup Expert',
             'Company Secretary', 'Cost Accounting', 
             'Auditor', 'StartUp Export', 'Legal Compliance']
     },

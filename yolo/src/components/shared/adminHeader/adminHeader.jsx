@@ -5,9 +5,8 @@ import {
     IconButton, Drawer, ListItem, ListItemIcon, makeStyles,
     useTheme, ListItemText, Icon
 } from '@material-ui/core';
-import {history} from '../../../store';
 import clsx from 'clsx';
-
+import { history } from '../../../store';
 
 const drawerWidth = 240;
 
@@ -69,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function ProcHeader () {
+export default function AdminHeader () {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
@@ -94,14 +93,14 @@ export default function ProcHeader () {
         setName(name);
     }
 
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
     const logout = () => {
       window.localStorage.removeItem('token');
       history.push('/');
     }
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
 
     const opened = Boolean(anchorEl);
     const id = opened ? 'simple-popover' : undefined;
@@ -144,6 +143,13 @@ export default function ProcHeader () {
               {theme.direction === 'ltr' ? <Icon className="fa fa-exchange" /> : <Icon className="fa fa-exchange" />}
             </IconButton>
           </div>
+          <Divider />
+          <List>
+              <ListItem button>
+                <ListItemIcon onClick={() => setName('All History')}> <Icon className="fa fa-history" /></ListItemIcon>
+                <ListItemText primary={'All History'} />
+              </ListItem>
+          </List>
           <Divider />
           <List>
               <ListItem button>

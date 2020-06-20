@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../shared/Header/Header';
+import HeaderContainer from '../../containers/headerContainer';
 import './Login.css';
 import { 
     Grid, Container,
@@ -82,7 +82,7 @@ export default class Login extends React.Component {
     render() {
         return(
             <div>
-                <Header />
+                <HeaderContainer />
                 <Grid container
                     className="rootLoginHead"
                     alignItems="center"

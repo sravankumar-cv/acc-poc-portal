@@ -27,9 +27,10 @@ export function providerRegister(
                     OrganizationRegNumber: OrganizationRegNumber,
                     idType: idType,
                     country: country,
-                    servicesOffered: servicesOffered,
+                    servicesOffered: [],
                     providerIdentityImg: providerIdentityImg,
-                    partnerType: partnerType
+                    partnerType: partnerType,
+                    role: 2
                 })
             }).then(res=> {
                 if(res.status === 201) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../shared/Header/Header';
+import HeaderContainer from '../../containers/headerContainer';
 import './Register.css';
 import { Grid, Container, 
         InputLabel, Card, 
@@ -104,25 +104,15 @@ export default class Register extends React.Component {
     render() {
         return(
             <div>
-                <Header />
-                <Grid container 
-                        className="rootHead" 
-                        alignContent="center"  
-                        direction="row" 
-                        justify="center" 
-                        alignItems="center">
-                    <Grid item 
-                        xs={10} 
-                        alignContent="center" 
-                        container
-                        justify="center" 
-                        alignItems="center">
-                    <Container fixed>
+                <HeaderContainer />
+                <div style={{backgroundColor:'#20ABC7', paddingTop:200, height:'100%', width:'100%', position: 'absolute',top: 0, left: 0}} className="rootCont">
+                    <Grid container>
+                        <Grid item xs={7} style={{marginLeft:100}}>
                         <Card>
-                            <CardHeader title="Register to Yolo" />
+                            <CardHeader title="It seems you are new here! Register to Continue" />
                             <CardContent>
-                               <form noValidate autoCapitalize="off" onSubmit={(e) => this.signUp(e)}>
-                                   <TextField 
+                                <form noValidate autoCapitalize="off" onSubmit={(e) => this.signUp(e)}>
+                                    <TextField 
                                         id="name"
                                         label="Enter your Name"
                                         name="name"
@@ -133,8 +123,8 @@ export default class Register extends React.Component {
                                         autoFocus
                                         required
                                         onChange={(e)=> this.change(e)}
-                                   />
-                                   <TextField
+                                    />
+                                    <TextField
                                         id="email"
                                         label="Enter your email"
                                         name="email"
@@ -145,7 +135,7 @@ export default class Register extends React.Component {
                                         autoFocus
                                         required
                                         onChange={(e)=> this.change(e)}
-                                   />
+                                    />
                                     <TextField
                                         id="password"
                                         label="Enter your password"
@@ -157,8 +147,8 @@ export default class Register extends React.Component {
                                         autoFocus
                                         required
                                         onChange={(e)=> this.change(e)}
-                                   />
-                                   <TextField 
+                                    />
+                                    <TextField 
                                         id="confirm_password"
                                         label="Re-Enter your password"
                                         name="confirm_password"
@@ -169,25 +159,21 @@ export default class Register extends React.Component {
                                         autoFocus
                                         required
                                         onChange={(e)=> this.change(e)}
-                                   />
-                                   <div>
-                                       <div>
-                                       <InputLabel id="demo-simple-select-label">Code</InputLabel>
-                                            <Select
-                                                labelId="demo-simple-select-label"
-                                                id="demo-simple-select"
-                                                value={this.state.country_code}
-                                                style={{minWidth:650}}
-                                            >
-                                                {
-                                                    (this.state.countries && this.state.countries.length) ? this.state.countries.map((item, index)=>{
-                                                    return <MenuItem key={index} value={item.dial_code} autoWidth={true} onClick={(e)=> this.handleAccessCode(e)}>{item.dial_code}</MenuItem>
-                                                    }) : <span>Loading</span>
-                                                }
-                                            </Select>
-                                       </div>
-                                       <div style={{ alignSelf: 'center' }}>
-                                           <TextField 
+                                    />
+                                    <Grid item xs={4} style={{display:'flex'}}>
+                                        <Select
+                                            labelId="demo-simple-select-label"
+                                            id="demo-simple-select"
+                                            value={this.state.country_code}
+                                            style={{minWidth:150}}
+                                        >
+                                            {
+                                                (this.state.countries && this.state.countries.length) ? this.state.countries.map((item, index)=>{
+                                                return <MenuItem key={index} value={item.dial_code} autoWidth={true} onClick={(e)=> this.handleAccessCode(e)}>{item.dial_code}</MenuItem>
+                                                }) : <span>Loading</span>
+                                            }
+                                        </Select>
+                                        <TextField 
                                             id="phone_number"
                                             label="Enter your Phone number"
                                             name="phone_number"
@@ -198,21 +184,22 @@ export default class Register extends React.Component {
                                             helperText={this.state.errors.phone_number}
                                             autoFocus
                                             required
+                                            style={{minWidth:800}}
                                             onChange={(e)=> this.change(e)}
-                                           />
-                                       </div>
-                                   </div><br />
-                                   <Button variant="contained" type="submit" color="primary">Create a Free Account</Button>
-                               </form>
+                                        />
+                                    </Grid>
+                                    <br />
+                                    <Button variant="contained" type="submit" color="primary">Create a Free Account</Button>
+                                </form>
                             </CardContent>
                             <CardActions>
                                 <label>Already have an account ? </label>
                                 <Link href="#" onClick={this.navigateToLogin}>Link</Link>
                             </CardActions>
-                        </Card>
-                    </Container>
+                            </Card>
+                        </Grid>
                     </Grid>
-                </Grid>
+                </div>
                 <Snackbar
                     anchorOrigin={{
                         vertical: 'bottom',

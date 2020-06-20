@@ -1,14 +1,14 @@
 import React from 'react';
-import AdminDashboard from '../components/AdminDashboard/AdminDashboard';
+import AdminApproval from '../components/AdminApproval/AdminApproval';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as adminApproval from '../actions/approveProviderAction';
 import * as getUnapprovedList from '../actions/getUnapprovedProvidersAction';
 
-class AdminDashboardContainer extends React.Component {
+class AdminApprovalContainer extends React.Component {
     render() {
-        return(
-            <AdminDashboard 
+        return (
+            <AdminApproval 
                 getProviderList={this.props.getProviderList}
                 approveProvider={this.props.approveProvider}
             />
@@ -23,4 +23,4 @@ const mapDispatchToProps = dispatch => {
     }, dispatch)
 }
 
-export default connect(null, mapDispatchToProps)(AdminDashboardContainer);
+export default connect(null, mapDispatchToProps)(AdminApprovalContainer);

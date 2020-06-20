@@ -3,12 +3,12 @@ import Header from '../shared/Header/Header';
 import './ProviderRegister.css';
 import {
     Container,
-    InputLabel,
-    StepLabel, Step,
-    Stepper, TextField,
+    InputLabel, Icon,
+    StepLabel, Step, ExpansionPanelSummary,
+    Stepper, TextField, Grid, Typography,
     Paper, Select, Avatar,
-    MenuItem, Chip,
-    Snackbar, Button
+    MenuItem, Chip, ExpansionPanel, ExpansionPanelActions,
+    Snackbar, Button, ExpansionPanelDetails
 } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import { history, store } from '../../store';
@@ -18,23 +18,25 @@ export default class ProviderRegister extends React.Component {
         super();
         this.state = {
             activeStep: 0,
-            steps: ['Partner Details', 'Organization Details', 'Services Details'],
+            steps: ['Partner Details', 'Organization Details', 'Services Details', 'Service Type Details'],
             firstName: '',
             lastName: '',
             password: '',
             email: '',
             countries: [],
+            businessList: ['Business Incorporation', 'GST Service', 'Startup Serices', 'Legal Complaince Service', 'Tax Returns', 'Goverment Registration', 'Trademark', 'Miscelleneous Services'],
+            individualList: ['Tax returns', 'TDS', 'Legal', 'Miscelleneous Services'],
             services: [],
             expertise: [],
             confirmPassword: '',
             phoneNumber: '',
-            country_code: '',
+            country_code: '+91',
             errorMessage: '',
             OrgName: '',
             base64: '',
             OrgAddress: '',
             OrgPINType: '',
-            OrgCountry : '',
+            OrgCountry : 'India',
             OrgRegNumber : '',
             OrgServiceType: '',
             OrgExpertise: '',
@@ -45,7 +47,7 @@ export default class ProviderRegister extends React.Component {
                 lastName: '',
                 OrgName: '',
                 OrgAddress: '',
-                OrgCountry: 'India',
+                OrgCountry: '',
                 OrgRegNumber: '',
                 OrgPINType: '',
                 password: '',
@@ -203,9 +205,79 @@ export default class ProviderRegister extends React.Component {
     }
 
     getStepperContent = () => {
+        if(this.state.activeStep === 3) {
+            return(
+                <Paper style={{height:500}}>
+                    <h4>Please provide your serice type details</h4>
+                    <div style={{display: 'inline-flex'}}>
+                        <div>
+                            <Paper style={{width: 800, marginBottom: 50}}>
+                    <ExpansionPanel style={{width:800}}>
+                        <ExpansionPanelSummary expandIcon={<Icon className="fa fa-sort-desc" aria-hidden="true"/>}>
+                            <Typography>{"For business"}</Typography>
+                        </ExpansionPanelSummary>
+                        <ExpansionPanelSummary >
+                            {/* <InputLabel id="demo-simple-select-label" style={{marginBottom:20}}>Select Services provided for individual</InputLabel><br /> */}
+                            {
+                                (this.state.individualList && this.state.individualList.length) ? this.state.individualList.map((item, index)=> {
+                                    return <Chip label={item}
+                                                    style={{marginBottom: 10, marginRight:10}}
+                                                    onDelete={() => this.handleDelete(item)} 
+                                                    onClick={()=>this.handleClick()}
+                                                    clickable
+                                                    key={index}
+                                                    avatar={<Avatar
+                                                    className="avatarRe">{item[0]}</Avatar>}
+                                     />
+                                }) : <span>No serices found.</span>
+                            }
+                        </ExpansionPanelSummary>
+                    </ExpansionPanel>
+
+                    <ExpansionPanel style={{width:800}}>
+                        <ExpansionPanelSummary expandIcon={<Icon className="fa fa-sort-desc" aria-hidden="true"/>}>
+                            <Typography>{"For business"}</Typography>
+                        </ExpansionPanelSummary>
+                        <ExpansionPanelSummary>
+                            <div>
+                            {/* <InputLabel id="demo-simple-select-label" style={{marginBottom:20}}>Select Services provided for Business</InputLabel> */}
+                            {
+                                (this.state.individualList && this.state.businessList.length) ? this.state.businessList.map((item, index)=> {
+                                    return <Chip label={item}
+                                                    style={{marginBottom: 10, marginRight:10}}
+                                                    onDelete={() => this.handleDelete(item)} 
+                                                    onClick={()=>this.handleClick()}
+                                                    clickable
+                                                    key={index}
+                                                    avatar={<Avatar
+                                                    className="avatarRe">{item[0]}</Avatar>}
+                                     />
+                                }) : <span>No serices found.</span>
+                            }
+                            </div>
+                        </ExpansionPanelSummary>
+                    </ExpansionPanel>
+                </Paper>
+                </div>
+                </div><br/>
+                <Button disabled={this.state.activeStep === 0} onClick={this.handleBack} 
+                        style={{marginRight:30}} variant="outlined"
+                    >Back</Button>
+                    <Button onClick={this.handleReset} 
+                        variant="outlined" 
+                        color="secondary" 
+                        style={{marginRight:30}}>Reset Form
+                    </Button>
+                    <Button onClick={this.createOrganization} 
+                        variant="outlined" 
+                        color="primary">Create your Provider Account
+                    </Button>
+                </Paper>
+            )
+        }
         if(this.state.activeStep === 2) {
             return (
-                <Paper style={{height:400}}>
+                <Paper style={{height:500}}>
                     <h4>Enter your Organization Services</h4>
                     <div style={{display: 'inline-flex'}}>
                         <div>
@@ -213,19 +285,20 @@ export default class ProviderRegister extends React.Component {
                                 {
                                     this.state.showAlert ? <Alert severity="warning">Cannot delete. Atleast one expertise required</Alert> : null
                                 }
-                            <InputLabel id="demo-simple-select-label" style={{marginBottom:20}}>Select your service Type</InputLabel>
-                                {
-                                    (this.state.services && this.state.services.length) ? this.state.services.map((item, index)=>{
-                                    return <Chip label={item.name}
-                                                style={{marginBottom: 10, marginRight:10}}
-                                                onDelete={() => this.handleDelete(item)} 
-                                                onClick={()=>this.handleClick()}
-                                                clickable
-                                                key={index}
-                                                avatar={<Avatar>{item.name[0]}</Avatar>}
-                                            />
-                                    }) : <span>No Serice type selected. Atleast one expertise required.</span>
-                                }
+                                <InputLabel id="demo-simple-select-label" style={{marginBottom:20}}>Select your service Type</InputLabel>
+                                    {
+                                        (this.state.services && this.state.services.length) ? this.state.services.map((item, index)=>{
+                                        return <Chip label={item.name}
+                                                    style={{marginBottom: 10, marginRight:10}}
+                                                    onDelete={() => this.handleDelete(item)} 
+                                                    onClick={()=>this.handleClick()}
+                                                    clickable
+                                                    key={index}
+                                                    avatar={<Avatar
+                                                    className="avatarRe">{item.name[0]}</Avatar>}
+                                                />
+                                        }) : <span>No Serice type selected. Atleast one expertise required.</span>
+                                    }
                             </Paper>
                            
                         </div>
@@ -247,17 +320,15 @@ export default class ProviderRegister extends React.Component {
                             </Select>
                         </div>
                     </div><br />
-                   <Button disabled={this.state.activeStep === 0} onClick={this.handleBack} 
-                        style={{marginRight:30}} variant="outlined"
-                    >Back</Button>
-                    <Button onClick={this.handleReset} 
-                        variant="outlined" 
-                        color="secondary" 
-                        style={{marginRight:30}}>Reset Form
+                    <Button
+                        disabled={this.state.activeStep === 0}
+                        onClick={this.handleBack} style={{marginRight:30}}
+                        variant="outlined"
+                    >
+                        Back
                     </Button>
-                    <Button onClick={this.createOrganization} 
-                        variant="outlined" 
-                        color="primary">Create your Provider Account
+                    <Button variant="outlined" color="primary" onClick={this.handleNext} style={{marginRight:30}}>
+                        {this.state.activeStep === this.state.steps.length - 1 ? 'Finish' : 'Next'}
                     </Button>
                 </Paper>
             )
@@ -328,38 +399,34 @@ export default class ProviderRegister extends React.Component {
                                 onChange={(e)=> this.change(e)}
                                 value={this.state.confirmPassword}
                             />
-                            <div >
-                                <div>
-                                <InputLabel id="demo-simple-select-label">Code</InputLabel>
-                                    <Select
-                                        labelId="demo-simple-select-label"
-                                        id="demo-simple-sßelect"
-                                        value={this.state.country_code}
-                                        style={{minWidth:550}}
-                                    >
-                                        {
-                                            (this.state.countries && this.state.countries.length) ? this.state.countries.map((item, index)=>{
-                                            return <MenuItem key={index} value={item.dial_code} onClick={(e)=> this.handleAccessCode(e)}>{item.dial_code}</MenuItem>
-                                            }) : <span>Loading</span>
-                                        }
-                                    </Select><br/>
-                                </div><br/>
-                                <div style={{ alignSelf: 'center' }}>
-                                    <TextField 
-                                        id="phone_number"
-                                        label="Enter your Phone number"
-                                        name="phoneNumber"
-                                        fullWidth
-                                        type="number"
-                                        error={this.state.errors.phoneNumber}
-                                        helperText={this.state.errors.phoneNumber}
-                                        autoFocus
-                                        required
-                                        onChange={(e)=> this.change(e)}
-                                        value={this.state.phoneNumber}
-                                    />
-                                </div>
-                            </div>
+                            <Grid item xs={4} style={{display:'flex'}}>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-sßelect"
+                                value={this.state.country_code}
+                                style={{minWidth:150}}
+                            >
+                                {
+                                    (this.state.countries && this.state.countries.length) ? this.state.countries.map((item, index)=>{
+                                    return <MenuItem key={index} value={item.dial_code} onClick={(e)=> this.handleAccessCode(e)}>{item.dial_code}</MenuItem>
+                                    }) : <span>Loading</span>
+                                }
+                            </Select>
+                            <TextField 
+                                id="phone_number"
+                                label="Enter your Phone number"
+                                name="phoneNumber"
+                                fullWidth
+                                type="number"
+                                error={this.state.errors.phoneNumber}
+                                helperText={this.state.errors.phoneNumber}
+                                autoFocus
+                                required
+                                style={{minWidth:400}}
+                                onChange={(e)=> this.change(e)}
+                                value={this.state.phoneNumber}
+                            />
+                            </Grid>
                         </form>
                     </Container>
                     <Button
@@ -405,22 +472,17 @@ export default class ProviderRegister extends React.Component {
                                 onChange={(e)=> this.change(e)}
                                 value={this.state.OrgAddress}
                             />
-                            <div style={{display:'inline-flex'}}>
-                                <div>
-                                    <InputLabel id="countriesLabel">Select your Country</InputLabel>
-                                    <Select id="countriesLabel"
-                                        label='India'
-                                        style={{minWidth:550}}
-                                        value={this.state.OrgCountry}
-                                    >
-                                        {
-                                            (this.state.countries && this.state.countries.length) ? this.state.countries.map((item, index)=> {
-                                                return <MenuItem key={index} value={item.name} onClick={(e)=> this.handleCountrySelect(e)}>{item.name}</MenuItem>
-                                            }) : <span>Loading...</span>
-                                        }
-                                    </Select>
-                                </div>
-                            </div>
+                            <Select id="countriesLabel"
+                                labelId="demo-simple-select-label"
+                                style={{minWidth:550}}
+                                value={this.state.OrgCountry}
+                            >
+                                {
+                                    (this.state.countries && this.state.countries.length) ? this.state.countries.map((item, index)=> {
+                                        return <MenuItem key={index} value={item.name} onClick={(e)=> this.handleCountrySelect(e)}>{item.name}</MenuItem>
+                                    }) : <span>Loading...</span>
+                                }
+                            </Select>
                             <TextField 
                                 fullWidth
                                 label="Enter your Organization Registation Number"
@@ -445,15 +507,16 @@ export default class ProviderRegister extends React.Component {
                                 style={{marginBottom:40}}
                                 value={this.state.OrgPINType}
                             />
-                            <label>Please provide a proof of Organization</label><br />
-                           <input
-                                accept="image/*"
-                                id="raised-button-file"
-                                multiple
-                                type="file"
-                                onChange={(e)=> {this.name(e)}}
-                            />
-                            <label htmlFor="raised-button-file" ref={this.fileInput}></label> 
+                            <Grid item xs={4} style={{display:'flex'}}>
+                                <label>Please provide a proof of Organization</label>
+                                <input
+                                    accept="image/*"
+                                    id="raised-button-file"
+                                    multiple
+                                    type="file"
+                                    onChange={(e)=> {this.name(e)}}
+                                />
+                            </Grid>
                         </form>
                     </Container>
                     <Button

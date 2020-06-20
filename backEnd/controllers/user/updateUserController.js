@@ -15,10 +15,10 @@ exports.updateUser = (req, res) => {
         } else {
             userModel.findOneAndUpdate({email: req.body.email}, {$set: {
                 email: req.body.email,
-                fullName: req.body.fullName,
-                mobileNumber: req.body.mobileNumber,
+                name: req.body.name,
+                phone_number: req.body.phone_number,
                 country: req.body.country,
-                organizationName: req.body.organizationName
+                photo: req.body.photo
             }}, (error, newUser) => {
                 if(error) {
                     res.status(400).json(error);
