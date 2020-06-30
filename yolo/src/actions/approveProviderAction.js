@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Action for approving provider from admin side.
+ */
+
 import {
     PROVIDER_APPROVAL_IS_FAILURE,
     PROVIDER_APPROVAL_IS_SUCCESS,

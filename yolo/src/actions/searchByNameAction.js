@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Action for searching by name.
+ */
+
 import {
     SEARCH_BY_NAME_IS_FAILURE,
     SEARCH_BY_NAME_IS_SUCCESS,

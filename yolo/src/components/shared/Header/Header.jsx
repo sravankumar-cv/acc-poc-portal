@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import { 
     AppBar, Toolbar, 
-    Typography, CssBaseline,
-    Link, Button, makeStyles,
-    Paper, InputBase, Grid, Snackbar
+    Typography, CssBaseline, Select,
+    Link, Button, makeStyles, TextField, Icon, Popper, Fade,
+    Paper, InputBase, Grid, Snackbar, NativeSelect, InputLabel, ClickAwayListener, MenuItem
 } from '@material-ui/core';
 import LoginPopUpContainer from '../../../containers/LoginPopUpContainer';
 import { store, history } from '../../../store';
-import { TOGGLE_LOGIN_DIALOG } from '../../../types/utils';
+import { TOGGLE_LOGIN_DIALOG, FILTER_PROVIDER_BY_COUNTRY, FILTER_PROVIDER_BY_SEARCH } from '../../../types/utils';
 
 export default function Header(props) {
 
@@ -15,15 +15,28 @@ export default function Header(props) {
     const [openDialog, setOpen] = useState(false);
     const [name, setName] = useState("");
     const [location, setLocation] = useState("");
+    const [anchorE, setAnchorE] = React.useState(null);
+    const [placement, setPlacement] = React.useState();
     const [errorMessage, setErrorMessage] = useState("");
+    const [openPopper, setOpenPopper] = useState(false);
+    const [countriesList, setCountriesList] = useState([]);
+    const [selectedCountry, setSelectedCountry] = useState("India");
+    const [selectedSearchItem, setselectedSearchItem] = useState("All");
 
     useEffect(()=> {
         if(history.location.pathname !== '/login' || '/register') {
             setIsLoggedIn(true);
         }
         setIsLoggedIn(false);
-
+        props.getCountriesList();
+        store.subscribe(()=> {
+            setCountriesList(store.getState().getCountries.countries);
+        })
     },[]);
+
+    const navigateToRegister = () => {
+        history.push('/register');
+    }
 
     const change = (e) => {
         const { name, value } = e.target;
@@ -39,27 +52,42 @@ export default function Header(props) {
         }
     }
 
-    const performSearch = () => {
-        props.searchByName(name,location);
-        // store.subscribe(()=>{
-        //     if(store.getState().searchProviderByName.error) {
-        //         this.setState({
-        //             open: true
-        //         })
-        //         this.setState({
-        //             errorMessage: store.getState().searchProviderByName.error
-        //         })
-        //     }
-        // })
+    const navigateToProviderRegister = () => {
+        history.push('/provider/register');
     }
+
+    const navigateToProviderLogin = () => {
+        history.push('/provider/login');
+    }
+
+    const performSearch = (e) => {
+        store.dispatch({
+            type: FILTER_PROVIDER_BY_SEARCH,
+            payload: {
+                'selectedCategory': selectedSearchItem,
+                'item': e.target.value
+            }
+        })
+    }
+
     const renderRegister = ()=> {
         if(history.location.pathname === '/') {
-            return <Button variant="contained" className={classes.margin}>Sign Up</Button>
+            return (
+                <Button variant="contained" className={classes.margin} onClick={navigateToRegister}>Sign Up</Button>
+            )
         }
         if(history.location.pathname === '/login') {
             return  <Button variant="contained" className={classes.margin}>Sign Up</Button>
         }
         return null;
+    }
+
+    const handleSelectedCountry = (e) => {
+        setSelectedCountry(e.target.getAttribute('data-value'))
+        store.dispatch({
+            type: FILTER_PROVIDER_BY_COUNTRY,
+            payload: e.target.getAttribute('data-value')
+        })
     }
 
     const handleClosed = () => {
@@ -68,6 +96,15 @@ export default function Header(props) {
             type: TOGGLE_LOGIN_DIALOG,
             payload: openDialog
         })
+    }
+
+    const handlePopper = (e) => {
+        setOpenPopper(!openPopper);
+        setAnchorE(e.currentTarget);
+    }
+
+    const handleSelectedCategory = (e) => {
+        setselectedSearchItem(e.target.getAttribute('data-value'))
     }
 
     const renderLogin = ()=> {
@@ -85,10 +122,13 @@ export default function Header(props) {
 
         if(history.location.pathname === '/register') {
             return  (
-                <div>
-                    <Button variant="contained" className={classes.margin}>Login</Button>
-                </div>
-                
+                 <div style={{display:'inline'}}>
+                 <Button variant="contained" 
+                     className={classes.margin} 
+                     onClick={handleClosed}>Login
+                 </Button>
+                 <LoginPopUpContainer />
+             </div>
             )
         }
         return null;
@@ -139,39 +179,61 @@ export default function Header(props) {
             <CssBaseline />
             <AppBar>
                 <Toolbar>
-                <Typography variant="h6">Yoloj Platform</Typography>
-                <Paper style={{flex:1, alignSelf:'center', alignItems:'center', marginLeft:'100px',paddingTop:'10px', maxWidth: 800}}>
-                    <InputBase
-                        placeholder="Search by Location"
-                        className="input"
-                        inputProps={{ 'aria-label': 'Search by Name or Services offered' }}
-                        onChange={change}
-                        id="location"
-                        name="location"
-                    />
-                    <InputBase
-                        placeholder="Search by Name"
-                        className="input"
-                        inputProps={{ 'aria-label': 'Search by Name or Services offered' }}
-                        onChange={change}
-                        name="name"
-                    />
-                    <Button variant="contained" color="secondary" onClick={performSearch} style={{marginBottom:10}}>Search</Button>
-                </Paper>
-                <div className={classes.toolbarButtons}>
-                    {
-                        isLoggedIn ? null : 
-                            <div>
-                                <Button className={[classes.margin, classes.btnColorWhite]}>Provider Login</Button>
-                                {
-                                    renderRegister()
-                                }
-                                {
-                                    renderLogin()
-                                }
-                            </div>
-                    }
-                </div>
+                    <div className="PlatformName">
+                        <Typography variant="h6">Yoloj Platform</Typography>
+                        <Select value={selectedCountry} style={{color: '#fff'}}>
+                        {
+                            (countriesList && countriesList.length) ? countriesList.map((item, index) => {
+                            return(<MenuItem key={index} value={item.name} autoWidth={true} onClick={handleSelectedCountry}>{item.name}</MenuItem>)
+                            }) : <span>Loading....</span>
+                        }
+                        </Select>
+                    </div>
+                    <Select value={selectedSearchItem} style={{marginRight: 10,color:"#fff", width:"80px"}}>
+                        <MenuItem value={"all"} autoWidth={true} onClick={handleSelectedCategory}>All Categories </MenuItem>
+                        <MenuItem value={"name"} autoWidth={true} onClick={handleSelectedCategory}>Name</MenuItem>
+                        <MenuItem value={"orgName"} autoWidth={true} onClick={handleSelectedCategory}>Organization Name</MenuItem>
+                    </Select>
+                    <TextField InputProps={{
+                        endAdornment: (
+                            <Icon className="fa fa-search" aria-hidden="true"/>
+                        )
+                    }}
+                    style={{color:"#fff", width:"500px",cursor: "pointer"}}
+                    onChange={performSearch}
+                    >
+
+                    </TextField>
+                    <div className={classes.toolbarButtons}>
+                        {
+                            isLoggedIn ? null : 
+                                <div>
+                                    <Button className={[classes.margin, classes.btnColorWhite]} onClick={handlePopper}>Providers</Button>
+                                    <Button className={[classes.margin, classes.btnColorWhite]}>Contact Us</Button>
+                                    {
+                                        renderRegister()
+                                    }
+                                    {
+                                        renderLogin()
+                                    }
+                                </div>
+                        }
+                    </div>
+                    <Popper open={openPopper} placement={"bottom"} transition anchorEl={anchorE} style={{marginTop:20, width:"300px"}}>
+                    {({ TransitionProps }) => (
+                        <Fade {...TransitionProps} timeout={350}>
+                            <ClickAwayListener onClickAway={handlePopper}>
+                                <Paper className="balloon">
+                                    <div className="arrow"></div>
+                                    <div className="mainPopContent">
+                                        <Button variant="contained" className={classes.margin} style={{minWidth:250, marginLeft:30}} onClick={navigateToProviderRegister}>Provider Register</Button><br/>
+                                        <Button variant="contained" className={classes.margin} style={{minWidth:250, marginLeft:30}} onClick={navigateToProviderLogin}>Provider Login</Button>
+                                    </div>
+                                </Paper>
+                            </ClickAwayListener>
+                        </Fade>
+                    )}
+                </Popper>
                 </Toolbar>
             </AppBar>
             </React.Fragment>

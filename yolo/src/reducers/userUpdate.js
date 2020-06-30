@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Reducer for user update.
+ */
+
 import { 
     USER_UPDATE,
     USER_UPDATE_IS_ERROR, 

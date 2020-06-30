@@ -1,4 +1,7 @@
-import { REGISTER_USER, LOADING_TOGGLE, NETWORK_ACCESS_SUCCESS, NETWORK_ACCESS_FAILURE } from '../types/auth';
+import { 
+    REGISTER_USER, LOADING_TOGGLE, 
+    NETWORK_ACCESS_SUCCESS, NETWORK_ACCESS_FAILURE 
+} from '../types/auth';
 
 let defaultState = {
     name: '',

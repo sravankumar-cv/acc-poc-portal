@@ -1,6 +1,11 @@
+/**
+ * @fileoverview Action for provider register.
+ */
+
 import {
     PROVIDER_REGISTER_IS_FAILURE,
-    PROVIDER_REGISTER_IS_SUCCESS, PROVIDER_REGISTER_LOADING_TOGGLE
+    PROVIDER_REGISTER_IS_SUCCESS, 
+    PROVIDER_REGISTER_LOADING_TOGGLE
 } from '../types/provider';
 
 export function providerRegister(

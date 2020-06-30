@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Reducer for utils actions.
+ */
+
 import { TOGGLE_LOGIN_DIALOG } from '../types/utils';
 
 let defaultState = {

@@ -1,5 +1,10 @@
+/**
+ * @fileoverview Action for register users.
+ */
+
 import { 
-    LOADING_TOGGLE, NETWORK_ACCESS_FAILURE,
+    LOADING_TOGGLE, 
+    NETWORK_ACCESS_FAILURE,
     NETWORK_ACCESS_SUCCESS 
 } from '../types/auth';
 

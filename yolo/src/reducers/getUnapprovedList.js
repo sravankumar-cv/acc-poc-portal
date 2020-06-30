@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Reducer for approving an unapproved provider from admin side.
+ */
+
 import {
     GET_UNAPPROVED_PROVIDER,
     GET_UNAPPROVED_PROVIDER_IS_FAILURE, 

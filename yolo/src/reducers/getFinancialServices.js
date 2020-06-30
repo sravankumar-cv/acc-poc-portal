@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Reducer for getting all the types of financial services.
+ */
+
 import {
     GET_FINANCIAL_SERVICE, GET_FINANCIAL_SERVICE_LOADING_TOGGLE,
     GET_FINANCIAL_SERVICE_NETWORK_ACCESS_SUCCESS, GET_FINANCIAL_SERVICE_NETWORK_ACCESS_FAILURE,

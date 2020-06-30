@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Action for getting all the business types.
+ */
+
 import { 
     GET_BUSINESS_TYPE_SERVICE_LOADING_TOGGLE,
     GET_BUSINESS_TYPE_SERVICE_NETWORK_ACCESS_SUCCESS,

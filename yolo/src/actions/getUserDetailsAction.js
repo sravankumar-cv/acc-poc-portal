@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Action for getting user details after login.
+ */
+
 import { 
     GET_USER_DETAILS_IS_ERROR,
     GET_USER_DETAILS_IS_LOADING,

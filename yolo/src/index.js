@@ -1,15 +1,19 @@
 /**
- * Main server startup file.
+ * Main React server startup file.
  * ChangeLog: 
  *  - Version: 0.0.1
  *      Basic working version.
  *  - Version : 0.1.0
  *      Stable verison.
+ *  - Version : 0.1.2
+ *      Search Functionality
+ * 
  * @todo Fix more bugs
  * @todo Use PropTypes for each component to accept and lint props.
  * @description Main server startup script.
  * @author Jithin Zacharia
  */
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';

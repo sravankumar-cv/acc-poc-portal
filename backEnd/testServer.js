@@ -1,8 +1,7 @@
 /**
- * @fileoverview Server main file
+ * @fileoverview Test Server main file
  */
-var express = require('express'),
-    app = express(),
+var app = require('express')(),
     bodyParser = require('body-parser'),
     cors = require("cors"),
     chalk = require("chalk"),
@@ -14,6 +13,7 @@ var express = require('express'),
     auth = require('./routers/auth'),
     common = require('./routers/common'),
     admin = require('./routers/admin'),
+    provider = require('./routers/provider'),
     user = require('./routers/user');
 
 //Middlewares
@@ -34,13 +34,14 @@ app.use('/api/auth', auth);
 app.use('/api/user', user);
 app.use('/api/common', common);
 app.use('/api/admin', admin);
+app.use('/api/provider', provider);
 
 app.use(function(err, req, res, next) {
     return res.status(500).send({ error: err });
 });
 
 app.use("*", (req,res)=> {
-    res.status(404).json("The route you requested has not been found. Please try again later.");
+    res.status(404).json("The route you requested has not been found");
 });
 
 app.listen(serverPortConfiguration.port,serverPortConfiguration.host,()=> console.log(`%s Yoloj running on ${serverPortConfiguration.port}`, chalk.green('✓')));
