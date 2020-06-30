@@ -13,9 +13,19 @@ import HomeContainer from './containers/homeContainer';
 import AdminDashboardContainer from './containers/adminDashboardContainer';
 import Dashboard from './components/Dashboard/Dashboard';
 import './App.css';
-
+import log from "./utils/logger.service"
 
 function App() {
+  fetch('https://api.ipify.org?format=jsonp?callback=?',{
+    method:'GET',
+    headers:{},
+  })
+  .then(res=>{
+    return res.text()
+  }).then(ip=>{
+    var str="Request from IP: "+ip;
+    log(str);
+  })
   return (
     <div className="App">
       <div className="App-intro">
