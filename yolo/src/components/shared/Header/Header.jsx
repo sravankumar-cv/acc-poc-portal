@@ -7,7 +7,13 @@ import {
 } from '@material-ui/core';
 import LoginPopUpContainer from '../../../containers/LoginPopUpContainer';
 import { store, history } from '../../../store';
-import { TOGGLE_LOGIN_DIALOG, FILTER_PROVIDER_BY_COUNTRY, FILTER_PROVIDER_BY_SEARCH } from '../../../types/utils';
+import { 
+    TOGGLE_LOGIN_DIALOG, 
+    FILTER_PROVIDER_BY_COUNTRY, 
+    FILTER_PROVIDER_BY_SEARCH,
+    FILTER_BY_FINANCIAL_SERVICES,
+    FILTER_BY_BUSINESS_SERVICES
+} from '../../../types/utils';
 
 export default function Header(props) {
 
@@ -22,6 +28,10 @@ export default function Header(props) {
     const [countriesList, setCountriesList] = useState([]);
     const [selectedCountry, setSelectedCountry] = useState("India");
     const [selectedSearchItem, setselectedSearchItem] = useState("All");
+    const [businessTypes, setBusinessTypes] = useState([]);
+    const [financialTypes, setFinancialTypes] = useState([]);
+    const [selectedBusinessType, setSelectedBusinessType] = useState("Company Secretary");
+    const [selectedFinancialType, setSelectedFinancialType] = useState("Banking");
 
     useEffect(()=> {
         if(history.location.pathname !== '/login' || '/register') {
@@ -29,8 +39,12 @@ export default function Header(props) {
         }
         setIsLoggedIn(false);
         props.getCountriesList();
+        props.getBusinessTypes();
+        props.getFinancialServices();
         store.subscribe(()=> {
             setCountriesList(store.getState().getCountries.countries);
+            setBusinessTypes(store.getState().getBusinessTypes.success);
+            setFinancialTypes(store.getState().getFinancialService.success);
         })
     },[]);
 
@@ -86,6 +100,22 @@ export default function Header(props) {
         setSelectedCountry(e.target.getAttribute('data-value'))
         store.dispatch({
             type: FILTER_PROVIDER_BY_COUNTRY,
+            payload: e.target.getAttribute('data-value')
+        })
+    }
+
+    const handleSelectedBusinessType = (e) => {
+        setSelectedBusinessType(e.target.getAttribute('data-value'));
+        store.dispatch({
+            type: FILTER_BY_BUSINESS_SERVICES,
+            payload: e.target.getAttribute('data-value')
+        })
+    }
+
+    const handleSelectedFinancialType = (e) => {
+        setSelectedFinancialType(e.target.getAttribute('data-value'));
+        store.dispatch({
+            type:FILTER_BY_FINANCIAL_SERVICES,
             payload: e.target.getAttribute('data-value')
         })
     }
@@ -189,7 +219,7 @@ export default function Header(props) {
                         }
                         </Select>
                     </div>
-                    <Select value={selectedSearchItem} style={{marginRight: 10,color:"#fff", width:"80px"}}>
+                    <Select value={selectedSearchItem} style={{marginRight: 10, color:"#fff", width:"100px"}}>
                         <MenuItem value={"all"} autoWidth={true} onClick={handleSelectedCategory}>All Categories </MenuItem>
                         <MenuItem value={"name"} autoWidth={true} onClick={handleSelectedCategory}>Name</MenuItem>
                         <MenuItem value={"orgName"} autoWidth={true} onClick={handleSelectedCategory}>Organization Name</MenuItem>
@@ -202,8 +232,23 @@ export default function Header(props) {
                     style={{color:"#fff", width:"500px",cursor: "pointer"}}
                     onChange={performSearch}
                     >
-
                     </TextField>
+
+                    <Select value={selectedBusinessType} style={{marginLeft:10,color: '#fff'}}>
+                        {
+                            (businessTypes && businessTypes.length) ? businessTypes.map((item, index)=> {
+                                return(<MenuItem key={index} value={item.name} onClick={handleSelectedBusinessType}>{item.name}</MenuItem>)
+                            }) : <span>Loading....</span>
+                        }
+                    </Select>
+
+                    <Select value={selectedFinancialType} style={{marginLeft:10,color: '#fff'}}>
+                        {
+                            (financialTypes && financialTypes.length) ? financialTypes.map((item, index)=> {
+                                return(<MenuItem key={index} value={item.name} onClick={handleSelectedFinancialType}>{item.name}</MenuItem>)
+                            }) : <span>Loading...</span>
+                        }
+                    </Select>
                     <div className={classes.toolbarButtons}>
                         {
                             isLoggedIn ? null : 

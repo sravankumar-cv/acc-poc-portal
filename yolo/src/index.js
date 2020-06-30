@@ -1,18 +1,25 @@
 /**
- * Main React server startup file.
- * ChangeLog: 
+ * @description Main React server startup file.
+ *
+ * @changelog: 
  *  - Version: 0.0.1
  *      Basic working version.
- *  - Version : 0.1.0
+ *  - Version: 0.1.0
  *      Stable verison.
- *  - Version : 0.1.2
+ *  - Version: 0.1.2
  *      Search Functionality
+ *  - Version: 0.2.2
+ *      Search Functionality issues fixed.
+ *      Redux store Functionality fixed.
+ *      Search over combination rules.
+ *      Fixed Header problems navigations props.
+ *      Documentation for every module.
  * 
  * @todo Fix more bugs
  * @todo Use PropTypes for each component to accept and lint props.
  * @description Main server startup script.
  * @author Jithin Zacharia
- */
+*/
 
 import React from 'react';
 import ReactDOM from 'react-dom';
