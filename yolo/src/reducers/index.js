@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Root reducer.
+ */
+
 import { combineReducers } from 'redux';
 
 import isLoggedInReducer from './isLoggedIn';
@@ -15,6 +19,7 @@ import utilsReducer from './utils';
 import getUnapprovedProvidersReducer from './getUnapprovedList';
 import approveProviderReducer from './approveProvider';
 import updateUserReducer from './userUpdate';
+import getAllApprovedProviderReducer from './getAllProvider';
 
 export default combineReducers({
     getCountries: getCountriesReducer,
@@ -31,5 +36,6 @@ export default combineReducers({
     utils: utilsReducer,
     getUnapproved: getUnapprovedProvidersReducer,
     approveProvider: approveProviderReducer,
-    userUpdate: updateUserReducer
+    userUpdate: updateUserReducer,
+    getAllApprovedProvider: getAllApprovedProviderReducer
 });

@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Reducer for getting user details.
+ */
+
 import { 
     GET_USER_DETAILS,
     GET_USER_DETAILS_IS_ERROR,

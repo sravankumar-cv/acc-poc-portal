@@ -1,6 +1,11 @@
+/**
+ * @fileoverview Action for Provider login.
+ */
+
 import {
     PROVIDER_LOGIN_LOADING_TOGGLE,
-    PROVIDER_LOGIN_IS_FAILURE, PROVIDER_LOGIN_IS_SUCCESS
+    PROVIDER_LOGIN_IS_FAILURE, 
+    PROVIDER_LOGIN_IS_SUCCESS
 } from '../types/provider';
 
 export function providerLogin(email, password) {

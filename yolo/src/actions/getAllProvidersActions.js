@@ -1,20 +1,20 @@
 /**
- * @fileoverview Action for utilities
+ * @fileoverview Action for getting all approved provides.
  */
 
 import { 
-    GET_COUNTRIES_LOADING_TOGGLE, 
-    GET_COUNTRIES_NETWORK_ACCESS_FAILURE, 
-    GET_COUNTRIES_NETWORK_ACCESS_SUCCESS
-} from '../types/utils';
+    GET_ALL_APPROVED_PROVIDER_IS_LOADING,
+    GET_ALL_APPROVED_PROVIDER_IS_SUCCESS,
+    GET_ALL_APPROVED_PROVIDER_IS_FAILURE
+} from '../types/provider';
 
-export function getCountriesList () {
+export function getAllProviders() {
     return(dispatch) => {
         dispatch(loading(true));
-        return fetch('/api/common/countries', {
+        return fetch('/api/provider/all', {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
             }
         }).then(res=> {
             if(res.status === 200) {
@@ -24,12 +24,14 @@ export function getCountriesList () {
                 })
             } else if(res.status === 500) {
                 dispatch(loading(false));
-                dispatch(isError('Something went wrong from our end. Please try again later.'))
+                dispatch(isError('Something went wrong. Please try again later.'));
             } else {
                 dispatch(loading(false));
-                dispatch(isError(res.statusText));
+                return res.json().then(res=> {
+                    dispatch(isError(res));
+                })
             }
-        }).catch(err=>{
+        }).catch(err=> {
             dispatch(loading(false));
             dispatch(isError(err));
         })
@@ -38,21 +40,21 @@ export function getCountriesList () {
 
 export function loading(loading) {
     return {
-        type: GET_COUNTRIES_LOADING_TOGGLE,
+        type: GET_ALL_APPROVED_PROVIDER_IS_LOADING,
         payload: loading
     }
 }
 
 export function isSuccess(success) {
     return {
-        type: GET_COUNTRIES_NETWORK_ACCESS_SUCCESS,
+        type: GET_ALL_APPROVED_PROVIDER_IS_SUCCESS,
         payload: success
     }
 }
 
 export function isError(err) {
     return {
-        type: GET_COUNTRIES_NETWORK_ACCESS_FAILURE,
+        type: GET_ALL_APPROVED_PROVIDER_IS_FAILURE,
         payload: err
     }
 }

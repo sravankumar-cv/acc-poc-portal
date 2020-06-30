@@ -1,4 +1,10 @@
-import { GET_COUNTRIES_LIST, GET_COUNTRIES_LOADING_TOGGLE, GET_COUNTRIES_NETWORK_ACCESS_SUCCESS, GET_COUNTRIES_NETWORK_ACCESS_FAILURE } from '../types/utils';
+/**
+ * @fileoverview Reducer for getting countries list.
+ */
+import { 
+    GET_COUNTRIES_LIST, GET_COUNTRIES_LOADING_TOGGLE, 
+    GET_COUNTRIES_NETWORK_ACCESS_SUCCESS, GET_COUNTRIES_NETWORK_ACCESS_FAILURE 
+} from '../types/utils';
 
 let defaultState = {
     isLoading: false,

@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Reducer for userlogin.
+ */
 import {
     LOGIN_USER,
     USER_LOGIN_LOADING_TOGGLE,

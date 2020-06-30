@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Action for getting unapproved providers.
+ */
+
 import { 
     GET_UNAPPROVED_PROVIDER_IS_FAILURE, 
     GET_UNAPPROVED_PROVIDER_IS_SUCCESS, 

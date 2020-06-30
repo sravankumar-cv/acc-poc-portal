@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Action for getting financial services.
+ */
+
 import {
     GET_FINANCIAL_SERVICE_LOADING_TOGGLE,
     GET_FINANCIAL_SERVICE_NETWORK_ACCESS_SUCCESS, 

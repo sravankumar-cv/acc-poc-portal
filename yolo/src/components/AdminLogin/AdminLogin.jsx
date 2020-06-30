@@ -141,7 +141,7 @@ export default class AdminLogin extends React.Component {
                     action={
                     <React.Fragment>
                         <Button color="secondary" size="small" onClick={(e,r)=>this.handleClose(e,r)}>
-                        Hide
+                            Hide
                         </Button>
                     </React.Fragment>
                     }

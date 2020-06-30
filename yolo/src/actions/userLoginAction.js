@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Action for user login.
+ */
+
 import {
     USER_LOGIN_LOADING_TOGGLE,
     USER_LOGIN_NETWORK_ACCESS_SUCCESS, 

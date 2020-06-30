@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Reducer for user loggedIn toggle.
+ */
+
 let defaultState={
     isLoggedIn: false,
 }

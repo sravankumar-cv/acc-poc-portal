@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../shared/Header/Header';
+import HeaderContainer from '../../containers/headerContainer';
 import './ProviderRegister.css';
 import {
     Container,
@@ -538,7 +538,7 @@ export default class ProviderRegister extends React.Component {
     render() {
         return(
             <div>
-                <Header />
+                <HeaderContainer />
                 <Paper className="stepperShrink">
                     <Stepper activeStep={this.state.activeStep} alternativeLabel elevation={0}>
                         {

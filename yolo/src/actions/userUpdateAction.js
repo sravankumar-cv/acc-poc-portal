@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Action for user updates
+ */
+
 import { 
     USER_UPDATE_IS_ERROR, 
     USER_UPDATE_IS_LOADING, 

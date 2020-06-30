@@ -1,10 +1,8 @@
 import React from 'react';
 import HeaderContainer from '../../containers/headerContainer';
-import { InputBase, 
-    Button, Paper,
-    Snackbar, Grid,
-    Card, Avatar,
-    CardActionArea
+import { 
+    Button, Snackbar, Grid,
+    Card, Avatar, CardActionArea,
 } from '@material-ui/core';
 import './Home.css';
 import { Rating } from '@material-ui/lab';
@@ -26,18 +24,18 @@ export default class Home extends React.Component {
     }
     componentDidMount () {
         document.title = 'Welcome to Infosys - Yolo Network';
-        this.props.searchByName('', 'Bangladesh');
+        this.props.getAllProvider();
         store.subscribe(()=>{
-            if(store.getState().searchProviderByName.error) {
+            if(store.getState().getAllApprovedProvider.error) {
                 this.setState({
                     open: true
                 })
                 this.setState({
-                    errorMessage: store.getState().searchProviderByName.error
+                    errorMessage: store.getState().getAllApprovedProvider.error
                 })
             } else {
                 this.setState({
-                    providerData: store.getState().searchProviderByName.success
+                    providerData: store.getState().getAllApprovedProvider.success
                 })
             }
         })
@@ -63,24 +61,6 @@ export default class Home extends React.Component {
 
     handleClickOpen = () => {
         this.setState({dialogOpen: true});
-    }
-
-    performSearch = () => {
-        this.props.searchByName(this.state.name, this.state.location);
-        store.subscribe(()=>{
-            if(store.getState().searchProviderByName.error) {
-                this.setState({
-                    open: true
-                })
-                this.setState({
-                    errorMessage: store.getState().searchProviderByName.error
-                })
-            } else {
-                this.setState({
-                    providerData: store.getState().searchProviderByName.success
-                })
-            }
-        })
     }
 
     render() {
@@ -123,7 +103,7 @@ export default class Home extends React.Component {
                     action={
                     <React.Fragment>
                         <Button color="secondary" size="small" onClick={(e,r)=>this.handleClose(e,r)}>
-                        Hide
+                            Hide
                         </Button>
                     </React.Fragment>
                     }

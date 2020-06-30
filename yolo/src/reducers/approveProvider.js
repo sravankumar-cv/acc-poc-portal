@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Reducer for approving a provider.
+ */
 import {
     PROVIDER_APPROVAL_IS_FAILURE,
     PROVIDER_APPROVAL_IS_SUCCESS,

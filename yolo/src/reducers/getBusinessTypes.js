@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Reducer for getting all the types of business.
+ */
+
 import { GET_BUSINESS_TYPE, 
     GET_BUSINESS_TYPE_SERVICE_LOADING_TOGGLE,
     GET_BUSINESS_TYPE_SERVICE_NETWORK_ACCESS_SUCCESS,

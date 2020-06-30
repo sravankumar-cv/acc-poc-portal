@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Reducer for admin login.
+ */
 import { 
     ADMIN_LOGIN, ADMIN_LOGIN_IS_ERROR,
     ADMIN_LOGIN_IS_LOADING, ADMIN_LOGIN_IS_SUCCESS

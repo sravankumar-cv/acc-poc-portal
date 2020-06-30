@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Action for Admin Login 
+ */
+
 import { 
     ADMIN_LOGIN_IS_ERROR,
     ADMIN_LOGIN_IS_LOADING, ADMIN_LOGIN_IS_SUCCESS
