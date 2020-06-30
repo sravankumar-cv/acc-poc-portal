@@ -8,7 +8,10 @@ import {
     GET_ALL_APPROVED_PROVIDER_IS_FAILURE
 } from '../types/provider';
 
-import { FILTER_PROVIDER_BY_COUNTRY, FILTER_PROVIDER_BY_SEARCH } from '../types/utils';
+import { 
+    FILTER_PROVIDER_BY_COUNTRY, FILTER_PROVIDER_BY_SEARCH,
+    FILTER_BY_FINANCIAL_SERVICES, FILTER_BY_BUSINESS_SERVICES
+} from '../types/utils';
 
 let defaultState = {
     isLoading: false,
@@ -68,6 +71,22 @@ const getAllApprovedProviderReducer = (state=defaultState, action) => {
                 return {
                     ...state
                 }
+        }
+    }
+    if(action.type === FILTER_BY_FINANCIAL_SERVICES) {
+        return {
+            ...state,
+            success: state.success.filter(item=> {
+                return item.servicesOffered.includes(action.payload)
+            })
+        }
+    }
+    if(action.type === FILTER_BY_BUSINESS_SERVICES) {
+        return {
+            ...state,
+            success: state.success.filter(item=> {
+                return item.partnerType === action.payload
+            })
         }
     }
     return state;
