@@ -9,6 +9,7 @@ import { Grid, Container,
         Snackbar, Button, Link
 } from '@material-ui/core';
 import { history, store } from '../../store';
+import log from '../../utils/logger.service';
 
 export default class Register extends React.Component {
 
@@ -37,6 +38,7 @@ export default class Register extends React.Component {
     }
 
     componentDidMount() {
+        log('User on Registration Page')
         this.props.getCountries();
         store.subscribe(()=>{
             this.setState({countries: store.getState().getCountries.countries});

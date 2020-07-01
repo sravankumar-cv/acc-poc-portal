@@ -3,7 +3,6 @@ import { TextField, Button, Dialog, Grid, Link } from '@material-ui/core'
 import { store, history } from '../../../store';
 import { TOGGLE_LOGIN_DIALOG } from '../../../types/utils';
 import './LoginPopUp.css';
-import log from '../../../utils/logger.service';
 
 export default class LoginPopUp extends React.Component {
     constructor(props) {
@@ -24,7 +23,6 @@ export default class LoginPopUp extends React.Component {
         store.subscribe(()=> {
             this.setState({open: store.getState().utils.loginDialog});
         })
-        log('User is on Login PopUp')
     }
 
     navigateToRegister = () => {
