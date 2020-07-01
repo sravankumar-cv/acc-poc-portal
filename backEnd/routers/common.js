@@ -10,7 +10,16 @@ const router = require('express').Router(),
     getBusinessTypeController = require('../controllers/common/getBusinessCategoriesController'),
     searchController = require('../controllers/common/searchController'),
     errorController = require('../controllers/common/serviceErrorController');
+    fs = require('fs');
 
+//method for frontend logging
+router.post('/log',(req,res)=>{
+	fs.appendFile('frontendLogger.txt',req.body.log + "\n", (err) => {
+	  if (err) {
+				console.log("logging request failed");
+			   }	
+	})
+})
 router.get('/countries', getAllCountriesController.getCountryList);
 router.get('/services', getFinancialServiceController.getFiancialService);
 router.get('/business', getBusinessTypeController.getBusinessService);

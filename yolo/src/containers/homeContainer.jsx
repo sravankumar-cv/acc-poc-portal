@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import * as searchProviderByName from '../actions/searchByNameAction';
 import * as getApprovedProviders from '../actions/getAllProvidersActions';
 import { bindActionCreators } from 'redux';
-
 class HomeContainer extends React.Component {
     render() {
         return <Home 

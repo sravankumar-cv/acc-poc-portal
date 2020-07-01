@@ -8,6 +8,7 @@ import {
     Snackbar, Button, Link
 } from '@material-ui/core';
 import { history, store } from '../../store';
+import log from '../../utils/logger.service';
 
 export default class ProviderLogin extends React.Component {
     constructor(props) {
@@ -26,6 +27,8 @@ export default class ProviderLogin extends React.Component {
 
     componentDidMount() {
         document.title = 'Yolo - Provider Login';
+        log('User is on Provider Login')
+
     }
     
     handleClose = (event, reason) => {

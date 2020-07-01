@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import { history, store } from '../../store';
+import log from '../../utils/logger.service';
 
 export default class ProviderRegister extends React.Component {
     constructor(props) {
@@ -111,6 +112,7 @@ export default class ProviderRegister extends React.Component {
     }
 
     componentDidMount() {
+        log('User is on Provider Register Page')
         document.title = 'Yolo- Partner Register';
         this.props.getFinancialServiceList();
         this.props.getBusinessTypeList();

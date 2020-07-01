@@ -8,6 +8,7 @@ import './Home.css';
 import { Rating } from '@material-ui/lab';
 import { store } from '../../store';
 import CardErrorBoundary from '../shared/CardErrorBoundary';
+import log from '../../utils/logger.service'
 
 export default class Home extends React.Component {
     constructor(props) {
