@@ -50,6 +50,7 @@ describe('User logout success Route', ()=> {
             })
         })
     })
+    
     it('Unit test for user logout', (logoutDone) => {
         chai.request(app)
             .post('/api/auth/logout')
@@ -57,7 +58,7 @@ describe('User logout success Route', ()=> {
             .set('x-api-key', jwt)
             .end((err, res)=>{
                 chai.assert.equal(res.status, 200);
-                logoutDone()
+                logoutDone();
             })
     })
 })

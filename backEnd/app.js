@@ -7,7 +7,8 @@
  *      Server stable version
  * - 0.2.0
  *      Unit tests 40%
- * @todo Unit tests.
+ * - 0.2.1
+ *      Unit tests 70%
  */
 
 var app = require('express')(),

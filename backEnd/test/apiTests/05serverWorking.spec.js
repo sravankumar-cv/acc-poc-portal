@@ -1,5 +1,6 @@
 /**
  * @fileoverview Basic server function tests
+ * @access no token required
  */
 
 let chai = require('chai'),

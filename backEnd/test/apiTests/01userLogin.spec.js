@@ -1,5 +1,6 @@
 /**
- * @desc Unit test for User login API
+ * @desc Unit test for User login API.
+ * @access no token required
  */
 
 let chai = require('chai'),

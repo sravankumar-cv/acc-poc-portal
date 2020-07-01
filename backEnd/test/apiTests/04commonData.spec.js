@@ -1,6 +1,6 @@
 /**
  * @fileoverview Unit test for getting the common data from server.
- * @access UnAuthorized
+ * @access no token required
  */
 
 let chai = require('chai'),

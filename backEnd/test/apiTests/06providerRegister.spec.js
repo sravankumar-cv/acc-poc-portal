@@ -1,6 +1,6 @@
 /**
  * @fileoverview Provider register Unit test flow
- * @access UnAuthorized
+ * @access no token required
  */
 
 let chai = require('chai'),
