@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 
 class ProviderLoginContainer extends React.Component {
     render() {
+        
         return(
             <ProviderLogin 
                 providerLogin = {this.props.providerLogin}
