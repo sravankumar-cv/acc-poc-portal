@@ -47,6 +47,7 @@ app.use('/api/admin', admin);
 app.use('/api/provider', provider);
 
 app.use(function(err, req, res, next) {
+    console.log(err)
     return res.status(500).send({ error: err });
 });
 

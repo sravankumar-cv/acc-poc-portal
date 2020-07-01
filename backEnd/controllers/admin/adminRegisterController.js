@@ -26,6 +26,8 @@ exports.adminRegister = (req, res) => {
                         res.status(201).json('Admin Successfully registred');
                     }
                 })
+            } else {
+                res.status(400).json("User already exist");
             }
         }
     })
