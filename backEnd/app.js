@@ -5,6 +5,8 @@
  * @changelog
  * - 0.0.1
  *      Server stable version
+ * - 0.2.0
+ *      Unit tests 40%
  * @todo Unit tests.
  */
 
