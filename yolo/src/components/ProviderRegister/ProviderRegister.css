@@ -19,6 +19,11 @@
     padding-bottom: 50px;
 }
 
+.MuiAvatar-circle {
+    width: 20px !important;
+    height: 20px !important;
+}
+
 .avatarRe {
     width: 20px !important;
     height: 20px !important;

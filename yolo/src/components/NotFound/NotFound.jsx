@@ -7,7 +7,9 @@ export default class NotFound extends React.Component {
         return(
             <div>
                 <HeaderContainer />
-                Not Found
+                <div style={{marginTop:100}}>
+                    <span>The page you are looking for is not found</span>
+                </div>
             </div>
         )
     }

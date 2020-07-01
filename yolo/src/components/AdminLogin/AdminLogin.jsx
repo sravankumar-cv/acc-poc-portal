@@ -5,7 +5,7 @@ import {
     CardHeader, CardContent,
     Button, Snackbar
 } from '@material-ui/core';
-import Header from '../shared/Header/Header';
+import HeaderContainer from '../../containers/headerContainer';
 import { history, store } from '../../store';
 
 export default class AdminLogin extends React.Component {
@@ -76,7 +76,7 @@ export default class AdminLogin extends React.Component {
     render() {
         return(
             <div>
-                <Header />
+                <HeaderContainer />
                 <Grid container
                     className="rootLoginHead"
                     alignItems="center"

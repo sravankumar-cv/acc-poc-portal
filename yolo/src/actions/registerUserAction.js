@@ -20,8 +20,7 @@ export function registerUser (name, email, password, phone_number) {
                 name: name,
                 email: email,
                 password: password,
-                phone_number: phone_number,
-                role: 1
+                phone_number: phone_number
             })
         }).then(res=>{
             if(res.status === 201) {

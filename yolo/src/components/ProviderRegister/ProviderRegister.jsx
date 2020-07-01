@@ -190,7 +190,7 @@ export default class ProviderRegister extends React.Component {
             this.state.password, this.state.email, this.state.phoneNumber,
             this.state.OrgCountry, this.state.OrgName,
             this.state.OrgAddress, this.state.OrgRegNumber,
-            this.state.OrgPINType, this.state.OrgServiceType,
+            this.state.OrgPINType, this.state.services,
             this.state.base64, this.state.OrgExpertise
         );
         store.subscribe(()=> {
@@ -217,7 +217,6 @@ export default class ProviderRegister extends React.Component {
                             <Typography>{"For business"}</Typography>
                         </ExpansionPanelSummary>
                         <ExpansionPanelSummary >
-                            {/* <InputLabel id="demo-simple-select-label" style={{marginBottom:20}}>Select Services provided for individual</InputLabel><br /> */}
                             {
                                 (this.state.individualList && this.state.individualList.length) ? this.state.individualList.map((item, index)=> {
                                     return <Chip label={item}
@@ -240,7 +239,6 @@ export default class ProviderRegister extends React.Component {
                         </ExpansionPanelSummary>
                         <ExpansionPanelSummary>
                             <div>
-                            {/* <InputLabel id="demo-simple-select-label" style={{marginBottom:20}}>Select Services provided for Business</InputLabel> */}
                             {
                                 (this.state.individualList && this.state.businessList.length) ? this.state.businessList.map((item, index)=> {
                                     return <Chip label={item}
@@ -294,7 +292,7 @@ export default class ProviderRegister extends React.Component {
                                                     onClick={()=>this.handleClick()}
                                                     clickable
                                                     key={index}
-                                                    avatar={<Avatar
+                                                    avatar={<Avatar style={{height:"20px !important", width:"20px !important"}}
                                                     className="avatarRe">{item.name[0]}</Avatar>}
                                                 />
                                         }) : <span>No Serice type selected. Atleast one expertise required.</span>

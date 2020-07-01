@@ -214,7 +214,7 @@ export default function Header(props) {
                         <Select value={selectedCountry} style={{color: '#fff'}}>
                         {
                             (countriesList && countriesList.length) ? countriesList.map((item, index) => {
-                            return(<MenuItem key={index} value={item.name} autoWidth={true} onClick={handleSelectedCountry}>{item.name}</MenuItem>)
+                                return(<MenuItem key={index} value={item.name} autoWidth={true} onClick={handleSelectedCountry}>{item.name}</MenuItem>)
                             }) : <span>Loading....</span>
                         }
                         </Select>
