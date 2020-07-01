@@ -51,7 +51,6 @@ describe('User logout success Route', ()=> {
         })
     })
     it('Unit test for user logout', (logoutDone) => {
-        console.log(jwt)
         chai.request(app)
             .post('/api/auth/logout')
             .set('Content-Type', 'application/json')
