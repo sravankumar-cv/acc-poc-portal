@@ -26,6 +26,8 @@ function App() {
     var str="Request from IP: "+ip;
     log(str);
   })
+  
+    
   return (
     <div className="App">
       <div className="App-intro">
