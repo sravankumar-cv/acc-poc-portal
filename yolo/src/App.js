@@ -12,6 +12,7 @@ import NotFound from './components/NotFound/NotFound';
 import HomeContainer from './containers/homeContainer';
 import AdminDashboardContainer from './containers/adminDashboardContainer';
 import Dashboard from './components/Dashboard/Dashboard';
+import ProviderProfileContainer from './containers/providerProfileContainer';
 import './App.css';
 import log from "./utils/logger.service"
 
@@ -40,6 +41,7 @@ function App() {
             <ProtectedRoute path="/dashboard" component={ Dashboard } />
             <ProtectedRoute path="/provider/dashboard" component= {ProviderDashboardContainer} />
             <ProtectedRoute path="/admin/dashboard" component= {AdminDashboardContainer} />
+            <ProtectedRoute path ="/provider/profile" component = {ProviderProfileContainer} />
             <Route path="*" component={ NotFound } />
           </Switch>
         </Router>
