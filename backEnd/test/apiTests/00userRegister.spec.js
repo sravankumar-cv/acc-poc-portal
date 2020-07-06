@@ -1,5 +1,6 @@
 /**
  * @fileoverview API tests for user register.
+ * @access no token required
  */
 
 let chai = require('chai'),

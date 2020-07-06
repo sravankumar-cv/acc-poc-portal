@@ -25,7 +25,7 @@ describe('User logout API test - Basic tests', ()=> {
 describe('User logout success Route', ()=> {
     let email = faker.internet.email(),
         jwt = '';
-    before('********Registering new user*******', (done)=> {
+    before('********Getting user token*******', (done)=> {
         chai.request(app)
             .post('/api/auth/register')
             .set('Content-Type', 'application/json')
@@ -36,19 +36,29 @@ describe('User logout success Route', ()=> {
                 phone_number: faker.phone.phoneNumber()
             }).end((err, res)=> {
                 chai.assert.equal(res.status, 201);
+                chai.request(app)
+                    .post('/api/auth/login')
+                    .set('Content-Type', 'application/json')
+                    .send({
+                        email: email,
+                        password: "Jithin3433!",
+                        role: 1
+                    }).end((err, res)=> {
+                        jwt = res.body.token;
+                        chai.assert.equal(res.status, 200);
+                        done();
+            })
         })
     })
-    before('********Logging in user using the registred user', (done)=> {
+    
+    it('Unit test for user logout', (logoutDone) => {
         chai.request(app)
-            .post('/api/auth/login')
+            .post('/api/auth/logout')
             .set('Content-Type', 'application/json')
-            .send({
-                email: email,
-                password: "Jithin3433!",
-            }).end((err, res)=> {
-                console.log(res)
+            .set('x-api-key', jwt)
+            .end((err, res)=>{
                 chai.assert.equal(res.status, 200);
-                done();
+                logoutDone();
             })
     })
 })

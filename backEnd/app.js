@@ -7,7 +7,8 @@
  *      Server stable version
  * - 0.2.0
  *      Unit tests 40%
- * @todo Unit tests.
+ * - 0.2.1
+ *      Unit tests 70%
  */
 
 var app = require('express')(),
@@ -46,6 +47,7 @@ app.use('/api/admin', admin);
 app.use('/api/provider', provider);
 
 app.use(function(err, req, res, next) {
+    console.log(err)
     return res.status(500).send({ error: err });
 });
 

@@ -9,6 +9,8 @@ import { Rating } from '@material-ui/lab';
 import { store } from '../../store';
 import CardErrorBoundary from '../shared/CardErrorBoundary';
 import log from '../../utils/logger.service'
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import {Link} from 'react-router-dom';
 
 export default class Home extends React.Component {
     constructor(props) {
@@ -71,22 +73,43 @@ export default class Home extends React.Component {
                     {
                         (this.state.providerData && this.state.providerData.length) ? this.state.providerData.map((itemz, index)=> {
                             return (
-                                <Grid item md={3} key={index} className="rootGrid" style={{marginRight: 20, marginBottom: 20}}>
-                                    <CardErrorBoundary>
-                                        <Card style={{minHeight: 200, minWidth: 100}}>
-                                            <CardActionArea style={{paddingLeft: 20, paddingTop: 20}}>
-                                                <div>
-                                                    <Avatar alt="org_logo" src={require('../../assets/Facebook_headquarters_building.jpg')}/>
-                                                    <div style={{position: 'absolute', left:10}}>
-                                                        <span className="orgName">{itemz.OrganizationName}</span><br />
-                                                        <Rating name="read-only" value={4.1} readOnly />
-                                                        <span style={{position: 'absolute', left:3, top:50}}>{itemz.OrganizationAddress}</span>
-                                                    </div>
-                                                </div>
-                                            </CardActionArea>
-                                        </Card>
-                                    </CardErrorBoundary>  
-                                </Grid>
+                                <div className ="Column">
+                        <div className="profile_container">
+                        <div className="profile_card">
+                        <div className="profile_img">
+                            
+                             <img src ={itemz.providerIdentityImg} ></img> 
+                        </div>
+                        
+                        <div className="profile_company">
+                            <p>{itemz.OrganizationName}</p>
+                        </div>
+                        <div className="profile_title">
+                            <p>{itemz.fullName}</p>
+                            <CheckCircleOutlineIcon style={{ color: 'green' }}></CheckCircleOutlineIcon>
+                        </div>
+                        
+                        <div className="profile_desc">
+                            <p>Expertise: {itemz.partnerType}</p>
+                            
+                            <Link  to = {`/provider/profile/${itemz._id}`}>See More</Link>
+                        </div>
+                         {/* <div className="profile_company">
+                            <p>Services: {itemz.servicesOffered}</p>
+                        </div>  {`/provider/profile/${props.itemz.partnerId}`}*/}
+                        <div className="profile_action">
+                            <Button color="secondary" size="small">Contact Us</Button>
+                            
+                            <Button color="primary" size="small">View Profile</Button>
+                        </div>
+                        <div className="profile_company">
+                            <p>Fees : $100</p>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+
+                                
                             )
                         }) : <span>We do not have enough data right now. Please check back later.</span>
                     }
