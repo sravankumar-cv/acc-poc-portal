@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 Request from IP: 103.50.150.18 at 7/1/2020, 12:01:08 PM
 User on Registration Page at 7/1/2020, 12:01:17 PM
 User is on Provider Register Page at 7/1/2020, 12:01:25 PM
@@ -188,3 +189,6 @@ User is on Provider Register Page at 7/6/2020, 9:37:27 PM
 User is on Provider Register Page at 7/7/2020, 2:39:11 PM
 Request from IP: 106.51.108.246 at 7/7/2020, 2:39:12 PM
 User is on Provider Register Page at 7/7/2020, 2:39:11 PM
+=======
+Request from IP: 103.50.150.26, os.name = Windows,browser.name = Chrome, at 7/6/2020, 1:17:23 PM
+>>>>>>> upstream/jithin
