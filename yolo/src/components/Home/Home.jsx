@@ -80,7 +80,9 @@ export default class Home extends React.Component {
                             
                              <img src ={itemz.providerIdentityImg} ></img> 
                         </div>
-                        
+                        <div className="profile_title">
+                            <p>Id: {itemz.partnerId}</p>
+                        </div>
                         <div className="profile_company">
                             <p>{itemz.OrganizationName}</p>
                         </div>
@@ -92,7 +94,7 @@ export default class Home extends React.Component {
                         <div className="profile_desc">
                             <p>Expertise: {itemz.partnerType}</p>
                             
-                            <Link  to = {`/provider/profile/${itemz._id}`}>See More</Link>
+                            <Link  to = {`/provider/profile?id=${itemz._id}`}>See More</Link>
                         </div>
                          {/* <div className="profile_company">
                             <p>Services: {itemz.servicesOffered}</p>
