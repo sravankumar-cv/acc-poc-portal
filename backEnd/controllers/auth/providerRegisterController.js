@@ -5,8 +5,7 @@
 
 const providerModel = require('../../model/providerModel'),
         uniqueIdGenerator = require('../../helpers/generateId'),
-        passwordValidator = require('../../helpers/passwordValidations'),
-        nameExtractor = require('../../helpers/generatePartnerId');
+        passwordValidator = require('../../helpers/passwordValidations');
 
 exports.registerPartner = (req, res) => {
     providerModel.find({email: req.body.email},{mobileNumber: req.body.mobileNumber}, (err, users)=>{
@@ -15,7 +14,7 @@ exports.registerPartner = (req, res) => {
         } else {
             if(!users.length) {
                 providerModel.create({
-                    partnerId: nameExtractor.getPartnerId(req.body.fullName,req.body.mobileNumber),
+                    partnerId: uniqueIdGenerator.generateUniqueId(),
                     fullName: req.body.fullName,
                     password: passwordValidator.generatePasswordHash(req.body.password),
                     email: req.body.email,
