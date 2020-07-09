@@ -13,7 +13,6 @@ import {
 import { Alert } from '@material-ui/lab';
 import { history, store } from '../../store';
 import log from '../../utils/logger.service';
-import { Multiselect } from 'multiselect-react-dropdown';
 
 export default class ProviderRegister extends React.Component {
     constructor(props) {
@@ -217,7 +216,7 @@ export default class ProviderRegister extends React.Component {
                             <Paper style={{width: 800, marginBottom: 50}}>
                     <ExpansionPanel style={{width:800}}>
                         <ExpansionPanelSummary expandIcon={<Icon className="fa fa-sort-desc" aria-hidden="true"/>}>
-                            <Typography>{"For Individual"}</Typography>
+                            <Typography>{"For business"}</Typography>
                         </ExpansionPanelSummary>
                         <ExpansionPanelSummary >
                             {
@@ -231,14 +230,14 @@ export default class ProviderRegister extends React.Component {
                                                     avatar={<Avatar
                                                     className="avatarRe">{item[0]}</Avatar>}
                                      />
-                                }) : <span>No services found.</span>
+                                }) : <span>No serices found.</span>
                             }
                         </ExpansionPanelSummary>
                     </ExpansionPanel>
 
                     <ExpansionPanel style={{width:800}}>
                         <ExpansionPanelSummary expandIcon={<Icon className="fa fa-sort-desc" aria-hidden="true"/>}>
-                            <Typography>{"For Business"}</Typography>
+                            <Typography>{"For business"}</Typography>
                         </ExpansionPanelSummary>
                         <ExpansionPanelSummary>
                             <div>
@@ -320,9 +319,6 @@ export default class ProviderRegister extends React.Component {
                                 }
                             </Select>
                         </div>
-
-                        
-
                     </div><br />
                     <Button
                         disabled={this.state.activeStep === 0}
