@@ -305,7 +305,7 @@ export default class ProviderRegister extends React.Component {
                         </div>
                     </div><br />
                     <div style={{display: 'inline-flex', marginBottom: 50}}>
-                        <div>
+                         <div>
                             <InputLabel id="demo-simple-select-label">Please Select your Expertise</InputLabel>
                             <Select
                                 labelId="demo-simple-select-label"
@@ -319,9 +319,9 @@ export default class ProviderRegister extends React.Component {
                                     }) : <span>Loading</span>
                                 }
                             </Select>
-                        </div>
+                        </div> 
 
-                        
+
 
                     </div><br />
                     <Button
