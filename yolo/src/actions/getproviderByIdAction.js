@@ -1,26 +1,25 @@
 /**
- * @fileoverview Action for getting all the business types.
+ * @fileoverview Action for getting user details after login.
  */
 
 import { 
-    GET_BUSINESS_TYPE_SERVICE_LOADING_TOGGLE,
-    GET_BUSINESS_TYPE_SERVICE_NETWORK_ACCESS_SUCCESS,
-    GET_BUSINESS_TYPE_SERVICE_NETWORK_ACCESS_FAILURE
-} from '../types/utils';
+    GET_USER_DETAILS_IS_ERROR,
+    GET_USER_DETAILS_IS_LOADING,
+    GET_USER_DETAILS_IS_SUCCESS,
+} from '../types/details';
 
-export function getBusinessTypes() {
-    return(dispatch) => {
+export function getUserDetails() {
+    return (dispatch) => {
         dispatch(loading(true));
-        return fetch('/api/common/business', {
+        return fetch('/api/provider/details',{
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'x-api-key': window.localStorage.getItem('token')
             }
         }).then(res=> {
-            console.log(res)
-            if(res.status === 200) {
+            if(res.status === 200){
                 return res.json().then(res=> {
-                    console.log(res);
                     dispatch(loading(false));
                     dispatch(isSuccess(res));
                 })
@@ -29,11 +28,7 @@ export function getBusinessTypes() {
                 dispatch(isError('Something went wrong from our end. Please try again later.'))
             } else {
                 dispatch(loading(false));
-
-                return res.json().then(res=> {
-                    console.log(res);
-                    dispatch(isError(res));
-                })
+                dispatch(isSuccess(res));
             }
         }).catch(err=> {
             dispatch(loading(false));
@@ -44,21 +39,21 @@ export function getBusinessTypes() {
 
 export function loading(loading) {
     return {
-        type: GET_BUSINESS_TYPE_SERVICE_LOADING_TOGGLE,
+        type: GET_USER_DETAILS_IS_LOADING,
         payload: loading
     }
 }
 
 export function isSuccess(success) {
     return {
-        type: GET_BUSINESS_TYPE_SERVICE_NETWORK_ACCESS_SUCCESS,
+        type: GET_USER_DETAILS_IS_SUCCESS,
         payload: success
     }
 }
 
 export function isError(err) {
     return {
-        type: GET_BUSINESS_TYPE_SERVICE_NETWORK_ACCESS_FAILURE,
+        type: GET_USER_DETAILS_IS_ERROR,
         payload: err
     }
 }
