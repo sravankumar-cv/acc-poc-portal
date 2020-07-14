@@ -33,7 +33,7 @@ export default class Home extends React.Component {
                     open: true
                 })
                 this.setState({
-                    errorMessage: store.getState().getAllApprovedProvider.error
+                    errorMessage: String( store.getState().getAllApprovedProvider.error)
                 })
             } else {
                 this.setState({
@@ -73,7 +73,7 @@ export default class Home extends React.Component {
                     {
                         (this.state.providerData && this.state.providerData.length) ? this.state.providerData.map((itemz, index)=> {
                             return (
-                                <div className ="Column">
+                        <div className ="Column">
                         <div className="profile_container">
                         <div className="profile_card">
                         <div className="profile_img">
@@ -94,11 +94,9 @@ export default class Home extends React.Component {
                         <div className="profile_desc">
                             <p>Expertise: {itemz.partnerType}</p>
                             
-                            <Link  to = {`/provider/profile?id=${itemz._id}`}>See More</Link>
+                            <Link  to = {`/provider/profile?id=${itemz.partnerId}`}>See More</Link>
                         </div>
-                         {/* <div className="profile_company">
-                            <p>Services: {itemz.servicesOffered}</p>
-                        </div>  {`/provider/profile/${props.itemz.partnerId}`}*/}
+                         
                         <div className="profile_action">
                             <Button color="secondary" size="small">Contact Us</Button>
                             
@@ -112,10 +110,11 @@ export default class Home extends React.Component {
                     </div>
 
                                 
-                            )
+                        )
                         }) : <span>We do not have enough data right now. Please check back later.</span>
                     }
                 </Grid>
+    
                 <Snackbar
                     anchorOrigin={{
                         vertical: 'bottom',
@@ -123,14 +122,14 @@ export default class Home extends React.Component {
                     }}
                     open={this.state.open}
                     autoHideDuration={5000}
-                    onClose={(e,r)=>this.handleClose(e,r)}
+                    onClose={(e, r) => this.handleClose(e, r)}
                     message={this.state.errorMessage}
                     action={
-                    <React.Fragment>
-                        <Button color="secondary" size="small" onClick={(e,r)=>this.handleClose(e,r)}>
-                            Hide
+                        <React.Fragment>
+                            <Button color="secondary" size="small" onClick={(e, r) => this.handleClose(e, r)}>
+                                Hide
                         </Button>
-                    </React.Fragment>
+                        </React.Fragment>
                     }
                 />
             </div>
