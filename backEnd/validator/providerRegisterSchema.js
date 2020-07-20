@@ -11,8 +11,8 @@ const providerRegisterSchema = joi.object().keys({
     OrganizationRegNumber: joi.string().required().exist(),
     idType: joi.string().required().exist(),
     servicesOffered: joi.array().required().exist(),
-    providerIdentityImg: joi.string().required().exist(),
-    partnerType: joi.string().required().exist(),
+    providerIdentityImg: joi.string(),//.required().exist(),
+    partnerType: joi.array().required().exist(),
     role: joi.number().optional().valid(2)
 })
 

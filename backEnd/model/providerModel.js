@@ -82,17 +82,17 @@ const partnerSchema = new mongoose.Schema({
     },
     providerIdentityImg: {
         type: String,
-        required: true
+        //required: true
     },
     partnerType: {
-        type: String,
+        type: Array,
         required: true,
-        enum: [
-            'CA(Certified)', 'CA(Practioner)', 
-            'TAX Filing Expert', 'Consultant',
-            'TAX Consultant', 'Startup Expert',
-            'Company Secretary', 'Cost Accounting', 
-            'Auditor', 'StartUp Export', 'Legal Compliance']
+        // enum: [
+        //     'CA(Certified)', 'CA(Practioner)', 
+        //     'TAX Filing Expert', 'Consultant',
+        //     'TAX Consultant', 'Startup Expert',
+        //     'Company Secretary', 'Cost Accounting', 
+        //     'Auditor', 'StartUp Export', 'Legal Compliance']
     },
     OrganizationLogo: {
         type: String,

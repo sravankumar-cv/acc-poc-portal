@@ -8,7 +8,7 @@ let defaultState = {
     success: ''
 }
 
-const getProviderProfileReducer = (state=defaultState) => {
+const getProviderProfileReducer = (state=defaultState,action) => {
     
             success: state.success.filter(item=> {
                 return item.partnerId === action.payload
