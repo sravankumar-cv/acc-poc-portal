@@ -1,6 +1,10 @@
 import React from 'react';
 import HeaderContainer from '../../containers/headerContainer';
 import './ProviderRegister.css';
+import {default as RSelect} from 'react-select';
+import makeAnimated from 'react-select/animated';
+import 'react-checkbox-tree/lib/react-checkbox-tree.css';
+import CheckboxTree from 'react-checkbox-tree';
 import {
     Container,
     InputLabel, Icon,
@@ -13,7 +17,38 @@ import {
 import { Alert } from '@material-ui/lab';
 import { history, store } from '../../store';
 import log from '../../utils/logger.service';
+import Checkbox from '@material-ui/core/Checkbox';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
+
+import { makeStyles } from '@material-ui/core/styles';
+// import Paper from '@material-ui/core/Paper';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import "cdn.syncfusion.com/ej2/ej2-base/styles/material.css";
+// import "cdn.syncfusion.com/ej2/ej2-inputs/styles/material.cs";
+// import "cdn.syncfusion.com/ej2/ej2-buttons/styles/material.css";
+// import "cdn.syncfusion.com/ej2/ej2-react-navigations/styles/material.css";
 import { Multiselect } from 'multiselect-react-dropdown';
+import { TreeViewComponent } from '@syncfusion/ej2-react-navigations';
+
+import { enableRipple } from '@syncfusion/ej2-base';
+enableRipple(true);
+
+//from ramids
+const nodes = [{
+    value: 'mars',
+    label: 'Mars',
+    children: [
+        { value: 'phobos', label: 'Phobos' },
+        { value: 'deimos', label: 'Deimos' },
+    ],
+}];
+// import log from '../../utils/logger.service';
+// import { Multiselect } from 'multiselect-react-dropdown';
+
 
 export default class ProviderRegister extends React.Component {
     constructor(props) {
@@ -25,11 +60,257 @@ export default class ProviderRegister extends React.Component {
             lastName: '',
             password: '',
             email: '',
-            countries: [],
+            // countries: [],
             businessList: ['Business Incorporation', 'GST Service', 'Startup Serices', 'Legal Complaince Service', 'Tax Returns', 'Goverment Registration', 'Trademark', 'Miscelleneous Services'],
             individualList: ['Tax returns', 'TDS', 'Legal', 'Miscelleneous Services'],
+            businessList1: [
+                { value: 'Business Incorporation', label: 'Business Incorporation' },
+                { value: 'strawberry', label: 'Strawberry' },
+                { value: 'vanilla', label: 'Vanilla' }
+            ],
+            countries: [
+                { id: 1, name: 'Australia', hasChild: true, expanded: true },
+                { id: 2, pid: 1, name: 'New South Wales' },
+                { id: 3, pid: 1, name: 'Victoria' },
+                { id: 4, pid: 1, name: 'South Australia' },
+                { id: 6, pid: 1, name: 'Western Australia' },
+                { id: 7, name: 'Brazil', hasChild: true },
+                { id: 8, pid: 7, name: 'Paraná' },
+                { id: 9, pid: 7, name: 'Ceará' },
+                { id: 10, pid: 7, name: 'Acre' },
+                { id: 11, name: 'China', hasChild: true },
+                { id: 12, pid: 11, name: 'Guangzhou' },
+                { id: 13, pid: 11, name: 'Shanghai' },
+                { id: 14, pid: 11, name: 'Beijing' },
+                { id: 15, pid: 11, name: 'Shantou' },
+                { id: 16, name: 'France', hasChild: true },
+                { id: 17, pid: 16, name: 'Pays de la Loire' },
+                { id: 18, pid: 16, name: 'Aquitaine' },
+                { id: 19, pid: 16, name: 'Brittany' },
+                { id: 20, pid: 16, name: 'Lorraine' },
+                { id: 21, name: 'India', hasChild: true },
+                { id: 22, pid: 21, name: 'Assam' },
+                { id: 23, pid: 21, name: 'Bihar' },
+                { id: 24, pid: 21, name: 'Tamil Nadu' },
+                { id: 25, pid: 21, name: 'Punjab' }
+            ],
+
+            field: { dataSource: this.countries, id: 'id', parentID: 'pid', text: 'name', hasChildren: 'hasChild' },
+            indNodes: [{
+                value: 'Individual',
+                label: 'Individual',
+                children: [
+                    {
+                        value: 'Tax returns', label: 'Tax returns', children: [{
+                            value: 'salaried Individuals',
+                            label: 'salaried Individuals',
+                        },
+                        {
+                            value: 'Capital Gains',
+                            label: 'Capital Gains',
+                        },
+                        {
+                            value: 'Tax notice management plan',
+                            label: 'Tax notice management plan',
+                        },
+                        {
+                            value: 'LTCG filing and advisory',
+                            label: 'LTCG filing and advisory',
+                        }
+
+                    ],
+                        
+                    },
+                    { value: 'TDS', label: 'TDS',children: [{
+                        value: 'Challan 26QB',
+                        label: 'Challan 26QB',
+                    }
+                  
+               
+                ] },
+                    { value: 'Legal', label: 'Legal' ,children: [{
+                        value: 'Document Review',
+                        label: 'Document Review',
+                    },
+                    {
+                        value: 'Legal Drafting',
+                        label: 'Legal Drafting'
+                    },
+                    {
+                        value:'Filing of Form DPT-3',
+                        label: 'Filing of Form DPT-3'
+                    }
+               
+                ]},
+                    { value: 'Miscelleneous Services', label: 'Miscelleneous Services',children: [{
+                        value: 'Advisory tax saving',
+                        label: 'Advisory tax saving',
+                    },
+                    {
+                       value:'Ask an expert',
+                       label:'Ask an expert'
+                    }
+                  
+               
+                ] }
+                ],
+            }],
+
+            busNodes: [{
+                value: 'Business',
+                label: 'Business',
+                children: [
+                    {
+                        value: 'Business Incorporation', label: 'Business Incorporation', children: [{
+                            value: 'Private Limited Company',
+                            label: 'Private Limited Company',
+                        },
+                        {
+                            value: 'One person company',
+                            label: 'One person company',
+                        },
+                        {
+                            value: 'Limited Liability Partnership',
+                            label: 'Limited Liability Partnership',
+                        },
+                        {
+                            value: 'PLC registration',
+                            label: 'PLC registration',
+                        },
+                        {
+                            value: 'NGO section and company registration',
+                            label: 'NGO section and company registration',
+                        }
+
+                    ]
+                    },
+                    { value: 'GST Service', label: 'GST Service',children: [{
+                        value: 'GST registration',
+                        label: 'GST registration',
+                    },
+                    {
+                        value: 'GST filing',
+                        label: 'GST filing',
+                    },
+                    {
+                        value: 'Ask an expert',
+                        label: 'Ask an expert',
+                    },
+                    {
+                        value: 'E-way bill service',
+                        label: 'E-way bill service',
+                    },
+                    {
+                        value: 'GST notice-Ask an expert',
+                        label: 'GST notice-Ask an expert',
+                    }
+
+                ] },
+                    { value: 'Startup Services', label: 'Startup Services',children: [{
+                        value: 'Payroll Service',
+                        label: 'Payroll Service',
+                    },
+                    {
+                        value:'Launch Your Startup',
+                        label:'Launch Your Startup'
+                    },
+                    {
+                        value:'Start up India Registration',
+                        label:'Start up India Registration'
+                    },
+                    {
+                        value:'Winding up of company',
+                        label:'Winding up of company'
+                    },
+                    {
+                        value:'Company and LLP returns',
+                        label:'Company and LLP returns'
+                    }
+                  
+               
+                ] },
+                    { value: 'Legal Complaince Service', label: 'Legal Complaince Service',children: [{
+                        value: 'Change company name',
+                        label: 'Change company name',
+                    },
+                    {
+                        value:'Change registered office',
+                        label:'Change registered office'
+                    }
+                  
+               
+                ] },
+                    { value: 'Tax Returns', label: 'Tax Returns' ,children: [{
+                        value: 'TDS returns',
+                        label: 'TDS returns',
+                    },
+                    {
+                        value:'Business Tax returns',
+                        label:'Business Tax returns'
+                    }
+                  
+               
+                ]},
+                    { value: 'Goverment Registration', label: 'Goverment Registration',children: [{
+                        value: 'Provident Fund',
+                        label: 'Provident Fund',
+                    },
+                    {
+                        value:'PAN registration',
+                        label:'PAN registration'
+                    }
+                  
+               
+                ] },
+                    { value: 'Trademark', label: 'Trademark' ,children: [{
+                        value: 'Trademark registration',
+                        label: 'Trademark registration',
+                    },
+                    {
+                        value:'Trademark renewal',
+                        label:'Trademark renewal'
+                    },
+                    {
+                        value:'Trademark registration in India',
+                        label:'Trademark registration in India'
+                    }
+                  
+               
+                ]},
+                    { value: 'Miscelleneous Services', label: 'Miscelleneous Services',children: [{
+                        value: 'List Your Business on government website',
+                        label: 'List Your Business on government website',
+                    },
+                    {
+                        value:'LEI Code',
+                        label:'LEI Code'
+                    },
+                    {
+                        value:'15CA Form Filing',
+                        label:'15CA Form Filing'
+                    },
+                    {
+                        value:'Gettinng FDI in India',
+                        label:'Getting FDI in India'
+                    }
+                  
+               
+                ] },
+                ],
+            }],
+            perChecked: [],
+            perExpanded: [],
+            busChecked: [],
+            busExpanded: [],
+            checked: [],
+            expanded: [],
+            selectedBusinesses: [],
             services: [],
+            servivesList: [],
+            selectedServices: [],
+            actualServices: [],
             expertise: [],
+            expertiseList: [],
             confirmPassword: '',
             phoneNumber: '',
             country_code: '+91',
@@ -38,12 +319,13 @@ export default class ProviderRegister extends React.Component {
             base64: '',
             OrgAddress: '',
             OrgPINType: '',
-            OrgCountry : 'India',
-            OrgRegNumber : '',
+            OrgCountry: 'India',
+            OrgRegNumber: '',
             OrgServiceType: '',
-            OrgExpertise: '',
+            OrgExpertise: [],
             open: false,
             showAlert: false,
+            value: 0,
             errors: {
                 firstName: '',
                 lastName: '',
@@ -56,7 +338,7 @@ export default class ProviderRegister extends React.Component {
                 email: '',
                 confirmPassword: '',
                 phoneNumber: ''
-            }
+            },
         }
     }
 
@@ -65,20 +347,46 @@ export default class ProviderRegister extends React.Component {
         reader.readAsDataURL(e.target.files[0]);
         reader.onloadend = () => {
             this.setState({
-              base64: reader.result
+                base64: reader.result
             });
         };
     }
 
+    classes = makeStyles({
+        root: {
+            flexGrow: 1,
+        },
+    });
+
+    //   const [value, setValue] = React.useState(0);
+
+    handleChange = (event, newValue) => {
+        this.setState({ value: newValue });
+    };
+
+    handleDelete = (name) => {
+        if(this.state.services.length === 1) {
+            this.setState({
+                showAlert: true
+            })
+            return null;
+        }
+        this.setState({
+            services: this.state.services.filter(item=> item.name !== name.name)
+        })
+    }
+
+
+
     change = (e) => {
         const { name, value } = e.target;
         let errors = this.state.errors;
-        switch(name) {
+        switch (name) {
             case 'firstName':
-                errors.firstName = value.length < 3 ? 'First Name should be 3 characters long': null;
+                errors.firstName = value.length < 3 ? 'First Name should be 3 characters long' : null;
                 break;
             case 'lastName':
-                errors.lastName = value.length < 3 ? 'Last name should be 3 characters long': null;
+                errors.lastName = value.length < 3 ? 'Last name should be 3 characters long' : null;
                 break;
             case 'email':
                 errors.email = value.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/) ? '' : 'Invalid Email Address';
@@ -93,21 +401,21 @@ export default class ProviderRegister extends React.Component {
                 errors.phoneNumber = value.match(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/) ? '' : 'Invalid phone number.';
                 break;
             case 'OrgName':
-                errors.OrgName = value.length < 3 ? 'Organization name should be 3 characters long': '';
+                errors.OrgName = value.length < 3 ? 'Organization name should be 3 characters long' : '';
                 break;
             case 'OrgAddress':
                 errors.OrgAddress = value.length < 3 ? 'Ivalid Organization address' : '';
                 break;
-                case 'OrgRegNumber':
-                    errors.OrgRegNumber = value.length ? '' : 'Organization registration number is required';
-                    break;
-                case 'OrgPINType':
-                    errors.OrgPINType = value.length ? '' : 'PIN type is required';
-                    break;
+            case 'OrgRegNumber':
+                errors.OrgRegNumber = value.length ? '' : 'Organization registration number is required';
+                break;
+            case 'OrgPINType':
+                errors.OrgPINType = value.length ? '' : 'PIN type is required';
+                break;
             default:
                 break;
         }
-        this.setState({errors, [name]: value}, ()=> {
+        this.setState({ errors, [name]: value }, () => {
             return null;
         });
     }
@@ -118,51 +426,94 @@ export default class ProviderRegister extends React.Component {
         this.props.getFinancialServiceList();
         this.props.getBusinessTypeList();
         this.props.getCountriesList();
-        store.subscribe(()=> {
+        store.subscribe(() => {
             this.setState({
                 services: store.getState().getFinancialService.success
             });
             this.setState({
-                expertise: store.getState().getBusinessTypes.success
+                expertiseList: store.getState().getBusinessTypes.success
             });
             this.setState({
                 countries: store.getState().getCountries.countries
             })
-        })
+        });
+        setTimeout(() => {
+            this.state.services.map((item) => {
+                var joined = this.state.servivesList.concat(item.name);
+                this.setState({ servivesList:[...new Set(joined)]  });
+
+            });
+            this.setState({expertise: Array.from(new Set(this.state.expertiseList.map(a=>a.name)))
+            .map(name=>{
+                return this.state.expertiseList.find(a=>a.name === name)
+            })})
+
+        }, 1000);
+        this.setState();
+    }
+    storeSelectedservices = (value) => {
+       
+        if (value.length === 0) {
+                    this.setState({
+                        showAlert: true
+                    })
+                    return null;
+                }
+        else{
+            this.setState({actualServices: Array.from(new Set(value.map(a=>a)))
+                .map(name=>{
+                 return this.state.services.find(a => a.name === name)
+             })})
+             this.setState({showAlert:false});
+        }
+
+        
     }
 
-    handleDelete = (name) => {
-        if(this.state.services.length === 1) {
-            this.setState({
-                showAlert: true
-            })
-            return null;
-        }
-        this.setState({
-            services: this.state.services.filter(item=> item.name !== name.name)
-        })
-    }
+    // storeSelectedservices = (value) => {
+    //     var newArrayobj = []
+    //     if (this.state.value.length === 1) {
+    //                 this.setState({
+    //                     showAlert: true
+    //                 })
+    //                 return null;
+    //             }
+    //     this.state.services.forEach(element1 => {
+    //         value.forEach(element2 => {
+    //             if (element1.name === element2) {
+                   
+    //                     newArrayobj.push(element1)
+                    
+    //             }
+    //         });          
+            
+    //     });     
+    //     this.setState({ actualServices: newArrayobj });
+    //     console.log("servicessss",this.state.actualServices)
+        
+    // }
+
 
     handleNext = () => {
         this.setState({
             activeStep: this.state.activeStep + 1
         })
     };
-    
+
     handleBack = () => {
         this.setState({
             activeStep: this.state.activeStep - 1
         })
     };
-    
+
     handleReset = () => {
         this.setState({
             activeStep: 0
         });
     };
 
-    handleAccessCode = (e)=> {
-        this.setState({country_code: e.target.getAttribute('data-value')});
+    handleAccessCode = (e) => {
+        this.setState({ country_code: e.target.getAttribute('data-value') });
     }
 
     handleCountrySelect = (e) => {
@@ -171,16 +522,17 @@ export default class ProviderRegister extends React.Component {
         })
     }
 
-    handleServiceCode = (e) => {
-        this.setState({OrgExpertise: e.target.getAttribute('data-value')});
+    handleSelectedexpertise = (e, value) => {
+        this.setState({ OrgExpertise: value });
+        
     }
 
     handleClose = (event, reason) => {
         if (reason === 'clickaway') {
-          return;
+            return;
         }
-    
-        this.setState({open: false});
+
+        this.setState({ open: false });
     };
 
     handleClick = () => {
@@ -189,29 +541,106 @@ export default class ProviderRegister extends React.Component {
 
     createOrganization = () => {
         this.props.registerProvider(
-            this.state.firstName + " " +this.state.lastName,
+            this.state.firstName + " " + this.state.lastName,
             this.state.password, this.state.email, this.state.phoneNumber,
             this.state.OrgCountry, this.state.OrgName,
             this.state.OrgAddress, this.state.OrgRegNumber,
-            this.state.OrgPINType, this.state.services,
+            this.state.OrgPINType, this.state.actualServices,
             this.state.base64, this.state.OrgExpertise
         );
-        store.subscribe(()=> {
-            if(store.getState().registerProvider.error) {
-                this.setState({open: true});
-                this.setState({errorMessage: store.getState().registerProvider.error})
+        store.subscribe(() => {
+            if (store.getState().registerProvider.error) {
+                this.setState({ open: true });
+                this.setState({ errorMessage: store.getState().registerProvider.error })
             } else {
                 history.push('/provider/login');
             }
-            
+
         })
     }
 
+    handleSelectedservices = (event, value) => {
+        this.setState({ selectedServices: value });
+        this.storeSelectedservices(value);
+    }
+
+
+    renderMultiSelect = (options) => {
+        const animatedComponents = makeAnimated();
+        return (
+            <RSelect
+                className="multi-select"
+                closeMenuOnSelect={false}
+                components={animatedComponents}
+                isMulti
+                options={options}
+                onChange={this.multiSelectGetValues}>
+            </RSelect>
+        );
+    }
+
+    multiSelectGetValues = (...vv) => {
+        
+        this.setState({
+            selectedBusinesses: vv[0]
+        });
+    }
+
+    renderMultiCheck = () => {
+        return (
+            <CheckboxTree
+                nodes={this.state.busNodes}
+                checked={this.state.checked}
+                expanded={this.state.expanded}
+                onCheck={checked => this.setState({ checked })}
+                onExpand={expanded => this.setState({ expanded })}
+                icons={{
+                    check: <span className="rct-icon rct-icon-check" />,
+                    uncheck: <span className="rct-icon rct-icon-uncheck" />,
+                    halfCheck: <span className="rct-icon rct-icon-half-check" />,
+                    expandClose: <span className="rct-icon rct-icon-expand-close" />,
+                    expandOpen: <span className="rct-icon rct-icon-expand-open" />,
+                    expandAll: <span className="rct-icon rct-icon-expand-all" />,
+                    collapseAll: <span className="rct-icon rct-icon-collapse-all" />,
+                    parentClose: null,
+                    parentOpen: null,
+                    leaf: null,
+                }}
+            />
+        );
+    }
+    renderMultiCheck1 = () => {
+        return (
+            <CheckboxTree
+                nodes={this.state.indNodes}
+                checked={this.state.checked}
+                expanded={this.state.expanded}
+                onCheck={checked => this.setState({ checked })}
+                onExpand={expanded => this.setState({ expanded })}
+                icons={{
+                    check: <span className="rct-icon rct-icon-check" />,
+                    uncheck: <span className="rct-icon rct-icon-uncheck" />,
+                    halfCheck: <span className="rct-icon rct-icon-half-check" />,
+                    expandClose: <span className="rct-icon rct-icon-expand-close" />,
+                    expandOpen: <span className="rct-icon rct-icon-expand-open" />,
+                    expandAll: <span className="rct-icon rct-icon-expand-all" />,
+                    collapseAll: <span className="rct-icon rct-icon-collapse-all" />,
+                    parentClose: null,
+                    parentOpen: null,
+                    leaf: null,
+                }}
+            />
+        );
+    }
+
+
     getStepperContent = () => {
+
+       
         if(this.state.activeStep === 3) {
             return(
                 <Paper style={{height:500}}>
-                    <h4>Please provide your serice type details</h4>
+                    <h4>Please provide your service type details</h4>
                     <div style={{display: 'inline-flex'}}>
                         <div>
                             <Paper style={{width: 800, marginBottom: 50}}>
@@ -220,41 +649,26 @@ export default class ProviderRegister extends React.Component {
                             <Typography>{"For Individual"}</Typography>
                         </ExpansionPanelSummary>
                         <ExpansionPanelSummary >
-                            {
-                                (this.state.individualList && this.state.individualList.length) ? this.state.individualList.map((item, index)=> {
-                                    return <Chip label={item}
-                                                    style={{marginBottom: 10, marginRight:10}}
-                                                    onDelete={() => this.handleDelete(item)} 
-                                                    onClick={()=>this.handleClick()}
-                                                    clickable
-                                                    key={index}
-                                                    avatar={<Avatar
-                                                    className="avatarRe">{item[0]}</Avatar>}
-                                     />
-                                }) : <span>No services found.</span>
+                            {   
+                                 this.renderMultiCheck1()
+                                
                             }
+                           
                         </ExpansionPanelSummary>
                     </ExpansionPanel>
 
                     <ExpansionPanel style={{width:800}}>
                         <ExpansionPanelSummary expandIcon={<Icon className="fa fa-sort-desc" aria-hidden="true"/>}>
-                            <Typography>{"For Business"}</Typography>
+                            <Typography>{"For business"}</Typography>
                         </ExpansionPanelSummary>
                         <ExpansionPanelSummary>
                             <div>
                             {
-                                (this.state.individualList && this.state.businessList.length) ? this.state.businessList.map((item, index)=> {
-                                    return <Chip label={item}
-                                                    style={{marginBottom: 10, marginRight:10}}
-                                                    onDelete={() => this.handleDelete(item)} 
-                                                    onClick={()=>this.handleClick()}
-                                                    clickable
-                                                    key={index}
-                                                    avatar={<Avatar
-                                                    className="avatarRe">{item[0]}</Avatar>}
-                                     />
-                                }) : <span>No serices found.</span>
+                                this.renderMultiCheck()
+                            /* <InputLabel id="demo-simple-select-label" style={{marginBottom:20}}>Select Services provided for Business</InputLabel> */
                             }
+                            
+            
                             </div>
                         </ExpansionPanelSummary>
                     </ExpansionPanel>
@@ -276,73 +690,125 @@ export default class ProviderRegister extends React.Component {
                 </Paper>
             )
         }
-        if(this.state.activeStep === 2) {
+        if (this.state.activeStep === 2) {
             return (
-                <Paper style={{height:500}}>
+                <Paper style={{ height: 500 }}>
                     <h4>Enter your Organization Services</h4>
-                    <div style={{display: 'inline-flex'}}>
+                    <Paper className={this.classes.root}>
+                        <Tabs
+                            value={this.state.value}
+                            onChange={this.handleChange}
+                            indicatorColor="secondary"
+                            textColor="primary"
+                            centered
+                        >
+                            <Tab label="Select your service Type" />
+                            <Tab label="Select your Expertise" />
+                        </Tabs>
+                    </Paper>
+                    {
+                        this.state.value !== 1 ?
+                        <div style={{ display: 'inline-flex', marginBottom: 50 }}>
                         <div>
-                            <Paper style={{width: 800, marginBottom: 50}}>
+                            {/* <Paper style={{ width: 800, marginBottom: 50 }}> */}
                                 {
                                     this.state.showAlert ? <Alert severity="warning">Cannot delete. Atleast one expertise required</Alert> : null
                                 }
-                                <InputLabel id="demo-simple-select-label" style={{marginBottom:20}}>Select your service Type</InputLabel>
-                                    {
-                                        (this.state.services && this.state.services.length) ? this.state.services.map((item, index)=>{
-                                        return <Chip label={item.name}
-                                                    style={{marginBottom: 10, marginRight:10}}
-                                                    onDelete={() => this.handleDelete(item)} 
-                                                    onClick={()=>this.handleClick()}
-                                                    clickable
-                                                    key={index}
-                                                    avatar={<Avatar style={{height:"20px !important", width:"20px !important"}}
-                                                    className="avatarRe">{item.name[0]}</Avatar>}
+                                {/* <InputLabel id="demo-simple-select-label" style={{ marginBottom: 20 }}>Select your service Type</InputLabel> */}
+                                <br/>
+                                <br/>
+                                    <Autocomplete
+                                        multiple
+                                        id="checkboxes-tags-demo"
+                                        value={this.state.selectedServices}
+                                        options={this.state.servivesList}
+                                        disableCloseOnSelect
+                                        getOptionLabel={(option) => option}
+                                        onChange={(event, value) => this.handleSelectedservices(event, value)}
+                                        renderOption={(option, { selected }) => (
+                                            <React.Fragment>
+                                                <Checkbox
+                                                    icon={<CheckBoxOutlineBlankIcon fontSize="small" />}
+                                                    checkedIcon={<CheckBoxIcon fontSize="small" />}
+                                                    style={{ marginRight: 8 }}
+                                                    checked={selected}
                                                 />
-                                        }) : <span>No Serice type selected. Atleast one expertise required.</span>
-                                    }
-                            </Paper>
-                           
+                                                {option}
+                                            </React.Fragment>
+                                        )}
+                                        style={{ width: 600 }}
+                                        renderInput={(params) => (
+                                            <TextField {...params} variant="outlined" label="Select your service Type" placeholder="services" />
+                                        )}
+                                    />
+                            {/* </Paper> */}
                         </div>
-                    </div><br />
-                    <div style={{display: 'inline-flex', marginBottom: 50}}>
-                         <div>
-                            <InputLabel id="demo-simple-select-label">Please Select your Expertise</InputLabel>
-                            <Select
+                        <br/><br/>
+                    </div>: <div style={{ display: 'inline-flex', marginBottom: 50 }}>
+                        <div>
+                            {/* <InputLabel id="demo-simple-select-label">Please Select your Expertise</InputLabel> */}
+                            <br/>
+                            <br/>
+                            <Autocomplete
+                                multiple
+                                id="checkboxes-tags-demo"
+                                value={this.state.OrgExpertise}
+                                options={this.state.expertise}
+                                disableCloseOnSelect
+                                getOptionLabel={(option) => option.name}
+                                onChange={(event, value) => this.handleSelectedexpertise(event, value)}
+                                renderOption={(option, { selected }) => (
+                                    <React.Fragment>
+                                        <Checkbox
+                                            icon={<CheckBoxOutlineBlankIcon fontSize="small" />}
+                                            checkedIcon={<CheckBoxIcon fontSize="small" />}
+                                            style={{ marginRight: 8 }}
+                                            checked={selected}
+                                        />
+                                        {option.name}
+                                    </React.Fragment>
+                                )}
+                                style={{ width: 600 }}
+                                renderInput={(params) => (
+                                    <TextField {...params} variant="outlined" label="Please Select your Expertise" placeholder="Expertise" />
+                                )}
+                            />
+                            {/* <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-sßelect"
                                 value={this.state.OrgExpertise}
-                                style={{minWidth:650}}
+                                style={{ minWidth: 650 }}
                             >
                                 {
-                                    (this.state.expertise && this.state.expertise.length) ? this.state.expertise.map((item, index)=>{
-                                    return <MenuItem key={index} value={item.name} onClick={(e)=> this.handleServiceCode(e)}>{item.name}</MenuItem>
+                                    (this.state.expertise && this.state.expertise.length) ? this.state.expertise.map((item, index) => {
+                                        return <MenuItem key={index} value={item.name} onClick={(e) => this.handleServiceCode(e)}>{item.name}</MenuItem>
                                     }) : <span>Loading</span>
                                 }
-                            </Select>
-                        </div> 
-
-
-
-                    </div><br />
+                            </Select> */}
+                        </div>
+                    </div>
+                    }
+                    <br/>
+                   <br />
                     <Button
                         disabled={this.state.activeStep === 0}
-                        onClick={this.handleBack} style={{marginRight:30}}
+                        onClick={this.handleBack} style={{ marginRight: 30 }}
                         variant="outlined"
                     >
                         Back
                     </Button>
-                    <Button variant="outlined" color="primary" onClick={this.handleNext} style={{marginRight:30}}>
+                    <Button variant="outlined" color="primary" onClick={this.handleNext} style={{ marginRight: 30 }}>
                         {this.state.activeStep === this.state.steps.length - 1 ? 'Finish' : 'Next'}
                     </Button>
                 </Paper>
             )
         } if (this.state.activeStep === 0) {
             return (
-                <Paper style={{marginLeft:150, height: 500}}>
+                <Paper style={{ marginLeft: 150, height: 500 }}>
                     <h4>Please provide your personal details</h4>
-                    <Container maxWidth="sm" style={{marginBottom:30}}>
+                    <Container maxWidth="sm" style={{ marginBottom: 30 }}>
                         <form noValidate autoCapitalize="off">
-                            <TextField 
+                            <TextField
                                 id="firstName"
                                 label="Please enter your first Name"
                                 fullWidth
@@ -352,10 +818,10 @@ export default class ProviderRegister extends React.Component {
                                 error={this.state.errors.firstName}
                                 helperText={this.state.errors.firstName}
                                 autoFocus
-                                onChange={(e)=> this.change(e)}
+                                onChange={(e) => this.change(e)}
                                 value={this.state.firstName}
                             />
-                            <TextField 
+                            <TextField
                                 id="lastName"
                                 label="Please enter your last Name"
                                 fullWidth
@@ -364,10 +830,10 @@ export default class ProviderRegister extends React.Component {
                                 name="lastName"
                                 error={this.state.errors.lastName}
                                 helperText={this.state.errors.lastName}
-                                onChange={(e)=> this.change(e)}
+                                onChange={(e) => this.change(e)}
                                 value={this.state.lastName}
                             />
-                            <TextField 
+                            <TextField
                                 id="email"
                                 label="Please enter your Email Address"
                                 fullWidth
@@ -376,10 +842,10 @@ export default class ProviderRegister extends React.Component {
                                 name="email"
                                 error={this.state.errors.email}
                                 helperText={this.state.errors.email}
-                                onChange={(e)=> this.change(e)}
+                                onChange={(e) => this.change(e)}
                                 value={this.state.email}
                             />
-                            <TextField 
+                            <TextField
                                 id="password"
                                 label="Please enter your password"
                                 fullWidth
@@ -388,10 +854,10 @@ export default class ProviderRegister extends React.Component {
                                 name="password"
                                 error={this.state.errors.password}
                                 helperText={this.state.errors.password}
-                                onChange={(e)=> this.change(e)}
+                                onChange={(e) => this.change(e)}
                                 value={this.state.password}
                             />
-                            <TextField 
+                            <TextField
                                 id="confirmPassword"
                                 label="Please re-enter your password"
                                 fullWidth
@@ -400,58 +866,58 @@ export default class ProviderRegister extends React.Component {
                                 name="confirmPassword"
                                 error={this.state.errors.confirmPassword}
                                 helperText={this.state.errors.confirmPassword}
-                                onChange={(e)=> this.change(e)}
+                                onChange={(e) => this.change(e)}
                                 value={this.state.confirmPassword}
                             />
-                            <Grid item xs={4} style={{display:'flex'}}>
-                            <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-sßelect"
-                                value={this.state.country_code}
-                                style={{minWidth:150}}
-                            >
-                                {
-                                    (this.state.countries && this.state.countries.length) ? this.state.countries.map((item, index)=>{
-                                    return <MenuItem key={index} value={item.dial_code} onClick={(e)=> this.handleAccessCode(e)}>{item.dial_code}</MenuItem>
-                                    }) : <span>Loading</span>
-                                }
-                            </Select>
-                            <TextField 
-                                id="phone_number"
-                                label="Enter your Phone number"
-                                name="phoneNumber"
-                                fullWidth
-                                type="number"
-                                error={this.state.errors.phoneNumber}
-                                helperText={this.state.errors.phoneNumber}
-                                autoFocus
-                                required
-                                style={{minWidth:400}}
-                                onChange={(e)=> this.change(e)}
-                                value={this.state.phoneNumber}
-                            />
+                            <Grid item xs={4} style={{ display: 'flex' }}>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-sßelect"
+                                    value={this.state.country_code}
+                                    style={{ minWidth: 150 }}
+                                >
+                                    {
+                                        (this.state.countries && this.state.countries.length) ? this.state.countries.map((item, index) => {
+                                            return <MenuItem key={index} value={item.dial_code} onClick={(e) => this.handleAccessCode(e)}>{item.dial_code}</MenuItem>
+                                        }) : <span>Loading</span>
+                                    }
+                                </Select>
+                                <TextField
+                                    id="phone_number"
+                                    label="Enter your Phone number"
+                                    name="phoneNumber"
+                                    fullWidth
+                                    type="number"
+                                    error={this.state.errors.phoneNumber}
+                                    helperText={this.state.errors.phoneNumber}
+                                    autoFocus
+                                    required
+                                    style={{ minWidth: 400 }}
+                                    onChange={(e) => this.change(e)}
+                                    value={this.state.phoneNumber}
+                                />
                             </Grid>
                         </form>
                     </Container>
                     <Button
                         disabled={this.state.activeStep === 0}
-                        onClick={this.handleBack} style={{marginRight:30}}
+                        onClick={this.handleBack} style={{ marginRight: 30 }}
                         variant="outlined"
                     >
                         Back
                     </Button>
-                    <Button variant="outlined" color="primary" onClick={this.handleNext} style={{marginRight:30}}>
+                    <Button variant="outlined" color="primary" onClick={this.handleNext} style={{ marginRight: 30 }}>
                         {this.state.activeStep === this.state.steps.length - 1 ? 'Finish' : 'Next'}
                     </Button>
-                    </Paper>
+                </Paper>
             )
         } if (this.state.activeStep === 1) {
             return (
                 <Paper >
                     <h4>Please provide your Organization Details</h4>
-                    <Container maxWidth="sm" style={{marginBottom: 50}}>
+                    <Container maxWidth="sm" style={{ marginBottom: 50 }}>
                         <form noValidate autoCapitalize="off">
-                            <TextField 
+                            <TextField
                                 fullWidth
                                 type="text"
                                 required
@@ -461,10 +927,10 @@ export default class ProviderRegister extends React.Component {
                                 error={this.state.errors.OrgName}
                                 helperText={this.state.errors.OrgName}
                                 autoFocus
-                                onChange={(e)=> this.change(e)}
+                                onChange={(e) => this.change(e)}
                                 value={this.state.OrgName}
                             />
-                            <TextField 
+                            <TextField
                                 fullWidth
                                 label="Enter your Organization Address"
                                 type="text"
@@ -473,21 +939,21 @@ export default class ProviderRegister extends React.Component {
                                 name="OrgAddress"
                                 error={this.state.errors.OrgAddress}
                                 helperText={this.state.errors.OrgAddress}
-                                onChange={(e)=> this.change(e)}
+                                onChange={(e) => this.change(e)}
                                 value={this.state.OrgAddress}
                             />
                             <Select id="countriesLabel"
                                 labelId="demo-simple-select-label"
-                                style={{minWidth:550}}
+                                style={{ minWidth: 550 }}
                                 value={this.state.OrgCountry}
                             >
                                 {
-                                    (this.state.countries && this.state.countries.length) ? this.state.countries.map((item, index)=> {
-                                        return <MenuItem key={index} value={item.name} onClick={(e)=> this.handleCountrySelect(e)}>{item.name}</MenuItem>
+                                    (this.state.countries && this.state.countries.length) ? this.state.countries.map((item, index) => {
+                                        return <MenuItem key={index} value={item.name} onClick={(e) => this.handleCountrySelect(e)}>{item.name}</MenuItem>
                                     }) : <span>Loading...</span>
                                 }
                             </Select>
-                            <TextField 
+                            <TextField
                                 fullWidth
                                 label="Enter your Organization Registation Number"
                                 type="text"
@@ -496,10 +962,10 @@ export default class ProviderRegister extends React.Component {
                                 name="OrgRegNumber"
                                 error={this.state.errors.OrgRegNumber}
                                 helperText={this.state.errors.OrgRegNumber}
-                                onChange={(e)=> this.change(e)}
+                                onChange={(e) => this.change(e)}
                                 value={this.state.OrgRegNumber}
                             />
-                            <TextField 
+                            <TextField
                                 fullWidth
                                 label="Enter type of registation"
                                 type="text"
@@ -507,46 +973,46 @@ export default class ProviderRegister extends React.Component {
                                 name="OrgPINType"
                                 error={this.state.errors.OrgPINType}
                                 helperText={this.state.errors.OrgPINType}
-                                onChange={(e)=> this.change(e)}
-                                style={{marginBottom:40}}
+                                onChange={(e) => this.change(e)}
+                                style={{ marginBottom: 40 }}
                                 value={this.state.OrgPINType}
                             />
-                            <Grid item xs={4} style={{display:'flex'}}>
+                            <Grid item xs={4} style={{ display: 'flex' }}>
                                 <label>Please provide a proof of Organization</label>
                                 <input
                                     accept="image/*"
                                     id="raised-button-file"
                                     multiple
                                     type="file"
-                                    onChange={(e)=> {this.name(e)}}
+                                    onChange={(e) => { this.name(e) }}
                                 />
                             </Grid>
                         </form>
                     </Container>
                     <Button
-                    disabled={this.state.activeStep === 0}
-                    onClick={this.handleBack}
-                    style={{marginRight:30}}
-                    variant="outlined"
-                >
-                    Back
+                        disabled={this.state.activeStep === 0}
+                        onClick={this.handleBack}
+                        style={{ marginRight: 30 }}
+                        variant="outlined"
+                    >
+                        Back
                 </Button>
-                <Button variant="outlined" color="primary" onClick={this.handleNext} style={{marginRight:30}}>
-                    {this.state.activeStep === this.state.steps.length - 1 ? 'Finish' : 'Next'}
-                </Button>
+                    <Button variant="outlined" color="primary" onClick={this.handleNext} style={{ marginRight: 30 }}>
+                        {this.state.activeStep === this.state.steps.length - 1 ? 'Finish' : 'Next'}
+                    </Button>
                 </Paper>
             )
         }
     }
 
     render() {
-        return(
+        return (
             <div>
                 <HeaderContainer />
                 <Paper className="stepperShrink">
                     <Stepper activeStep={this.state.activeStep} alternativeLabel elevation={0}>
                         {
-                            this.state.steps.map((items, index)=> {
+                            this.state.steps.map((items, index) => {
                                 return (
                                     <Step key={items}>
                                         <StepLabel>{items}</StepLabel>
@@ -555,29 +1021,29 @@ export default class ProviderRegister extends React.Component {
                             })
                         }
                     </Stepper>
-                    </Paper>
-                    <div className="shrink">
-                        {   
-                            this.getStepperContent()
-                        }
-                    </div>
-                    <Snackbar
-                        anchorOrigin={{
-                            vertical: 'bottom',
-                            horizontal: 'center',
-                        }}
-                        open={this.state.open}
-                        autoHideDuration={5000}
-                        onClose={(e,r)=>this.handleClose(e,r)}
-                        message={this.state.errorMessage}
-                        action={
+                </Paper>
+                <div className="shrink">
+                    {
+                        this.getStepperContent()
+                    }
+                </div>
+                <Snackbar
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'center',
+                    }}
+                    open={this.state.open}
+                    autoHideDuration={5000}
+                    onClose={(e, r) => this.handleClose(e, r)}
+                    message={this.state.errorMessage}
+                    action={
                         <React.Fragment>
-                            <Button color="secondary" size="small" onClick={(e,r)=>this.handleClose(e,r)}>
-                            Hide
+                            <Button color="secondary" size="small" onClick={(e, r) => this.handleClose(e, r)}>
+                                Hide
                             </Button>
                         </React.Fragment>
-                        }
-                    />
+                    }
+                />
             </div>
         )
     }

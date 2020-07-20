@@ -11,4 +11,3 @@ router.get('/all', getProviderController.getAllProvider);
 router.get('/:partnerId',getProviderDetailsController.getProviderDetails)
 
 module.exports = router;
- 

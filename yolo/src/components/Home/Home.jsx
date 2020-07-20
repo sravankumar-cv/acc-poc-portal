@@ -11,6 +11,7 @@ import CardErrorBoundary from '../shared/CardErrorBoundary';
 import log from '../../utils/logger.service'
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import {Link} from 'react-router-dom';
+import { classList } from '@syncfusion/ej2-base';
 
 export default class Home extends React.Component {
     constructor(props) {
@@ -43,6 +44,8 @@ export default class Home extends React.Component {
         })
     }
     
+  
+
     change = (e) => {
         const { name, value } = e.target;
         switch(name) {
@@ -76,31 +79,38 @@ export default class Home extends React.Component {
                         <div className ="Column">
                         <div className="profile_container">
                         <div className="profile_card">
+
                         <div className="profile_img">
-                            
                              <img src ={itemz.providerIdentityImg} ></img> 
                         </div>
-                        <div className="profile_title">
-                            <p>Id: {itemz.partnerId}</p>
-                        </div>
+                        
                         <div className="profile_company">
                             <p>{itemz.OrganizationName}</p>
                         </div>
+
+                        <div className="profile_company">
+                            <p>{itemz.partnerId}</p>
+                        </div>
+
                         <div className="profile_title">
                             <p>{itemz.fullName}</p>
+
                             <CheckCircleOutlineIcon style={{ color: 'green' }}></CheckCircleOutlineIcon>
                         </div>
                         
                         <div className="profile_desc">
-                            <p>Expertise: {itemz.partnerType}</p>
-                            
+                             <p>Expertise: {itemz.partnerType[0].name}</p> 
                             <Link  to = {`/provider/profile?id=${itemz.partnerId}`}>See More</Link>
+                            
                         </div>
+                        
                          
                         <div className="profile_action">
                             <Button color="secondary" size="small">Contact Us</Button>
-                            
+                            <Link to={`/provider/profile?id=${itemz.partnerId}`}>
                             <Button color="primary" size="small">View Profile</Button>
+                            </Link>
+                            
                         </div>
                         <div className="profile_company">
                             <p>Fees : $100</p>

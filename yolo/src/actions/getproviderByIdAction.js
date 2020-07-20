@@ -3,10 +3,10 @@
  */
 
 import { 
-    GET_USER_DETAILS_IS_ERROR,
-    GET_USER_DETAILS_IS_LOADING,
-    GET_USER_DETAILS_IS_SUCCESS,
-} from '../types/details';
+    GET_PROVIDER_BY_ID_IS_LOADING,
+    GET_PROVIDER_BY_ID_IS_LOADING_IS_SUCCESS,
+    GET_PROVIDER_BY_ID_IS_LOADING_IS_FAILURE,
+} from '../types/provider';
 
 export function getUserDetails() {
     return (dispatch) => {
@@ -39,21 +39,21 @@ export function getUserDetails() {
 
 export function loading(loading) {
     return {
-        type: GET_USER_DETAILS_IS_LOADING,
+        type: GET_PROVIDER_BY_ID_IS_LOADING,
         payload: loading
     }
 }
 
 export function isSuccess(success) {
     return {
-        type: GET_USER_DETAILS_IS_SUCCESS,
+        type: GET_PROVIDER_BY_ID_IS_LOADING_IS_SUCCESS,
         payload: success
     }
 }
 
 export function isError(err) {
     return {
-        type: GET_USER_DETAILS_IS_ERROR,
+        type: GET_PROVIDER_BY_ID_IS_LOADING_IS_FAILURE,
         payload: err
     }
 }

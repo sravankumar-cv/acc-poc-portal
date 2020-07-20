@@ -15,6 +15,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import ProviderProfileContainer from './containers/providerProfileContainer';
 import './App.css';
 import log from "./utils/logger.service"
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App() {
   var str;
@@ -118,13 +119,14 @@ function App() {
             <Route exact path="/" component={ HomeContainer } />
             <Route exact path="/register" component={ RegisterContainer } />
             <Route exact path="/login" component={ LoginContainer } />
+            <ProtectedRoute path ="/provider/profile" component = {ProviderProfileContainer} />
             <Route exact path="/provider/login" component = {ProviderLoginContainer} />
             <Route exact path="/provider/register" component = {ProviderRegisterContainer} />
             <Route exact path="/admin/login" component={AdminLoginContainer} />
             <ProtectedRoute path="/dashboard" component={ Dashboard } />
             <ProtectedRoute path="/provider/dashboard" component= {ProviderDashboardContainer} />
             <ProtectedRoute path="/admin/dashboard" component= {AdminDashboardContainer} />
-            <ProtectedRoute path ="/provider/profile" component = {ProviderProfileContainer} />
+            
             <Route path="*" component={ NotFound } />
           </Switch>
         </Router>
