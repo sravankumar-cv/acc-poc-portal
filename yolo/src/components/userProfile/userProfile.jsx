@@ -59,9 +59,7 @@ export default class UserProfile extends React.Component {
                 countries: store.getState().getCountries.countries
             })
         })
-        // if (history.location.pathname !== '/login' || '/register' ) {
-        //     setIsLoggedIn(true);
-        // }
+    
         if(localStorage.getItem('userProfile')==='false'){
             setTimeout(() => {
                 this.setState({
@@ -75,12 +73,14 @@ export default class UserProfile extends React.Component {
     }
 
     handleClose = (event, reason) => {
+      
         if (reason === 'clickaway') {
           return;
         }
         
         this.setState({open: false});
-        window.location.reload();
+    
+       // window.location.reload();
     };
 
     change = (e) => {
@@ -127,6 +127,7 @@ export default class UserProfile extends React.Component {
     //UI part is done need to work on put and 
     updateProfile=(e)=>{
         e.preventDefault();
+        console.log("update profile")
         this.props.userUpdate( this.state.email, this.state.name,this.state.phone_number,this.state.country_code,this.state.photo );
         store.subscribe(()=>{
             if(store.getState().userUpdate.error) {
@@ -135,8 +136,16 @@ export default class UserProfile extends React.Component {
                     errorMessage: store.getState().userUpdate.error
                 })
             } else{ 
-                // history.push('/');
-                // window.location.reload();
+                console.log("update profile--->",this.state.userDetails)
+                
+                this.setState({open: true});
+                this.setState({
+                    errorMessage: "Successfully Updated ! Bye Bye",
+                    disableName:true,
+                    disableEmail:true,
+                    disableNumber:true,
+                    updateDetails: true
+                })
             }
         })
     }
@@ -144,26 +153,24 @@ export default class UserProfile extends React.Component {
     handleUpdate =()=>{
         // console.log('inside func')
         if(this.state.disableName===false || this.state.disableEmail===false || this.state.disableNumber===false){
-            // console.log('inside first ')
+            
             if(this.state.errors.name == "" && this.state.errors.email == "" && this.state.errors.phone_number == ""){
-                // console.log('inside third')
+                
                 this.setState({updateDetails:false});
             }else{
 
                 this.setState({updateDetails:true});
             }
         }
-        // console.log(this.state.disableName);
+       
         
     }
 
 
-    // handleTabChange = (e) => {
-    //     console.log(e);
-    // }
+    
 
     handleAccessCode = (e)=> {
-        // console.log( e.target.value);
+        
         this.setState({countries_code:e.target.value});
     }
 
@@ -259,18 +266,7 @@ export default class UserProfile extends React.Component {
                                                                                 }) : <span>Loading</span>
                                                                             }
                                                                         </Form.Control>
-                                                                        {/* <Select
-                                                                            labelId="demo-simple-select-label"
-                                                                            id="demo-simple-select"
-                                                                            value={this.state.country_code}
-                                                                            style={{ minWidth: 150 }}
-                                                                        >
-                                                                            {
-                                                                                (this.state.countries && this.state.countries.length) ? this.state.countries.map((item, index) => {
-                                                                                    return <MenuItem key={index} value={item.dial_code} autoWidth={true}>{item.dial_code}</MenuItem>
-                                                                                }) : <span>Loading</span>
-                                                                            }
-                                                                        </Select> */}
+                                                                       
                                                                     </Col>
                                                                     <Col md={10}>
                                                                         <Form.Control
@@ -295,7 +291,7 @@ export default class UserProfile extends React.Component {
                                                         </Row>
                                                     </Form.Group>
                                                     <br/>
-                                                    <Button variant="contained" type="submit" color="primary" disabled={this.state.updateDetails} >Update</Button>
+                                                    <Button variant="contained" type="submit" color="primary" disabled={this.state.updateDetails} onClick={()=>{console.log("user  -->",this.state.userDetails)}} >Update</Button>
                                                     </Form>
 
                                                     {/* <form noValidate autoCapitalize="off"> */}

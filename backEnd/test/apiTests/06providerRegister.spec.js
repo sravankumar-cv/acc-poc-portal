@@ -33,6 +33,7 @@ describe('Provider register validation unit test', ()=> {
                 password: 'Jithin3433!',
                 email: faker.internet.email(),
                 mobileNumber: faker.phone.phoneNumber(),
+                
                 country: faker.address.country(),
                 OrganizationName: faker.company.companyName(),
                 OrganizationAddress: faker.address.streetName(),

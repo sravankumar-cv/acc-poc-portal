@@ -12,7 +12,7 @@ export function userUpdate(email, name, phone_number, country, photo) {
     return(dispatch) => {
         dispatch(loading(true));
         return fetch('/api/user/update', {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
                 'x-api-key': window.localStorage.getItem('token')
@@ -21,8 +21,8 @@ export function userUpdate(email, name, phone_number, country, photo) {
                 email: email,
                 name: name,
                 phone_number: phone_number,
-                country: country,
-                photo: photo
+                //country: country,
+                //photo: photo
             })
         }).then(res=> {
             if(res.status === 200) {

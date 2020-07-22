@@ -5,6 +5,8 @@ import {default as RSelect} from 'react-select';
 import makeAnimated from 'react-select/animated';
 import 'react-checkbox-tree/lib/react-checkbox-tree.css';
 import CheckboxTree from 'react-checkbox-tree';
+import data from '../../assets/businessTypes.json';
+import data1 from '../../assets/businessType2.json'
 import {
     Container,
     InputLabel, Icon,
@@ -21,16 +23,10 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
-
 import { makeStyles } from '@material-ui/core/styles';
-// import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import "cdn.syncfusion.com/ej2/ej2-base/styles/material.css";
-// import "cdn.syncfusion.com/ej2/ej2-inputs/styles/material.cs";
-// import "cdn.syncfusion.com/ej2/ej2-buttons/styles/material.css";
-// import "cdn.syncfusion.com/ej2/ej2-react-navigations/styles/material.css";
 import { Multiselect } from 'multiselect-react-dropdown';
 import { TreeViewComponent } from '@syncfusion/ej2-react-navigations';
 
@@ -46,8 +42,7 @@ const nodes = [{
         { value: 'deimos', label: 'Deimos' },
     ],
 }];
-// import log from '../../utils/logger.service';
-// import { Multiselect } from 'multiselect-react-dropdown';
+
 
 
 export default class ProviderRegister extends React.Component {
@@ -60,6 +55,8 @@ export default class ProviderRegister extends React.Component {
             lastName: '',
             password: '',
             email: '',
+            City: '',
+            Fees: '',
             // countries: [],
             businessList: ['Business Incorporation', 'GST Service', 'Startup Serices', 'Legal Complaince Service', 'Tax Returns', 'Goverment Registration', 'Trademark', 'Miscelleneous Services'],
             individualList: ['Tax returns', 'TDS', 'Legal', 'Miscelleneous Services'],
@@ -96,208 +93,10 @@ export default class ProviderRegister extends React.Component {
             ],
 
             field: { dataSource: this.countries, id: 'id', parentID: 'pid', text: 'name', hasChildren: 'hasChild' },
-            indNodes: [{
-                value: 'Individual',
-                label: 'Individual',
-                children: [
-                    {
-                        value: 'Tax returns', label: 'Tax returns', children: [{
-                            value: 'salaried Individuals',
-                            label: 'salaried Individuals',
-                        },
-                        {
-                            value: 'Capital Gains',
-                            label: 'Capital Gains',
-                        },
-                        {
-                            value: 'Tax notice management plan',
-                            label: 'Tax notice management plan',
-                        },
-                        {
-                            value: 'LTCG filing and advisory',
-                            label: 'LTCG filing and advisory',
-                        }
+            indNodes: [],
 
-                    ],
-                        
-                    },
-                    { value: 'TDS', label: 'TDS',children: [{
-                        value: 'Challan 26QB',
-                        label: 'Challan 26QB',
-                    }
-                  
-               
-                ] },
-                    { value: 'Legal', label: 'Legal' ,children: [{
-                        value: 'Document Review',
-                        label: 'Document Review',
-                    },
-                    {
-                        value: 'Legal Drafting',
-                        label: 'Legal Drafting'
-                    },
-                    {
-                        value:'Filing of Form DPT-3',
-                        label: 'Filing of Form DPT-3'
-                    }
-               
-                ]},
-                    { value: 'Miscelleneous Services', label: 'Miscelleneous Services',children: [{
-                        value: 'Advisory tax saving',
-                        label: 'Advisory tax saving',
-                    },
-                    {
-                       value:'Ask an expert',
-                       label:'Ask an expert'
-                    }
-                  
-               
-                ] }
-                ],
-            }],
-
-            busNodes: [{
-                value: 'Business',
-                label: 'Business',
-                children: [
-                    {
-                        value: 'Business Incorporation', label: 'Business Incorporation', children: [{
-                            value: 'Private Limited Company',
-                            label: 'Private Limited Company',
-                        },
-                        {
-                            value: 'One person company',
-                            label: 'One person company',
-                        },
-                        {
-                            value: 'Limited Liability Partnership',
-                            label: 'Limited Liability Partnership',
-                        },
-                        {
-                            value: 'PLC registration',
-                            label: 'PLC registration',
-                        },
-                        {
-                            value: 'NGO section and company registration',
-                            label: 'NGO section and company registration',
-                        }
-
-                    ]
-                    },
-                    { value: 'GST Service', label: 'GST Service',children: [{
-                        value: 'GST registration',
-                        label: 'GST registration',
-                    },
-                    {
-                        value: 'GST filing',
-                        label: 'GST filing',
-                    },
-                    {
-                        value: 'Ask an expert',
-                        label: 'Ask an expert',
-                    },
-                    {
-                        value: 'E-way bill service',
-                        label: 'E-way bill service',
-                    },
-                    {
-                        value: 'GST notice-Ask an expert',
-                        label: 'GST notice-Ask an expert',
-                    }
-
-                ] },
-                    { value: 'Startup Services', label: 'Startup Services',children: [{
-                        value: 'Payroll Service',
-                        label: 'Payroll Service',
-                    },
-                    {
-                        value:'Launch Your Startup',
-                        label:'Launch Your Startup'
-                    },
-                    {
-                        value:'Start up India Registration',
-                        label:'Start up India Registration'
-                    },
-                    {
-                        value:'Winding up of company',
-                        label:'Winding up of company'
-                    },
-                    {
-                        value:'Company and LLP returns',
-                        label:'Company and LLP returns'
-                    }
-                  
-               
-                ] },
-                    { value: 'Legal Complaince Service', label: 'Legal Complaince Service',children: [{
-                        value: 'Change company name',
-                        label: 'Change company name',
-                    },
-                    {
-                        value:'Change registered office',
-                        label:'Change registered office'
-                    }
-                  
-               
-                ] },
-                    { value: 'Tax Returns', label: 'Tax Returns' ,children: [{
-                        value: 'TDS returns',
-                        label: 'TDS returns',
-                    },
-                    {
-                        value:'Business Tax returns',
-                        label:'Business Tax returns'
-                    }
-                  
-               
-                ]},
-                    { value: 'Goverment Registration', label: 'Goverment Registration',children: [{
-                        value: 'Provident Fund',
-                        label: 'Provident Fund',
-                    },
-                    {
-                        value:'PAN registration',
-                        label:'PAN registration'
-                    }
-                  
-               
-                ] },
-                    { value: 'Trademark', label: 'Trademark' ,children: [{
-                        value: 'Trademark registration',
-                        label: 'Trademark registration',
-                    },
-                    {
-                        value:'Trademark renewal',
-                        label:'Trademark renewal'
-                    },
-                    {
-                        value:'Trademark registration in India',
-                        label:'Trademark registration in India'
-                    }
-                  
-               
-                ]},
-                    { value: 'Miscelleneous Services', label: 'Miscelleneous Services',children: [{
-                        value: 'List Your Business on government website',
-                        label: 'List Your Business on government website',
-                    },
-                    {
-                        value:'LEI Code',
-                        label:'LEI Code'
-                    },
-                    {
-                        value:'15CA Form Filing',
-                        label:'15CA Form Filing'
-                    },
-                    {
-                        value:'Gettinng FDI in India',
-                        label:'Getting FDI in India'
-                    }
-                  
-               
-                ] },
-                ],
-            }],
+            busNodes: [],
+                 
             perChecked: [],
             perExpanded: [],
             busChecked: [],
@@ -426,6 +225,12 @@ export default class ProviderRegister extends React.Component {
         this.props.getFinancialServiceList();
         this.props.getBusinessTypeList();
         this.props.getCountriesList();
+	this.setState({
+            indNodes: data
+        });
+        this.setState({
+            busNodes: data1
+        })
         store.subscribe(() => {
             this.setState({
                 services: store.getState().getFinancialService.success
@@ -470,28 +275,7 @@ export default class ProviderRegister extends React.Component {
         
     }
 
-    // storeSelectedservices = (value) => {
-    //     var newArrayobj = []
-    //     if (this.state.value.length === 1) {
-    //                 this.setState({
-    //                     showAlert: true
-    //                 })
-    //                 return null;
-    //             }
-    //     this.state.services.forEach(element1 => {
-    //         value.forEach(element2 => {
-    //             if (element1.name === element2) {
-                   
-    //                     newArrayobj.push(element1)
-                    
-    //             }
-    //         });          
-            
-    //     });     
-    //     this.setState({ actualServices: newArrayobj });
-    //     console.log("servicessss",this.state.actualServices)
-        
-    // }
+    
 
 
     handleNext = () => {
@@ -543,6 +327,7 @@ export default class ProviderRegister extends React.Component {
         this.props.registerProvider(
             this.state.firstName + " " + this.state.lastName,
             this.state.password, this.state.email, this.state.phoneNumber,
+            this.state.Fees,this.state.City,
             this.state.OrgCountry, this.state.OrgName,
             this.state.OrgAddress, this.state.OrgRegNumber,
             this.state.OrgPINType, this.state.actualServices,
@@ -710,11 +495,11 @@ export default class ProviderRegister extends React.Component {
                         this.state.value !== 1 ?
                         <div style={{ display: 'inline-flex', marginBottom: 50 }}>
                         <div>
-                            {/* <Paper style={{ width: 800, marginBottom: 50 }}> */}
+                            
                                 {
                                     this.state.showAlert ? <Alert severity="warning">Cannot delete. Atleast one expertise required</Alert> : null
                                 }
-                                {/* <InputLabel id="demo-simple-select-label" style={{ marginBottom: 20 }}>Select your service Type</InputLabel> */}
+                                
                                 <br/>
                                 <br/>
                                     <Autocomplete
@@ -773,18 +558,7 @@ export default class ProviderRegister extends React.Component {
                                     <TextField {...params} variant="outlined" label="Please Select your Expertise" placeholder="Expertise" />
                                 )}
                             />
-                            {/* <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-sßelect"
-                                value={this.state.OrgExpertise}
-                                style={{ minWidth: 650 }}
-                            >
-                                {
-                                    (this.state.expertise && this.state.expertise.length) ? this.state.expertise.map((item, index) => {
-                                        return <MenuItem key={index} value={item.name} onClick={(e) => this.handleServiceCode(e)}>{item.name}</MenuItem>
-                                    }) : <span>Loading</span>
-                                }
-                            </Select> */}
+                        
                         </div>
                     </div>
                     }
@@ -941,6 +715,28 @@ export default class ProviderRegister extends React.Component {
                                 helperText={this.state.errors.OrgAddress}
                                 onChange={(e) => this.change(e)}
                                 value={this.state.OrgAddress}
+                            />
+                            <TextField
+                                fullWidth
+                                label="Enter your Fees"
+                                type="text"
+                                required
+                                id="Fees"
+                                name="Fees"
+                                //error={this.state.errors.OrgAddress}
+                                //helperText={this.state.errors.OrgAddress}
+                                onChange={(e) => this.change(e)}
+                                value={this.state.Fees}
+                            />
+                            <TextField
+                                fullWidth
+                                label="Enter your City"
+                                type="text"
+                                required
+                                id="City"
+                                name="City"
+                                onChange={(e) => this.change(e)}
+                                value={this.state.City}
                             />
                             <Select id="countriesLabel"
                                 labelId="demo-simple-select-label"

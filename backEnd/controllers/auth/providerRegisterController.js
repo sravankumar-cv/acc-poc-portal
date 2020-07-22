@@ -14,12 +14,15 @@ exports.registerPartner = (req, res) => {
             res.status(400).json(err);
         } else {
             if(!users.length) {
+                console.log("Object Rcvd",req);
                 providerModel.create({
                     partnerId: nameExtractor.getPartnerId(req.body.fullName,req.body.mobileNumber),
                     fullName: req.body.fullName,
                     password: passwordValidator.generatePasswordHash(req.body.password),
                     email: req.body.email,
                     mobileNumber: req.body.mobileNumber,
+                    Fees: req.body.Fees,
+                    City: req.body.City,
                     role: 2,
                     country: req.body.country,
                     OrganizationName: req.body.OrganizationName,

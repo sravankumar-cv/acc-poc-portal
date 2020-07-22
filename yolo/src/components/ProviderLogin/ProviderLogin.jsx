@@ -13,6 +13,7 @@ import log from '../../utils/logger.service';
 export default class ProviderLogin extends React.Component {
     constructor(props) {
         super();
+      
         this.state = {
             email: '',
             password: '',
@@ -73,7 +74,9 @@ export default class ProviderLogin extends React.Component {
                     errorMessage: store.getState().providerLogin.error
                 })
             } else {
+                console.log("provider profile",store.getState().providerLogin)
                 window.localStorage.setItem('token', store.getState().providerLogin.success.token);
+                //setName(store.getState().providerLogin.success[0].name);
                 window.localStorage.setItem('providerProfile', true);
                 history.push('/');
             }

@@ -26,12 +26,23 @@ import Chip from '@material-ui/core/Chip';
 import AccountCircleTwoToneIcon from '@material-ui/icons/AccountCircleTwoTone'
 import Grow from '@material-ui/core/Grow';
 import MenuList from '@material-ui/core/MenuList';
+//location specific
+import { 
+    DialogActions,DialogContent,DialogContentText,DialogTitle,Slide
+} from '@material-ui/core';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="down" ref={ref} {...props} />;
+});
 
+// location end
 
 
 
 
 export default function Header(props) {
+
+   
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [openDialog, setOpen] = useState(false);
@@ -41,7 +52,7 @@ export default function Header(props) {
     const [placement, setPlacement] = React.useState();
     const [errorMessage, setErrorMessage] = useState("");
     const [openPopper, setOpenPopper] = useState(false);
-    const [countriesList, setCountriesList] = useState([]);
+    //const [countriesList, setCountriesList] = useState([]);
     const [selectedCountry, setSelectedCountry] = useState("India");
     const [selectedSearchItem, setselectedSearchItem] = useState("All");
     const [businessTypes, setBusinessTypes] = useState([]);
@@ -52,6 +63,63 @@ export default function Header(props) {
     const [anchorMenuEl, setAnchorMenuEl] = React.useState(null);
     const [userName, setuserDetails] = useState([]);
 
+//location
+    const [lopen,setLopen] = useState(false);
+    const [scroll,setScroll]=useState("paper");
+    const [countriesList, setCountriesList] = useState([]);
+    const [selectedCountry1, setSelectedCountry1] = useState({
+        "name": "India",
+        "dial_code": "+91",
+        "code": "IN",
+        "popular_cities":[1,2,3,4,5,6,7,8,9],
+        "other_cities":[10,11,12,13,14,15,16,17,18,19,20]
+        });
+ 
+
+    const Locationstyles = makeStyles(theme => ({
+        root: {
+          flexGrow: 1,
+        },
+        paper: {
+          padding: theme.spacing(2),
+          textAlign: 'center',
+          color: theme.palette.text.secondary,
+        },
+      }));
+    const classLocation = Locationstyles();
+    const handleClickLopen = () =>  {
+         setLopen(true);
+        setScroll("paper")
+      };
+    
+    const handleLclose = () => {
+        console.log("LOPEN-->",lopen);
+        setLopen(false);
+        console.log("LOPEN-->",lopen,value);
+      };
+
+    const [value, setValue] = React.useState({
+        "name": "India",
+        "dial_code": "+91",
+        "code": "IN",
+        "popular_cities":[1,2,3,4,5,6,7,8,9],
+        "other_cities":[10,11,12,13,14,15,16,17,18,19,20]
+        });
+        
+    const  getCity=(update)=>{
+        console.log("value---> ",update);
+        setValue(update)
+        let x;
+        for (x of countriesList){
+            if(x == update){
+                console.log("Foundd",x)
+               setSelectedCountry1(x)
+            }
+        }
+    }
+
+
+////////location end 
 
     const styles = (theme) => ({
         root: {
@@ -222,9 +290,15 @@ export default function Header(props) {
                 setName(store.getState().getUserDetails.success[0].name);
             }else{
                 localStorage.setItem('userProfile', true);
-                history.push('/dashboard');
+                //history.push('/dashboard');
             }
         }
+        //setName(store.getState().providerLogin.success[0].name);
+
+
+
+
+
     }, []);
 
     const navigateToRegister = () => {
@@ -374,6 +448,7 @@ export default function Header(props) {
             history.push('/dashboard');
         }
         if (localStorage.getItem('providerProfile')) {
+            localStorage.setItem('providerProfile', false);
             history.push('/provider/dashboard');
         }
 
@@ -390,6 +465,7 @@ export default function Header(props) {
                 <Toolbar>
                     <div className="PlatformName">
                         <Typography variant="h6">Yoloj Platform</Typography>
+				{/* old Location */}
                         <Select value={selectedCountry} style={{ color: '#fff' }}>
                             {
                                 (countriesList && countriesList.length) ? countriesList.map((item, index) => {
@@ -487,6 +563,105 @@ export default function Header(props) {
                             </DialogActions>
                         </Dialog>
                     </div>
+ {/*Location  */}
+
+                    
+                    <p> &nbsp; &nbsp; </p>
+                    <div>
+                        <Button className={classes.btnColorWhite} onClick={handleClickLopen} size="medium">
+                            Location
+                        </Button>
+                    </div>
+
+                <Dialog
+                fullWidth={true}
+                maxWidth = {"xl"}
+                TransitionComponent={Transition}
+                keepMounted
+                open={lopen}
+                onClose={handleLclose}
+                scroll={scroll}
+                aria-labelledby="scroll-dialog-title"
+                aria-describedby="scroll-dialog-description"
+      >
+                    <DialogTitle id="scroll-dialog-title" onClose={handleLclose}>
+                    <Autocomplete
+                    value={value.name}
+                    onChange={(event, newValue) => {
+                        getCity(newValue)
+                    }}
+                    freeSolo
+                    disableClearable
+                id="country-select-demo"
+                style={{ width: '100%' }}
+                options={countriesList}
+                autoHighlight
+                getOptionLabel={(option) =>option.name?option.name:option}
+                renderOption={(option) => option.name?option.name:option}
+                renderInput={(params) => (
+                    <TextField
+                    {...params}
+                    label="Choose a country"
+                    variant="outlined"
+                    inputProps={{
+                        ...params.inputProps,
+                        type: 'search',
+                        autoComplete: 'new-password', // disable autocomplete and autofill
+                    }}
+                    />
+                )}
+                />
+                    </DialogTitle>
+        <DialogContent dividers={scroll === 'paper'}>
+          <DialogContentText
+            id="scroll-dialog-description"
+          
+            tabIndex={-1}   
+          > 
+          <div>
+            {selectedCountry1 && <h6>Country Selected : {selectedCountry1.name}</h6>}
+                <h4>Popular Cities : </h4>
+                {selectedCountry1.popular_cities != null ? 
+                        <div className={classLocation.root}>
+                    <Grid container spacing={3}>
+                    {selectedCountry1.popular_cities.map(e=>(
+                        <Grid item xs={3} sm={3}>
+                        <Paper onClick={handleLclose} className={classLocation.paper}>{e}</Paper>
+                    </Grid>
+                    ))}
+                    
+                    </Grid>
+                    </div>
+    :(<h3>No Popular Cities Available</h3>) }
+       
+                <h4>Other Cities : </h4>
+                {selectedCountry1.other_cities != null ? 
+                        <div className={classLocation.root}>
+                    <Grid container spacing={3}>
+                    {selectedCountry1.other_cities.map(e=>(
+                        <Grid item xs={3} sm={3}>
+                        <li><u onClick={handleLclose}>{e}</u></li>
+                       </Grid>
+                    ))}
+                    
+                    </Grid>
+                    </div>
+    :(<h3>No Other Cities Available</h3>) }
+         </div>  
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleLclose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleLclose} color="primary">
+            Subscribe
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+
+                    {/* Location ends */}
 
 
                     <div className={classes.toolbarButtons}>
