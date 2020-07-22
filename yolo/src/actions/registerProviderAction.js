@@ -10,7 +10,7 @@ import {
 
 export function providerRegister(
     fullName, password, 
-    email, mobileNumber, country, 
+    email, mobileNumber,Fees,City, country, 
     OrganizationName,OrganizationAddress, 
     OrganizationRegNumber, idType, 
     servicesOffered, providerIdentityImg, 
@@ -27,6 +27,8 @@ export function providerRegister(
                     password: password,
                     email: email,
                     mobileNumber: mobileNumber,
+                    Fees:Fees,
+                    City:City,
                     OrganizationName: OrganizationName,
                     OrganizationAddress: OrganizationAddress,
                     OrganizationRegNumber: OrganizationRegNumber,

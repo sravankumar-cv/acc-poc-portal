@@ -51,6 +51,16 @@ const partnerSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    Fees: {
+        type: String,
+        //required: true,
+        //unique: true
+    },
+    City: {
+        type: String,
+        //required: true,
+        //unique: true
+    },
     role: {
         type: Number,
         required: true,

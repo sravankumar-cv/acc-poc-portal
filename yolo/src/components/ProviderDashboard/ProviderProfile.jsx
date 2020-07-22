@@ -85,10 +85,6 @@ export default class ProviderProfile extends React.Component {
                         Org Address:  {this.state.providerData.OrganizationAddress }
                 </div>
 
-
-
-
-
                 <div className="profile_title">     
                    {this.state.providerData.servicesOffered!=undefined  && this.state.providerData.servicesOffered.map((expertise)=> {                 
                                 return (

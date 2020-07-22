@@ -18,4 +18,5 @@ router.get('/role/:role', JWTCertifier.verifyJWT, getAllUserByRoleController.get
 router.get('/details', JWTCertifier.verifyJWT, getUserDetailsContoller.getUserDetails);
 router.get('/details/:id', JWTCertifier.verifyJWT, getAllUserByIdContoller.getUserById);
 router.put('/update', JWTCertifier.verifyJWT, validatorMiddleware(userUpdateSchema), updateUserController.updateUser);
+//
 module.exports = router;

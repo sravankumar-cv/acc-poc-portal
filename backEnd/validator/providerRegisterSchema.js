@@ -5,6 +5,8 @@ const providerRegisterSchema = joi.object().keys({
     password: joi.string().exist().required().regex(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/),
     email: joi.string().exist().required().email(),
     mobileNumber: joi.string().exist().required(),
+    Fees: joi.string(),
+    City: joi.string(),
     country: joi.string().exist().required(),
     OrganizationName: joi.string().required().exist(),
     OrganizationAddress: joi.string().required().exist(),
