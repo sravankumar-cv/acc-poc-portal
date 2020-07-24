@@ -1,6 +1,4 @@
 import React from 'react';
-
-//import HeaderContainer from '../../containers/headerContainer';
 import { 
     Button, Snackbar, Grid,
     Card, Avatar, CardActionArea,
@@ -70,6 +68,14 @@ export default class ProviderProfile extends React.Component {
                 </div>
                 <div className="profile_company">
                         Contact No:  {this.state.providerData.mobileNumber }
+                </div>
+
+                <div className="profile_company">
+                        City:  {this.state.providerData.City }
+                </div>
+
+                <div className="profile_company">
+                        Fees:  {this.state.providerData.Fees }
                 </div>
 
                 <div className="profile_company">

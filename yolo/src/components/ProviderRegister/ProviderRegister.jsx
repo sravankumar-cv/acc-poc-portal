@@ -6,7 +6,8 @@ import makeAnimated from 'react-select/animated';
 import 'react-checkbox-tree/lib/react-checkbox-tree.css';
 import CheckboxTree from 'react-checkbox-tree';
 import data from '../../assets/businessTypes.json';
-import data1 from '../../assets/businessType2.json'
+import data1 from '../../assets/businessType2.json';
+import cities from '../../assets/city.json';
 import {
     Container,
     InputLabel, Icon,
@@ -48,6 +49,7 @@ const nodes = [{
 export default class ProviderRegister extends React.Component {
     constructor(props) {
         super();
+        console.log("cities ",cities);
         this.state = {
             activeStep: 0,
             steps: ['Partner Details', 'Organization Details', 'Services Details', 'Service Type Details'],
@@ -56,7 +58,11 @@ export default class ProviderRegister extends React.Component {
             password: '',
             email: '',
             City: '',
+            AllCities: cities,
             Fees: '',
+            ALine1: '',
+            ALine2: '',
+            PinCode: '',
             // countries: [],
             businessList: ['Business Incorporation', 'GST Service', 'Startup Serices', 'Legal Complaince Service', 'Tax Returns', 'Goverment Registration', 'Trademark', 'Miscelleneous Services'],
             individualList: ['Tax returns', 'TDS', 'Legal', 'Miscelleneous Services'],
@@ -119,6 +125,9 @@ export default class ProviderRegister extends React.Component {
             OrgAddress: '',
             OrgPINType: '',
             OrgCountry: 'India',
+            OrgCity: 'Please Select you City',
+            selectedCountry: '',
+            importedCity:[],
             OrgRegNumber: '',
             OrgServiceType: '',
             OrgExpertise: [],
@@ -231,6 +240,13 @@ export default class ProviderRegister extends React.Component {
         this.setState({
             busNodes: data1
         })
+
+        this.setState({
+            AllCities: cities
+            
+        })
+
+        
         store.subscribe(() => {
             this.setState({
                 services: store.getState().getFinancialService.success
@@ -253,14 +269,16 @@ export default class ProviderRegister extends React.Component {
                 return this.state.expertiseList.find(a=>a.name === name)
             })})
 
-        }, 1000);
+        }, 5000);
         this.setState();
+        this.CitySelect();
     }
     storeSelectedservices = (value) => {
        
         if (value.length === 0) {
                     this.setState({
                         showAlert: true
+
                     })
                     return null;
                 }
@@ -300,10 +318,43 @@ export default class ProviderRegister extends React.Component {
         this.setState({ country_code: e.target.getAttribute('data-value') });
     }
 
-    handleCountrySelect = (e) => {
-        this.setState({
-            OrgCountry: e.target.getAttribute('data-value')
+    CitySelect = () => {
+        var join =[]
+        this.state.AllCities.map((item)=> {
+            if (item.country === this.state.OrgCountry)
+            {
+                 join.push(item)
+                  this.setState({importedCity:join})
+                
+            }
         })
+      }
+
+    handleCountrySelect = (e) => {
+       
+        this.setState({
+            OrgCountry: e.target.getAttribute('data-value'),
+            selectedCountry:e.target.getAttribute('data-value')
+        })
+
+        setTimeout(() => {
+            this.CitySelect()
+
+        }, 1000);
+
+        
+
+       
+    }
+
+    handleCitySelect = (e) => {
+      this.setState({
+        OrgCity: e.target.getAttribute('data-value'),
+        City: e.target.getAttribute('data-value')
+      })
+
+      
+     
     }
 
     handleSelectedexpertise = (e, value) => {
@@ -328,7 +379,8 @@ export default class ProviderRegister extends React.Component {
             this.state.firstName + " " + this.state.lastName,
             this.state.password, this.state.email, this.state.phoneNumber,
             this.state.Fees,this.state.City,
-            this.state.OrgCountry, this.state.OrgName,
+            this.state.OrgCountry,this.state.ALine1,this.state.ALine2 ,
+            this.state.PinCode,this.state.OrgName,
             this.state.OrgAddress, this.state.OrgRegNumber,
             this.state.OrgPINType, this.state.actualServices,
             this.state.base64, this.state.OrgExpertise
@@ -450,10 +502,7 @@ export default class ProviderRegister extends React.Component {
                             <div>
                             {
                                 this.renderMultiCheck()
-                            /* <InputLabel id="demo-simple-select-label" style={{marginBottom:20}}>Select Services provided for Business</InputLabel> */
                             }
-                            
-            
                             </div>
                         </ExpansionPanelSummary>
                     </ExpansionPanel>
@@ -526,12 +575,10 @@ export default class ProviderRegister extends React.Component {
                                             <TextField {...params} variant="outlined" label="Select your service Type" placeholder="services" />
                                         )}
                                     />
-                            {/* </Paper> */}
                         </div>
                         <br/><br/>
                     </div>: <div style={{ display: 'inline-flex', marginBottom: 50 }}>
                         <div>
-                            {/* <InputLabel id="demo-simple-select-label">Please Select your Expertise</InputLabel> */}
                             <br/>
                             <br/>
                             <Autocomplete
@@ -723,22 +770,13 @@ export default class ProviderRegister extends React.Component {
                                 required
                                 id="Fees"
                                 name="Fees"
-                                //error={this.state.errors.OrgAddress}
-                                //helperText={this.state.errors.OrgAddress}
                                 onChange={(e) => this.change(e)}
                                 value={this.state.Fees}
                             />
-                            <TextField
-                                fullWidth
-                                label="Enter your City"
-                                type="text"
-                                required
-                                id="City"
-                                name="City"
-                                onChange={(e) => this.change(e)}
-                                value={this.state.City}
-                            />
-                            <Select id="countriesLabel"
+                            
+                            <div>
+                                <div>
+                                    <Select id="countriesLabel"
                                 labelId="demo-simple-select-label"
                                 style={{ minWidth: 550 }}
                                 value={this.state.OrgCountry}
@@ -749,6 +787,55 @@ export default class ProviderRegister extends React.Component {
                                     }) : <span>Loading...</span>
                                 }
                             </Select>
+
+                                </div>
+                                <div>
+                                <Select id="citiesLabel"
+                                labelId="demo-simple-select-label"
+                                
+                                style={{ minWidth: 550 }}
+                                value={this.state.OrgCity}
+                            >
+                                         
+                                {
+                                    (this.state.importedCity && this.state.importedCity.length) ? this.state.importedCity.map((item, index) => {
+                                        return <MenuItem key={index} value={item.name} onClick={(e) => this.handleCitySelect(e)}>{item.name}</MenuItem>
+                                    }) : <span>Loading...</span>
+                                }
+                            </Select>
+
+                                </div>
+                            </div>
+                             <TextField
+                                fullWidth
+                                label="Address Line 1"
+                                type="text"
+                                required
+                                id="ALine1"
+                                name="ALine1"
+                                onChange={(e) => this.change(e)}
+                                value={this.state.ALine1}
+                            /> 
+                             <TextField
+                                fullWidth
+                                label="Address Line 2"
+                                type="text"
+                                required
+                                id="ALine2"
+                                name="ALine2"
+                                onChange={(e) => this.change(e)}
+                                value={this.state.ALine2}
+                            /> 
+                            <TextField
+                                fullWidth
+                                label="Please Enter Your PinCode"
+                                type="text"
+                                required
+                                id="PinCode"
+                                name="PinCode"
+                                onChange={(e) => this.change(e)}
+                                value={this.state.PinCode}
+                            /> 
                             <TextField
                                 fullWidth
                                 label="Enter your Organization Registation Number"
@@ -774,7 +861,7 @@ export default class ProviderRegister extends React.Component {
                                 value={this.state.OrgPINType}
                             />
                             <Grid item xs={4} style={{ display: 'flex' }}>
-                                <label>Please provide a proof of Organization</label>
+                                <label>Provide Your Profile Picture</label>
                                 <input
                                     accept="image/*"
                                     id="raised-button-file"
