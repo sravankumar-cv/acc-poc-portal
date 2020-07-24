@@ -53,13 +53,13 @@ const partnerSchema = new mongoose.Schema({
     },
     Fees: {
         type: String,
-        //required: true,
+        required: true,
         //unique: true
     },
     City: {
         type: String,
-        //required: true,
-        //unique: true
+        required: true,
+        
     },
     role: {
         type: Number,
@@ -67,6 +67,18 @@ const partnerSchema = new mongoose.Schema({
         default: 2
     },
     country: {
+        type: String,
+        required: true
+    },
+    ALineOne: {
+        type: String,
+        required: true
+    },
+    ALineTwo: {
+        type: String,
+        required: true
+    },
+    PinCode: {
         type: String,
         required: true
     },
@@ -92,17 +104,12 @@ const partnerSchema = new mongoose.Schema({
     },
     providerIdentityImg: {
         type: String,
-        //required: true
+        required: true
     },
     partnerType: {
         type: Array,
         required: true,
-        // enum: [
-        //     'CA(Certified)', 'CA(Practioner)', 
-        //     'TAX Filing Expert', 'Consultant',
-        //     'TAX Consultant', 'Startup Expert',
-        //     'Company Secretary', 'Cost Accounting', 
-        //     'Auditor', 'StartUp Export', 'Legal Compliance']
+        
     },
     OrganizationLogo: {
         type: String,

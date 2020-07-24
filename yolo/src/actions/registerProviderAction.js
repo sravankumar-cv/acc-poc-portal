@@ -10,8 +10,8 @@ import {
 
 export function providerRegister(
     fullName, password, 
-    email, mobileNumber,Fees,City, country, 
-    OrganizationName,OrganizationAddress, 
+    email, mobileNumber,Fees,country,City,ALine1,ALine2,
+    PinCode,OrganizationName,OrganizationAddress, 
     OrganizationRegNumber, idType, 
     servicesOffered, providerIdentityImg, 
     partnerType) {
@@ -28,12 +28,16 @@ export function providerRegister(
                     email: email,
                     mobileNumber: mobileNumber,
                     Fees:Fees,
+                    country: country,
                     City:City,
+                    ALine1:ALine1,
+                    ALine2:ALine2,
+                    PinCode:PinCode,
                     OrganizationName: OrganizationName,
                     OrganizationAddress: OrganizationAddress,
                     OrganizationRegNumber: OrganizationRegNumber,
                     idType: idType,
-                    country: country,
+                    
                     servicesOffered: servicesOffered,
                     providerIdentityImg: providerIdentityImg,
                     partnerType: partnerType,

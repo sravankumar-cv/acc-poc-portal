@@ -2,7 +2,9 @@
     {
     "name": "Afghanistan",
     "dial_code": "+93",
-    "code": "AF"
+    "code": "AF",
+    "popular_cities":[1,2,3,4,5,6,7,8,9],
+        "other_cities":[10,11,12,13,14,15,16,17,18,19,20]
     },
     {
     "name": "Aland Islands",

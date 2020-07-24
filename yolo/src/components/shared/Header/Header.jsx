@@ -52,7 +52,6 @@ export default function Header(props) {
     const [placement, setPlacement] = React.useState();
     const [errorMessage, setErrorMessage] = useState("");
     const [openPopper, setOpenPopper] = useState(false);
-    //const [countriesList, setCountriesList] = useState([]);
     const [selectedCountry, setSelectedCountry] = useState("India");
     const [selectedSearchItem, setselectedSearchItem] = useState("All");
     const [businessTypes, setBusinessTypes] = useState([]);
@@ -290,13 +289,9 @@ export default function Header(props) {
                 setName(store.getState().getUserDetails.success[0].name);
             }else{
                 localStorage.setItem('userProfile', true);
-                //history.push('/dashboard');
+                
             }
         }
-        //setName(store.getState().providerLogin.success[0].name);
-
-
-
 
 
     }, []);
