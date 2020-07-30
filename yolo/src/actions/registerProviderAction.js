@@ -14,7 +14,7 @@ export function providerRegister(
     PinCode,OrganizationName,OrganizationAddress, 
     OrganizationRegNumber, idType, 
     servicesOffered, providerIdentityImg, 
-    partnerType) {
+    partnerType, indChecked, busChecked) {
         return (dispatch) => {
             dispatch(loading(true));
             return fetch('/api/auth/provider/register', {
@@ -37,7 +37,8 @@ export function providerRegister(
                     OrganizationAddress: OrganizationAddress,
                     OrganizationRegNumber: OrganizationRegNumber,
                     idType: idType,
-                    
+                    busChecked: busChecked,
+                    indChecked:indChecked,
                     servicesOffered: servicesOffered,
                     providerIdentityImg: providerIdentityImg,
                     partnerType: partnerType,

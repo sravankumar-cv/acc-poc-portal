@@ -111,6 +111,16 @@ const partnerSchema = new mongoose.Schema({
         required: true,
         
     },
+    busChecked: {
+        type: Array,
+        required: true,
+        
+    },
+    indChecked: {
+        type: Array,
+        required: true,
+        
+    },
     OrganizationLogo: {
         type: String,
         required: false
