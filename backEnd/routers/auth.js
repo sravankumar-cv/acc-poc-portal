@@ -10,6 +10,7 @@ const router = require('express').Router(),
     providerLogoutController = require('../controllers/auth/providerLogoutContoller'),
     providerForgotPasswordController = require('../controllers/auth/providerForgotPasswordController'),
     providerResetPasswordController = require('../controllers/auth/providerResetPasswordController'),
+    providerUpdateController = require('../controllers/auth/updateProviderProfileController'),
     validatorMiddleware = require('../validator/middleware'),
     registerValidator = require('../validator/userRegister'),
     loginValidator = require('../validator/userLogin'),
@@ -17,6 +18,7 @@ const router = require('express').Router(),
     providerLoginValidator = require('../validator/providerLoginSchema'),
     providerForgotPasswordSchema = require('../validator/providerForgotPasswordSchema'),
     providerResetPasswordSchema = require('../validator/providerResetPasswordSchema'),
+    providerUpdateSchema = require('../validator/updateProviderSchema'),
     JWTCertifier = require('../helpers/JWTCertifier');
 
 router.post('/register', validatorMiddleware(registerValidator),  userRegisterController.userRegister);
@@ -27,5 +29,5 @@ router.post('/provider/login', validatorMiddleware(providerLoginValidator), prov
 router.post('/provider/logout', JWTCertifier.verifyJWT, providerLogoutController.partnerLogout);
 router.post('/provider/password/forgot', validatorMiddleware(providerForgotPasswordSchema), providerForgotPasswordController.providerForgotPassword);
 router.post('/provider/password/reset', JWTCertifier.verifyJWT, validatorMiddleware(providerResetPasswordSchema), providerResetPasswordController.providerResetPassword);
-
+router.put('provider/update', JWTCertifier.verifyJWT, validatorMiddleware(providerUpdateSchema), providerUpdateController.updateProvider);
 module.exports = router;

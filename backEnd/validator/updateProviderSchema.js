@@ -1,6 +1,6 @@
 const joi = require('joi');
 
-const providerRegisterSchema = joi.object().keys({
+const providerProfileUpdateSchema = joi.object().keys({
     fullName: joi.string().required().exist().min(3),
     password: joi.string().exist().required().regex(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/),
     email: joi.string().exist().required().email(),
@@ -24,4 +24,4 @@ const providerRegisterSchema = joi.object().keys({
     role: joi.number().optional().valid(2)
 })
 
-module.exports = providerRegisterSchema;
+module.exports = providerProfileUpdateSchema;

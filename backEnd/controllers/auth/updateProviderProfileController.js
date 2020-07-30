@@ -1,24 +1,20 @@
-/**
- * @description Controller for adding new partner
- * @author Jithin Zacharia
- */
-
 const providerModel = require('../../model/providerModel'),
-        uniqueIdGenerator = require('../../helpers/generateId'),
-        passwordValidator = require('../../helpers/passwordValidations'),
-        nameExtractor = require('../../helpers/generatePartnerId');
+    JWTCertifier = require('../../helpers/JWTCertifier'),
+    passwordValidator = require('../../helpers/passwordValidations');
 
-exports.registerPartner = (req, res) => {
-    providerModel.find({email: req.body.email},{mobileNumber: req.body.mobileNumber}, (err, users)=>{
-        if(err) {
-            res.status(400).json(err);
-        } else {
-            if(!users.length) {
-                console.log("Object Rcvd",req);
-                providerModel.create({
-                    partnerId: nameExtractor.getPartnerId(req.body.fullName,req.body.mobileNumber),
+    exports.updateProvider = (req, res) => {
+        providerModel.find({partnerId: req.body.partnerId}, (err, users)=> {
+            if(err) {
+                res.status(400).json(err);
+            } else if(!users.length) {
+                res.status(400).json("Provider not found. Please register to continue");
+            } else {
+                providerModel.findOneAndUpdate({partnerId: req.body.partnerId}, {$set: {
+                    //partnerId: nameExtractor.getPartnerId(req.body.fullName,req.body.mobileNumber),
+                    partnerId:req.body.partnerId,
                     fullName: req.body.fullName,
-                    password: passwordValidator.generatePasswordHash(req.body.password),
+                   // password: passwordValidator.generatePasswordHash(req.body.password),
+                   password: req.body.password,
                     email: req.body.email,
                     mobileNumber: req.body.mobileNumber,
                     Fees: req.body.Fees,
@@ -37,16 +33,13 @@ exports.registerPartner = (req, res) => {
                     busChecked: req.body.busChecked,
                     indChecked: req.body.indChecked,
                     partnerType: req.body.partnerType,
-                }, (error, partner)=> {
+                }}, (error, provider) => {
                     if(error) {
                         res.status(400).json(error);
                     } else {
-                        res.status(201).json("Partner successfully created.");   
+                        res.status(200).json("Profile successfully updated.");
                     }
                 })
-            } else {
-                res.status(400).json("User alraedy exist. Please try again later.");
             }
-        }
-    })
-}
+        })
+    }

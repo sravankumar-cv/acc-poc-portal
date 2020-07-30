@@ -103,8 +103,8 @@ export default class ProviderRegister extends React.Component {
 
             busNodes: [],
                  
-            perChecked: [],
-            perExpanded: [],
+            indChecked: [],
+            indExpanded: [],
             busChecked: [],
             busExpanded: [],
             checked: [],
@@ -383,7 +383,8 @@ export default class ProviderRegister extends React.Component {
             this.state.PinCode,this.state.OrgName,
             this.state.OrgAddress, this.state.OrgRegNumber,
             this.state.OrgPINType, this.state.actualServices,
-            this.state.base64, this.state.OrgExpertise
+            this.state.base64, this.state.OrgExpertise,
+	    this.state.indChecked, this.state.busChecked
         );
         store.subscribe(() => {
             if (store.getState().registerProvider.error) {
@@ -423,14 +424,14 @@ export default class ProviderRegister extends React.Component {
         });
     }
 
-    renderMultiCheck = () => {
+ businessTreeCheck = () => {
         return (
             <CheckboxTree
                 nodes={this.state.busNodes}
-                checked={this.state.checked}
-                expanded={this.state.expanded}
-                onCheck={checked => this.setState({ checked })}
-                onExpand={expanded => this.setState({ expanded })}
+                checked={this.state.busChecked}
+                expanded={this.state.busExpanded}
+                onCheck={checked => this.setState({ busChecked: checked })}
+                onExpand={expanded => this.setState({ busExpanded: expanded })}
                 icons={{
                     check: <span className="rct-icon rct-icon-check" />,
                     uncheck: <span className="rct-icon rct-icon-uncheck" />,
@@ -446,14 +447,15 @@ export default class ProviderRegister extends React.Component {
             />
         );
     }
-    renderMultiCheck1 = () => {
+    
+    indTreeCheck = () => {
         return (
             <CheckboxTree
                 nodes={this.state.indNodes}
-                checked={this.state.checked}
-                expanded={this.state.expanded}
-                onCheck={checked => this.setState({ checked })}
-                onExpand={expanded => this.setState({ expanded })}
+                checked={this.state.indChecked}
+                expanded={this.state.indExpanded}
+                onCheck={checked => this.setState({ indChecked: checked })}
+                onExpand={expanded => this.setState({ indExpanded: expanded })}
                 icons={{
                     check: <span className="rct-icon rct-icon-check" />,
                     uncheck: <span className="rct-icon rct-icon-uncheck" />,
@@ -487,7 +489,7 @@ export default class ProviderRegister extends React.Component {
                         </ExpansionPanelSummary>
                         <ExpansionPanelSummary >
                             {   
-                                 this.renderMultiCheck1()
+                                 this.indTreeCheck()
                                 
                             }
                            
@@ -501,7 +503,7 @@ export default class ProviderRegister extends React.Component {
                         <ExpansionPanelSummary>
                             <div>
                             {
-                                this.renderMultiCheck()
+                                this.businessTreeCheck()
                             }
                             </div>
                         </ExpansionPanelSummary>

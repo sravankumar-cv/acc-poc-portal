@@ -12,7 +12,8 @@
 
 ```mongoimport --db poc --collection countries --file ~/infi/accelerate-POC-portal/backEnd/countries.json --jsonArray```<br/>
 ```mongoimport --db poc --collection businesstypes --file C:\Users\pc\Desktop\acc\accelerate-POC-portal/backEnd/businessTypes.json --jsonArray```<br />
-```jithin$ mongoimport --db poc --collection services --file C:\Users\pc\Desktop\acc\accelerate-POC-portal/backEnd/financialServices.json --jsonArray```
+```mongoimport --db poc --collection services --file C:\Users\pc\Desktop\acc\accelerate-POC-portal/backEnd/financialServices.json --jsonArray```
+
 
 - Start your Db instance by `npm start` or `node app.js` or using `pm2`
 - PM2 configurations are written in `run.sh` file.
