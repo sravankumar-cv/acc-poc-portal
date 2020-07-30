@@ -1700,3 +1700,68 @@ Request from IP: 137.97.224.158, os.name = Windows,browser.name = Chrome, at 7/2
 User is on Provider Register Page at 7/29/2020, 7:01:07 PM
 User is on Provider Login at 7/29/2020, 7:06:56 PM
 User is on Provider Login at 7/29/2020, 7:06:56 PM
+Request from IP: 157.39.56.244, os.name = Macintosh,browser.name = Chrome, at 30/07/2020, 12:19:22
+User on Registration Page at 30/07/2020, 12:19:31
+User is on Provider Register Page at 30/07/2020, 12:19:39
+User is on Provider Register Page at 30/07/2020, 12:32:03
+Request from IP: 157.39.56.244, os.name = Macintosh,browser.name = Chrome, at 30/07/2020, 12:32:06
+User is on Provider Login at 30/07/2020, 12:34:16
+User is on Provider Login at 30/07/2020, 12:34:54
+User is on Provider Login at 30/07/2020, 12:34:54
+User is on Provider Login at 30/07/2020, 12:34:54
+User is on Provider Login at 30/07/2020, 12:34:55
+User is on Provider Login at 30/07/2020, 12:34:55
+User is on Provider Login at 30/07/2020, 12:34:56
+User is on Provider Login at 30/07/2020, 12:34:56
+User is on Provider Login at 30/07/2020, 12:34:57
+User is on Provider Login at 30/07/2020, 12:34:57
+User is on Provider Login at 30/07/2020, 12:34:58
+Request from IP: 157.39.56.244, os.name = Macintosh,browser.name = Chrome, at 30/07/2020, 12:40:09
+User on Registration Page at 30/07/2020, 12:41:24
+Request from IP: 157.39.56.244, os.name = Macintosh,browser.name = Chrome, at 30/07/2020, 12:41:26
+Request from IP: 157.39.56.244, os.name = Macintosh,browser.name = Chrome, at 30/07/2020, 12:42:12
+User on Registration Page at 30/07/2020, 12:42:13
+Request from IP: 157.39.56.244, os.name = Macintosh,browser.name = Chrome, at 30/07/2020, 12:42:37
+Request from IP: 157.39.56.244, os.name = Macintosh,browser.name = Chrome, at 30/07/2020, 12:43:06
+Request from IP: 157.39.56.244, os.name = Macintosh,browser.name = Chrome, at 30/07/2020, 12:43:09
+Request from IP: 157.39.56.244, os.name = Macintosh,browser.name = Chrome, at 30/07/2020, 12:43:34
+Request from IP: 157.39.56.244, os.name = Macintosh,browser.name = Chrome, at 30/07/2020, 12:53:12
+Request from IP: 157.39.56.244, os.name = Macintosh,browser.name = Chrome, at 30/07/2020, 12:53:33
+Request from IP: 157.39.50.122, os.name = Macintosh,browser.name = Chrome, at 30/07/2020, 13:41:55
+Request from IP: 103.147.151.231, os.name = Macintosh,browser.name = Chrome, at 30/07/2020, 14:51:42
+Request from IP: 103.147.151.231, os.name = Macintosh,browser.name = Chrome, at 30/07/2020, 14:52:20
+Request from IP: 103.147.151.231, os.name = Macintosh,browser.name = Chrome, at 30/07/2020, 14:52:46
+Request from IP: 103.147.151.231, os.name = Macintosh,browser.name = Chrome, at 30/07/2020, 14:53:14
+Request from IP: 103.147.151.231, os.name = Macintosh,browser.name = Chrome, at 30/07/2020, 14:53:35
+Request from IP: 103.147.151.231, os.name = Macintosh,browser.name = Chrome, at 30/07/2020, 14:54:27
+Request from IP: 103.147.151.231, os.name = Macintosh,browser.name = Chrome, at 30/07/2020, 14:54:48
+Request from IP: 103.147.151.231, os.name = Macintosh,browser.name = Chrome, at 30/07/2020, 14:54:51
+Request from IP: 103.147.151.231, os.name = Macintosh,browser.name = Chrome, at 30/07/2020, 14:55:01
+Request from IP: 103.147.151.231, os.name = Macintosh,browser.name = Chrome, at 30/07/2020, 14:55:06
+User is on Provider Register Page at 30/07/2020, 16:18:45
+User is on Provider Login at 30/07/2020, 16:18:48
+User is on Provider Login at 30/07/2020, 16:20:21
+User on Registration Page at 30/07/2020, 16:21:47
+User on Registration Page at 30/07/2020, 16:22:29
+User on Registration Page at 30/07/2020, 16:22:39
+User on Registration Page at 30/07/2020, 16:23:37
+Request from IP: 157.39.10.219, os.name = Macintosh,browser.name = Chrome, at 30/07/2020, 16:46:00
+Request from IP: 157.39.10.219, os.name = Macintosh,browser.name = Chrome, at 30/07/2020, 16:46:17
+Request from IP: 157.39.10.219, os.name = Macintosh,browser.name = Chrome, at 30/07/2020, 16:51:29
+Request from IP: 157.39.10.219, os.name = Macintosh,browser.name = Chrome, at 30/07/2020, 16:52:17
+Request from IP: 157.39.10.219, os.name = Macintosh,browser.name = Chrome, at 30/07/2020, 16:54:22
+Request from IP: 157.39.10.219, os.name = Macintosh,browser.name = Chrome, at 30/07/2020, 16:54:24
+User is on Provider Register Page at 30/07/2020, 16:54:31
+Request from IP: 157.39.52.181, os.name = Macintosh,browser.name = Chrome, at 30/07/2020, 16:58:00
+Request from IP: 157.39.10.219, os.name = Macintosh,browser.name = Chrome, at 30/07/2020, 16:59:28
+Request from IP: 157.39.10.219, os.name = Macintosh,browser.name = Chrome, at 30/07/2020, 17:03:20
+Request from IP: 157.39.52.181, os.name = Macintosh,browser.name = Chrome, at 30/07/2020, 17:07:10
+Request from IP: 157.39.52.181, os.name = Macintosh,browser.name = Chrome, at 30/07/2020, 17:07:56
+Request from IP: 157.39.52.181, os.name = Macintosh,browser.name = Chrome, at 30/07/2020, 17:08:09
+Request from IP: 157.39.52.181, os.name = Macintosh,browser.name = Chrome, at 30/07/2020, 17:08:57
+Request from IP: 157.39.52.181, os.name = Macintosh,browser.name = Chrome, at 30/07/2020, 17:09:53
+Request from IP: 157.39.10.219, os.name = Macintosh,browser.name = Chrome, at 30/07/2020, 17:15:46
+Request from IP: 157.39.10.219, os.name = Macintosh,browser.name = Chrome, at 30/07/2020, 17:16:09
+Request from IP: 157.39.10.219, os.name = Macintosh,browser.name = Chrome, at 30/07/2020, 17:16:14
+Request from IP: 157.39.10.219, os.name = Macintosh,browser.name = Chrome, at 30/07/2020, 17:16:27
+Request from IP: 157.39.10.219, os.name = Macintosh,browser.name = Chrome, at 30/07/2020, 17:17:31

@@ -12,8 +12,16 @@ import log from '../../utils/logger.service'
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import {Link} from 'react-router-dom';
 import { classList } from '@syncfusion/ej2-base';
+import Parallax from '../Parallax/Parallax'
+import GridContainer from '../Grid/GridContainer'
+import GridItem from '../Grid/GridItem'
+import { withStyles } from "@material-ui/core/styles";
+import styles from "../../assets/jss/material-kit-react/views/components.js";
+import CountrySelect from "../select/country";
+import HomeProviders from '../Home/HomeProviders'
 
-export default class Home extends React.Component {
+
+class Home extends React.Component {
     constructor(props) {
         super();
         this.state = {
@@ -69,9 +77,22 @@ export default class Home extends React.Component {
     }
 
     render() {
+        const { classes } = this.props;
         return(
             <div>
                 <HeaderContainer />
+                <Parallax image={require("../../assets/img/newbg.jpg")}>
+                    <div className={classes.container}>
+                    <GridContainer>
+                        <GridItem>
+                        <div className={classes.brand}>
+                            <CountrySelect/>
+                        </div>
+                        </GridItem>
+                    </GridContainer>
+                    </div>
+                </Parallax>
+            
                 <Grid container spacing={24} style={{marginTop:200, marginLeft: 200}}>
                     {
                         (this.state.providerData && this.state.providerData.length) ? this.state.providerData.map((itemz, index)=> {
@@ -146,3 +167,5 @@ export default class Home extends React.Component {
         )
     }
 }
+
+export default withStyles(styles, { withTheme: true })(Home);
