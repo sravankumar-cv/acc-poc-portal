@@ -587,7 +587,7 @@ export default class ProviderRegister extends React.Component {
                                                 {option}
                                             </React.Fragment>
                                         )}
-                                        style={{ width: 600 }}
+                                        className = "dropDown"
                                         renderInput={(params) => (
                                             <TextField {...params} variant="outlined" label="Select your service Type" placeholder="services" />
                                         )}
@@ -617,7 +617,7 @@ export default class ProviderRegister extends React.Component {
                                         {option.name}
                                     </React.Fragment>
                                 )}
-                                style={{ width: 600 }}
+                                className = "dropDown"
                                 renderInput={(params) => (
                                     <TextField {...params} variant="outlined" label="Please Select your Expertise" placeholder="Expertise" />
                                 )}
