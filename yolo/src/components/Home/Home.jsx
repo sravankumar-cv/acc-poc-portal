@@ -275,15 +275,8 @@ class Home extends React.Component {
                                 )
                               }
 
-                            </div>  
-
-    
-
-                            </div>
-
-
-
-                                 
+                            </div> 
+                            </div>                                 
                         )
                         }) : <span>We do not have enough data right now. Please check back later.</span>
                         }
