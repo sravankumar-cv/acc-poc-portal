@@ -16,6 +16,8 @@ import ProviderProfileContainer from './containers/providerProfileContainer';
 import './App.css';
 import log from "./utils/logger.service"
 import 'bootstrap/dist/css/bootstrap.min.css'
+import Search from './components/Home/Search';
+import ChooseLoginRegister from './components/Home/LoginRegisterChoose';
 
 function App() {
   var str;
@@ -119,6 +121,9 @@ function App() {
             <Route exact path="/" component={ HomeContainer } />
             <Route exact path="/register" component={ RegisterContainer } />
             <Route exact path="/login" component={ LoginContainer } />
+            <Route exact path="/search" component={ Search } />
+            <Route exact path="/chooseLoginRegister" component={ ChooseLoginRegister } />
+
             <ProtectedRoute path ="/provider/profile" component = {ProviderProfileContainer} />
             <Route exact path="/provider/login" component = {ProviderLoginContainer} />
             <Route exact path="/provider/register" component = {ProviderRegisterContainer} />

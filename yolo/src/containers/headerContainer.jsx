@@ -11,14 +11,8 @@ import * as getBusinessTypesAction from '../actions/getBusinessTypesAction';
 import * as financialServicesAction from '../actions/getFinancialServiceAction';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import FolderIcon from '@material-ui/icons/Folder';
-import RestoreIcon from '@material-ui/icons/Restore';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
-import HomeIcon from '@material-ui/icons/Home';
-import SearchIcon from '@material-ui/icons/Search';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import InfoIcon from '@material-ui/icons/Info';
+import MobileHeader from '../components/shared/Header/PhoneHeader';
+
 
 class HeaderContainer extends React.Component {
 
@@ -46,14 +40,7 @@ class HeaderContainer extends React.Component {
         }}
       />)}
           {!this.state.matches && ( 
-          <AppBar position="fixed" color="primary" style={{top: "auto", bottom: 0}}>
-            <BottomNavigation value={0} onChange={(event, newValue) => {}}>
-            <BottomNavigationAction label="Home" value="home" icon={<HomeIcon />} />
-            <BottomNavigationAction label="Search" value="search" icon={<SearchIcon />} />
-            <BottomNavigationAction label="Profile" value="profile" icon={<AccountCircleIcon />} />
-            <BottomNavigationAction label="Info" value="info" icon={<InfoIcon />} />
-          </BottomNavigation>
-        </AppBar>)}
+          <MobileHeader/>)}
           </div>
         );
     }

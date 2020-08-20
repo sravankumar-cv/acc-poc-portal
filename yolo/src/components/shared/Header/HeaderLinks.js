@@ -312,7 +312,7 @@ const navigatetoLogin = () => {
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
       {
-        localStorage.getItem('userProfile') ?null:
+        localStorage.getItem('userProfile') ? null:
         <CustomDropdown
           noLiPadding
           buttonText="Provider"
