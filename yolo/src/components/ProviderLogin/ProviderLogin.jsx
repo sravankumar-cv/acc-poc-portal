@@ -5,10 +5,28 @@ import {
     Grid, Container,
     Card, TextField,
     CardHeader, CardContent, CardActions,
-    Snackbar, Button, Link
+    Snackbar, Button, Typography
 } from '@material-ui/core';
 import { history, store } from '../../store';
 import log from '../../utils/logger.service';
+
+
+import {Link} from 'react-router-dom';
+import logo from "../../assets/img/Logo.png";
+import Background from '../../assets/img/login_background.jpg';
+
+
+var button_style={
+
+    backgroundColor: '#0099cc', 
+    color: '#fff',
+    padding: '10px 0px 10px 0px',
+    width: '80%',
+    borderRadius: '1px'
+
+
+}
+
 
 export default class ProviderLogin extends React.Component {
     constructor(props) {
@@ -16,6 +34,7 @@ export default class ProviderLogin extends React.Component {
       
         this.state = {
             email: '',
+            setemail:'',
             password: '',
             errorMessage: '',
             open: false,
@@ -56,6 +75,7 @@ export default class ProviderLogin extends React.Component {
                 break;
             default:
                 break;
+                
         }
         this.setState({errors, [name]: value}, ()=> {
             return null;
@@ -74,10 +94,15 @@ export default class ProviderLogin extends React.Component {
                     errorMessage: store.getState().providerLogin.error
                 })
             } else {
-                console.log("provider profile",store.getState().providerLogin)
+                console.log("provider profile",store.getState().providerLogin.success.partnerData)
                 window.localStorage.setItem('token', store.getState().providerLogin.success.token);
                 //setName(store.getState().providerLogin.success[0].name);
                 window.localStorage.setItem('providerProfile', true);
+                //window.localStorage.setItem('setemail',store.getState().providerLogin.success.email);
+                window.localStorage.setItem('providerId',store.getState().providerLogin.success.providerId);
+                //console.log("provider id  is-----",store.getState().providerLogin.success.providerId);
+                window.localStorage.setItem('providerData',JSON.stringify(store.getState().providerLogin.success.partnerData));
+
                 history.push('/');
             }
         })
@@ -87,62 +112,113 @@ export default class ProviderLogin extends React.Component {
         return(
             <div>
                 <HeaderContainer />
-                <Grid container
-                    className="rootLoginHead"
-                    alignItems="center"
-                    justify="center"
-                    alignContent="center"
-                >
-                    <Grid item
-                        xs={10} 
-                        alignContent="center" 
-                        container
-                        justify="center" 
-                        alignItems="center"
-                    >
-                        <Container fixed>
-                            <Card>
-                                <CardHeader title="Please Login to Yolo"/>
-                                <CardContent>
-                                    <form noValidate autoCapitalize="off" onSubmit={(e) => this.login(e)}>
-                                        <TextField
-                                            id="email"
-                                            label="Enter your Email Address"
-                                            name="email"
-                                            type="email"
-                                            fullWidth
-                                            error={this.state.errors.email}
-                                            helperText={this.state.errors.email}
-                                            autoFocus
-                                            required
-                                            onChange={(e)=> this.change(e)}
-                                            value={this.state.email}
-                                        />
-                                        <TextField
-                                            id="password"
-                                            label="Enter your password"
-                                            name="password"
-                                            fullWidth
-                                            type="password"
-                                            error={this.state.errors.password}
-                                            helperText={this.state.errors.password}
-                                            autoFocus
-                                            required
-                                            onChange={(e)=> this.change(e)}
-                                            value={this.state.password}
-                                            style={{marginBottom: 50}}
-                                        />
-                                    <Button variant="contained" type="submit" color="primary">Login</Button>
-                                   </form>
-                                </CardContent>
-                                <CardActions>
-                                    <label>New to Yolo ?</label>
-                                    <Link onClick={this.navigateToRegister}>Sign Up</Link>
-                                </CardActions>
-                            </Card>
-                        </Container>
-                    </Grid>
-                </Grid>
+          
+                
+                <div class="section box_shadow">
+
+
+                    <div class="login_background">
+                        
+                        <div class="sub_login_background" >
+
+                            <div class="sub_section_content_login_background">
+                                
+                                <br/>
+                                <Typography variant="h5">Yoloj <img src ={logo} style={{width: '16px', height: '16px'}}/></Typography>
+
+                                <br/><br/>
+                                <Typography variant="body" style={{fontSize: '24px'}}>
+                                    Manage your<br/> personal & professional Identity
+                                </Typography>
+                                <br/><br/>
+
+                                <Typography varian="subtitle1" style={{fontSize: '13px'}}>
+                                    Yolos delivers you the exquisite service by providing you the platform<br/>
+                                    to build your peronal & professional identity to manage your individual and business<br/>
+                                    expertises all over the world.
+                                </Typography>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="sub_section">
+
+                        <div class="login_section">
+
+                        <img src ={logo}/>
+                    
+                            <br/><br/>
+
+                            <Typography variant="caption" style={{fontSize: '18px', color: '#4dd4d4d'}}>
+                                Welcome Back Provider
+                            </Typography>
+
+                            <CardContent>
+                                <form noValidate autoCapitalize="off" onSubmit={(e) => this.login(e)}>
+                                    <TextField
+                                        id="email"
+                                        label="Enter your Email Address"
+                                        variant="outlined"
+                                        name="email"
+                                        type="email"
+                                        size="small"
+                                        error={this.state.errors.email}
+                                        helperText={this.state.errors.email}
+                                        autoFocus
+                                        required
+                                        onChange={(e)=> this.change(e)}
+                                        value={this.state.email}
+                                        style={{marginBottom: 15,width: '80%',borderRadius: '1px'}}
+                                    />
+                                    
+                                    <TextField
+                                        id="password"
+                                        label="Enter your password"
+                                        variant="outlined"
+                                        name="password"
+                                        fullWidth
+                                        size="small"
+                                        type="password"
+                                        error={this.state.errors.password}
+                                        helperText={this.state.errors.password}
+                                        autoFocus
+                                        required
+                                        onChange={(e)=> this.change(e)}
+                                        value={this.state.password}
+                                        style={{marginBottom: 15,width: '80%',borderRadius: '1px'}}
+                                    />
+
+
+                                <Button variant="contained" type="submit" fullWidth style={button_style}>SIGN IN</Button>
+                                </form>
+
+
+                            </CardContent>
+                        
+                                    
+                        </div>
+
+                        <div class="forget_section">
+                            <label>Don't have an account ?</label>
+                            <Link to={this.navigateToRegister}>&nbsp;Sign Up</Link>
+                        </div>
+
+                    </div>
+
+
+
+
+
+                </div>
+
+
+                <br/><br/>
+
+
                 <Snackbar
                     anchorOrigin={{
                         vertical: 'bottom',
