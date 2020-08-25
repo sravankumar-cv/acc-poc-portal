@@ -7,6 +7,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import { store, history } from '../../store';
 
 class ChooseLoginRegister extends Component {
 
@@ -26,20 +27,20 @@ class ChooseLoginRegister extends Component {
                 <HeaderContainer />
                 <Grid style={{margin:"10px"}}>
                 <List component="nav" aria-label="main mailbox folders">
-                    <ListItem button>
+                    <ListItem button onClick={()=>{return history.push('/login')}}>
                    
                     <ListItemText primary="User Login" />
                     </ListItem>
-                    <ListItem button>
+                    <ListItem button onClick={()=>{return history.push('/register')}}>
                     
                     <ListItemText primary="User Register" />
                     </ListItem>
 
-                    <ListItem button>
+                    <ListItem button onClick={()=>{return history.push('/provider/login')}}>
                    
                     <ListItemText primary="Provider Login" />
                     </ListItem>
-                    <ListItem button>
+                    <ListItem button onClick={()=>{return history.push('/provider/register')}}>
                     
                     <ListItemText primary="Provider Register" />
                     </ListItem>

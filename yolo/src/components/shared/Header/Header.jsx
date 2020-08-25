@@ -84,7 +84,7 @@ export default function Header(props) {
       <Toolbar className={classes.container}>
         {leftLinks !== undefined ? brandComponent : null}
         <img src ={logo}
-        onClick={navigatetoHome}></img>
+        onClick={navigatetoHome}></img>&nbsp; &nbsp;YoloJ
 
         <div className={classes.flex}>
           {leftLinks !== undefined ? (

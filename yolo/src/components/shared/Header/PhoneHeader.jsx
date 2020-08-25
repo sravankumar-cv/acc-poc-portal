@@ -36,7 +36,6 @@ export default function MobileHeader(props){
   };
 
     
-
     return(
         <AppBar position="fixed" color="primary" style={{top: "auto", bottom: 0}}>
             <BottomNavigation value={value} onChange={handleChange}>
