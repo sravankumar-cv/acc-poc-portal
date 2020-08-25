@@ -13,7 +13,6 @@ import log from '../../utils/logger.service';
 
 import {Link} from 'react-router-dom';
 import logo from "../../assets/img/Logo.png";
-import Background from '../../assets/img/login_background.jpg';
 
 
 var button_style={
