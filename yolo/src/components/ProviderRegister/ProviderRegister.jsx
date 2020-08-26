@@ -38,6 +38,92 @@ import GroupIcon from '@material-ui/icons/Group';
 import MailIcon from '@material-ui/icons/Mail';
 import PhoneIcon from '@material-ui/icons/Phone';
 
+
+import PersonIcon from '@material-ui/icons/Person';
+import GroupAddIcon from '@material-ui/icons/GroupAdd';
+import VideoLabelIcon from '@material-ui/icons/VideoLabel';
+import WorkIcon from '@material-ui/icons/Work';
+import { withStyles } from '@material-ui/core/styles';
+import clsx from 'clsx';
+import StepConnector from '@material-ui/core/StepConnector';
+
+
+const ColorlibConnector = withStyles({
+    alternativeLabel: {
+      top: 22,
+    },
+    active: {
+      '& $line': {
+        backgroundImage:
+          'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
+      },
+    },
+    completed: {
+      '& $line': {
+        backgroundImage:
+          'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
+      },
+    },
+    line: {
+      height: 3,
+      border: 0,
+      backgroundColor: '#eaeaf0',
+      borderRadius: 1,
+    },
+  })(StepConnector);
+  
+  const useColorlibStepIconStyles = makeStyles({
+    root: {
+      backgroundColor: '#fff',
+      zIndex: 1,
+      color: '#0099cc',
+      width: 50,
+      height: 50,
+      display: 'flex',
+      borderRadius: '50%',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    active: {
+      backgroundImage:
+        'linear-gradient( 136deg, rgb(0, 191, 255) 0%, rgb(0, 153, 204) 50%, rgb(0, 134, 179) 100%)',
+      boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
+      color:'#fff'
+    },
+    completed: {
+      backgroundImage:
+        'linear-gradient( 136deg, rgb(0, 230, 230) 0%, rgb(0, 179, 179) 50%, rgb(0, 153, 153) 100%)',
+      color:'#fff'  
+    },
+  });
+
+
+function ColorlibStepIcon(props) {
+
+    const classes = useColorlibStepIconStyles();
+    const { active, completed } = props;
+  
+    const icons = {
+      1: <PersonIcon />,
+      2: <GroupAddIcon />,
+      3: <VideoLabelIcon />,
+      4: <WorkIcon/>,
+    };
+  
+    return (
+      <div
+        className={clsx(classes.root, {
+          [classes.active]: active,
+          [classes.completed]: completed,
+        })}
+      >
+        {icons[String(props.icon)]}
+      </div>
+    );
+  }
+
+
+
 enableRipple(true);
 
 //from ramids
@@ -49,6 +135,16 @@ const nodes = [{
         { value: 'deimos', label: 'Deimos' },
     ],
 }];
+
+
+var stepper_style={
+    backgroundImage:'linear-gradient( 136deg, rgb(140, 179, 217) 0%, rgb(121, 166, 210) 50%, rgb(83, 140, 198) 100%)',
+    color: '#fff'
+}
+
+var input_style={
+    
+}
 
 
 
@@ -69,40 +165,33 @@ export default class ProviderRegister extends React.Component {
             ALine1: '',
             ALine2: '',
             PinCode: '',
-            // countries: [],
-            businessList: ['Business Incorporation', 'GST Service', 'Startup Serices', 'Legal Complaince Service', 'Tax Returns', 'Goverment Registration', 'Trademark', 'Miscelleneous Services'],
-            individualList: ['Tax returns', 'TDS', 'Legal', 'Miscelleneous Services'],
-            businessList1: [
-                { value: 'Business Incorporation', label: 'Business Incorporation' },
-                { value: 'strawberry', label: 'Strawberry' },
-                { value: 'vanilla', label: 'Vanilla' }
-            ],
-            countries: [
-                { id: 1, name: 'Australia', hasChild: true, expanded: true },
-                { id: 2, pid: 1, name: 'New South Wales' },
-                { id: 3, pid: 1, name: 'Victoria' },
-                { id: 4, pid: 1, name: 'South Australia' },
-                { id: 6, pid: 1, name: 'Western Australia' },
-                { id: 7, name: 'Brazil', hasChild: true },
-                { id: 8, pid: 7, name: 'Paraná' },
-                { id: 9, pid: 7, name: 'Ceará' },
-                { id: 10, pid: 7, name: 'Acre' },
-                { id: 11, name: 'China', hasChild: true },
-                { id: 12, pid: 11, name: 'Guangzhou' },
-                { id: 13, pid: 11, name: 'Shanghai' },
-                { id: 14, pid: 11, name: 'Beijing' },
-                { id: 15, pid: 11, name: 'Shantou' },
-                { id: 16, name: 'France', hasChild: true },
-                { id: 17, pid: 16, name: 'Pays de la Loire' },
-                { id: 18, pid: 16, name: 'Aquitaine' },
-                { id: 19, pid: 16, name: 'Brittany' },
-                { id: 20, pid: 16, name: 'Lorraine' },
-                { id: 21, name: 'India', hasChild: true },
-                { id: 22, pid: 21, name: 'Assam' },
-                { id: 23, pid: 21, name: 'Bihar' },
-                { id: 24, pid: 21, name: 'Tamil Nadu' },
-                { id: 25, pid: 21, name: 'Punjab' }
-            ],
+            
+            // countries: [
+            //     { id: 1, name: 'Australia', hasChild: true, expanded: true },
+            //     { id: 2, pid: 1, name: 'New South Wales' },
+            //     { id: 3, pid: 1, name: 'Victoria' },
+            //     { id: 4, pid: 1, name: 'South Australia' },
+            //     { id: 6, pid: 1, name: 'Western Australia' },
+            //     { id: 7, name: 'Brazil', hasChild: true },
+            //     { id: 8, pid: 7, name: 'Paraná' },
+            //     { id: 9, pid: 7, name: 'Ceará' },
+            //     { id: 10, pid: 7, name: 'Acre' },
+            //     { id: 11, name: 'China', hasChild: true },
+            //     { id: 12, pid: 11, name: 'Guangzhou' },
+            //     { id: 13, pid: 11, name: 'Shanghai' },
+            //     { id: 14, pid: 11, name: 'Beijing' },
+            //     { id: 15, pid: 11, name: 'Shantou' },
+            //     { id: 16, name: 'France', hasChild: true },
+            //     { id: 17, pid: 16, name: 'Pays de la Loire' },
+            //     { id: 18, pid: 16, name: 'Aquitaine' },
+            //     { id: 19, pid: 16, name: 'Brittany' },
+            //     { id: 20, pid: 16, name: 'Lorraine' },
+            //     { id: 21, name: 'India', hasChild: true },
+            //     { id: 22, pid: 21, name: 'Assam' },
+            //     { id: 23, pid: 21, name: 'Bihar' },
+            //     { id: 24, pid: 21, name: 'Tamil Nadu' },
+            //     { id: 25, pid: 21, name: 'Punjab' }
+            // ],
 
             field: { dataSource: this.countries, id: 'id', parentID: 'pid', text: 'name', hasChildren: 'hasChild' },
             indNodes: [],
@@ -112,6 +201,8 @@ export default class ProviderRegister extends React.Component {
             indChecked: [],
             indExpanded: [],
             busChecked: [],
+	        busCheckedForAPI: [],
+            indCheckedForAPI: [],
             busExpanded: [],
             checked: [],
             expanded: [],
@@ -194,6 +285,7 @@ export default class ProviderRegister extends React.Component {
 
 
     change = (e) => {
+        e.preventDefault()
         const { name, value } = e.target;
         let errors = this.state.errors;
         switch (name) {
@@ -381,7 +473,8 @@ export default class ProviderRegister extends React.Component {
 
     }
 
-    createOrganization = () => {
+    createOrganization = (e) => {
+        e.preventDefault();
         this.props.registerProvider(
             this.state.firstName + " " + this.state.lastName,
             this.state.password, this.state.email, this.state.phoneNumber,
@@ -391,14 +484,21 @@ export default class ProviderRegister extends React.Component {
             this.state.OrgAddress, this.state.OrgRegNumber,
             this.state.OrgPINType, this.state.actualServices,
             this.state.base64, this.state.OrgExpertise,
-	    this.state.indChecked, this.state.busChecked
+	    this.state.indCheckedForAPI,
+	     this.state.busCheckedForAPI
         );
         store.subscribe(() => {
+            console.log("error message-------->",store.getState().registerProvider.error)
+            console.log("success message-------->",store.getState().registerProvider.success)
             if (store.getState().registerProvider.error) {
                 this.setState({ open: true });
                 this.setState({ errorMessage: store.getState().registerProvider.error })
-            } else {
-                history.push('/provider/login');
+                //alert(this.state.errorMessage)
+            }  
+            if(store.getState().registerProvider.success) {
+               //alert('registration successful')
+               this.setState({ errorMessage: store.getState().registerProvider.success })
+               history.push('/provider/login');
             }
 
         })
@@ -431,13 +531,52 @@ export default class ProviderRegister extends React.Component {
         });
     }
 
+treeParse = (nodes, checkedArray) => {
+        const checked = [];
+        nodes.forEach(node => {
+            if (node.children) {
+                const chdd = [];
+                node.children.forEach(child => {
+                    if (child.children) {
+                        const grans = [];
+                        child.children.forEach(grand => {
+                            if (checkedArray.indexOf(grand.label) > -1)
+                            grans.push({
+                                label: grand.label, value: grand.label
+                            });
+                        });
+                        chdd.push({
+                            value: child.label, label: child.label, children: grans
+                        });
+                    }
+                });
+                checked.push({
+                    value: node.label, label: node.label, children: chdd
+                });
+            }
+        });
+        console.log('checked ', checked);
+        return checked;
+    } 
+
+    checkTreeProperty = (checkedArray, busCh) => {
+        console.log('bbgg ', checkedArray);
+        if (busCh) {
+            this.setState({busChecked: checkedArray});
+            this.setState({busCheckedForAPI: this.treeParse(this.state.busNodes, checkedArray)});
+        }
+        else {
+            this.setState({indChecked: checkedArray});
+            this.setState({indCheckedForAPI: this.treeParse(this.state.indNodes, checkedArray)});
+        }
+    }
  businessTreeCheck = () => {
         return (
             <CheckboxTree
                 nodes={this.state.busNodes}
                 checked={this.state.busChecked}
                 expanded={this.state.busExpanded}
-                onCheck={checked => this.setState({ busChecked: checked })}
+                onCheck={checked => this.checkTreeProperty(checked, true)}
                 onExpand={expanded => this.setState({ busExpanded: expanded })}
                 icons={{
                     check: <span className="rct-icon rct-icon-check" />,
@@ -461,7 +600,7 @@ export default class ProviderRegister extends React.Component {
                 nodes={this.state.indNodes}
                 checked={this.state.indChecked}
                 expanded={this.state.indExpanded}
-                onCheck={checked => this.setState({ indChecked: checked })}
+                onCheck={ch => this.checkTreeProperty(ch, false)}
                 onExpand={expanded => this.setState({ indExpanded: expanded })}
                 icons={{
                     check: <span className="rct-icon rct-icon-check" />,
@@ -485,14 +624,17 @@ export default class ProviderRegister extends React.Component {
        
         if(this.state.activeStep === 3) {
             return(
-                <Paper elevation={3} style={{ padding:50, minHeight: 500 }}>
-                    <h4>Please provide your service type details</h4>
+                <div class="form_container">
+                    <div class="form_header">
+                        <Typography variant="h6">Please provide your Service details</Typography>
+                    </div>
+                    <br/>
 
                     <div style={{height: "10px",display: "block"}}></div>
 
                     <GridContainer>
                             <GridItem>
-                            <ExpansionPanel style={{width: "100%"}}>
+                            <ExpansionPanel style={{width: "90%", marginLeft: '5%'}}>
                         <ExpansionPanelSummary expandIcon={<Icon className="fa fa-sort-desc" aria-hidden="true"/>}>
                             <Typography>{"For Individual"}</Typography>
                         </ExpansionPanelSummary>
@@ -510,7 +652,7 @@ export default class ProviderRegister extends React.Component {
 
                         <GridContainer>
                             <GridItem>
-                            <ExpansionPanel style={{width: "100%"}}>
+                            <ExpansionPanel style={{width: "90%", marginLeft: '5%'}}>
                         <ExpansionPanelSummary expandIcon={<Icon className="fa fa-sort-desc" aria-hidden="true"/>}>
                             <Typography>{"For business"}</Typography>
                         </ExpansionPanelSummary>
@@ -532,19 +674,27 @@ export default class ProviderRegister extends React.Component {
                     <Button onClick={this.handleReset} 
                         variant="outlined" 
                         color="secondary" 
-                        style={{marginRight:30}}>Reset Form
+                        style={{marginRight:30}}>Reset
                     </Button>
+                    <br/><br/>
                     <Button onClick={this.createOrganization} 
-                        variant="outlined" 
-                        color="primary">Create your Provider Account
+                        variant="contained" 
+                        style={{backgroundColor: '#006699', color: '#fff'}}>Create your Provider Account
                     </Button>
-                </Paper>
+                </div>
             )
         }
+
+
+
         if (this.state.activeStep === 2) {
             return (
-                <Paper elevation={3} style={{ padding:50, minHeight: 500 }}>
-                    <h4>Enter your Organization Services</h4>
+                <div class="form_container">
+                    <div class="form_header" style={{textAlign: 'center'}}>
+                        <Typography variant="h6">Please provide your Organisation services</Typography>
+                    </div>
+                    <br/>
+
                     <div className={this.classes.root}>
                         <Tabs
                             value={this.state.value}
@@ -552,15 +702,16 @@ export default class ProviderRegister extends React.Component {
                             indicatorColor="secondary"
                             textColor="primary"
                             centered
+                            size="small"
                         >
-                            <Tab label="Select your service Type" />
-                            <Tab label="Select your Expertise" />
+                            <Tab size="small" style={{fontSize: '10px'}} label="Select your service Type" />
+                            <Tab size="small" style={{fontSize: '10px'}} label="Select your Expertise" />
                         </Tabs>
                     </div>
                     {
                         this.state.value !== 1 ?
                         <div style={{ display: 'inline-flex', marginBottom: 50 }}>
-                        <div>
+                        <div style={{width: '100%'}}>
                             
                                 {
                                     this.state.showAlert ? <Alert severity="warning">Cannot delete. Atleast one expertise required</Alert> : null
@@ -571,6 +722,7 @@ export default class ProviderRegister extends React.Component {
                                     <Autocomplete
                                         multiple
                                         id="checkboxes-tags-demo"
+                                        size="small"
                                         value={this.state.selectedServices}
                                         options={this.state.servivesList}
                                         disableCloseOnSelect
@@ -638,12 +790,20 @@ export default class ProviderRegister extends React.Component {
                     <Button variant="outlined" color="primary" onClick={this.handleNext} style={{ marginRight: 30 }}>
                         {this.state.activeStep === this.state.steps.length - 1 ? 'Finish' : 'Next'}
                     </Button>
-                </Paper>
+                </div>
             )
-        } if (this.state.activeStep === 0) {
+        } 
+        
+        
+
+        if (this.state.activeStep === 0) {
             return (
-                <Paper elevation={3} style={{ padding:50, minHeight: 500 }}>
-                    <h4>Please provide your personal details</h4>
+                <div class="form_container">
+                    <div class="form_header">
+                        <Typography variant="h6">Please provide your personal details</Typography>
+                    </div>
+                    <br/>
+
                     <Container maxWidth="sm" style={{ marginBottom: 30 }}>
                         <form noValidate autoCapitalize="off">
                             <GridContainer>
@@ -656,17 +816,21 @@ export default class ProviderRegister extends React.Component {
                                 type="text"
                                 required
                                 name="firstName"
-                                
+                                size="small"
                                 error={this.state.errors.firstName}
                                 helperText={this.state.errors.firstName}
                                 autoFocus
                                 onChange={(e) => this.change(e)}
                                 value={this.state.firstName}
                                 variant="outlined"
+          
+                                inputProps={{style: {fontSize: 40}}}
+                                InputLabelProps={{style: {fontSize: 40}}} 
+                                
                                 InputProps={{
                                     endAdornment:
                                     <InputAdornment position="end">
-                                      <PermIdentityIcon/>
+                                      <PermIdentityIcon style={{color: '#006699'}}/>
                                     </InputAdornment>,
                                   }}
                             />
@@ -677,6 +841,7 @@ export default class ProviderRegister extends React.Component {
                                 id="lastName"
                                 placeholder="Enter Last Name"
                                 fullWidth
+                                size="small"
                                 type="text"
                                 required
                                 name="lastName"
@@ -688,7 +853,7 @@ export default class ProviderRegister extends React.Component {
                                 InputProps={{
                                     endAdornment:
                                     <InputAdornment position="end">
-                                      <GroupIcon/>
+                                      <GroupIcon style={{color: '#006699'}}/>
                                     </InputAdornment>,
                                   }}
                             />
@@ -702,6 +867,7 @@ export default class ProviderRegister extends React.Component {
                                 id="email"
                                 placeholder="Enter Email Address"
                                 fullWidth
+                                size="small"
                                 type="email"
                                 required
                                 name="email"
@@ -713,7 +879,7 @@ export default class ProviderRegister extends React.Component {
                                 InputProps={{
                                     endAdornment:
                                     <InputAdornment position="end">
-                                      <MailIcon/>
+                                      <MailIcon style={{color: '#006699'}}/>
                                     </InputAdornment>,
                                   }}
                             />
@@ -729,6 +895,7 @@ export default class ProviderRegister extends React.Component {
                                 id="password"
                                 placeholder="Enter Password"
                                 fullWidth
+                                size="small"
                                 type="password"
                                 required
                                 name="password"
@@ -749,6 +916,7 @@ export default class ProviderRegister extends React.Component {
                                 id="confirmPassword"
                                 placeholder="Re-enter Password"
                                 fullWidth
+                                size="small"
                                 type="password"
                                 required
                                 name="confirmPassword"
@@ -777,11 +945,12 @@ export default class ProviderRegister extends React.Component {
                                 <GridItem xs={12} sm={12} md={3} >
                                 <Select
                                 fullwidth
+                                size="small"
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-sßelect"
                                     value={this.state.country_code}
                                     variant="outlined"
-                                    style={{ minWidth: 120 }}>
+                                    style={{ minWidth: 120, height: '40px' }}>
                                     {
                                         (this.state.countries && this.state.countries.length) ? this.state.countries.map((item, index) => {
                                             return <MenuItem key={index} value={item.dial_code} onClick={(e) => this.handleAccessCode(e)}>{item.dial_code}</MenuItem>
@@ -796,6 +965,7 @@ export default class ProviderRegister extends React.Component {
                                     placeholder="Enter Phone number.."
                                     name="phoneNumber"
                                     fullWidth
+                                    size="small"
                                     type="number"
                                     error={this.state.errors.phoneNumber}
                                     helperText={this.state.errors.phoneNumber}
@@ -807,7 +977,7 @@ export default class ProviderRegister extends React.Component {
                                     InputProps={{
                                         endAdornment:
                                         <InputAdornment position="end">
-                                          <PhoneIcon/>
+                                          <PhoneIcon style={{color: '#006699'}}/>
                                         </InputAdornment>,
                                       }}
                                 />
@@ -827,12 +997,20 @@ export default class ProviderRegister extends React.Component {
                     <Button variant="outlined" color="primary" onClick={this.handleNext} style={{ marginRight: 30 }}>
                         {this.state.activeStep === this.state.steps.length - 1 ? 'Finish' : 'Next'}
                     </Button>
-                </Paper>
+                </div>
             )
-        } if (this.state.activeStep === 1) {
+        } 
+
+
+        
+        if (this.state.activeStep === 1) {
             return (
-                <Paper elevation={3} style={{ padding:50, minHeight: 500 }}>
-                    <h4>Please provide your Organization Details</h4>
+                <div class="form_container">
+                    <div class="form_header">
+                        <Typography variant="h6">Please provide your organization details</Typography>
+                    </div>
+                    <br/>
+
                     <Container maxWidth="sm" style={{ marginBottom: 50 }}>
                         <form noValidate autoCapitalize="off">
                             <GridContainer>
@@ -841,6 +1019,7 @@ export default class ProviderRegister extends React.Component {
 
                                 <TextField
                                 fullWidth
+                                size="small"
                                 type="text"
                                 required
                                 placeholder="Enter Organization Name (As per goverment fillings)"
@@ -863,6 +1042,7 @@ export default class ProviderRegister extends React.Component {
 
                                 <TextField
                                 fullWidth
+                                size="small"
                                 placeholder="Enter Organization Address"
                                 type="text"
                                 required
@@ -884,6 +1064,7 @@ export default class ProviderRegister extends React.Component {
 
                                <TextField
                                 fullWidth
+                                size="small"
                                 placeholder="Enter your Fees"
                                 type="text"
                                 required
@@ -899,6 +1080,7 @@ export default class ProviderRegister extends React.Component {
 
                                <TextField
                                 fullWidth
+                                size="small"
                                 placeholder="Enter Your Pincode.."
                                 type="text"
                                 required
@@ -919,8 +1101,11 @@ export default class ProviderRegister extends React.Component {
                                <Select id="countriesLabel"
                                variant="outlined"
                                 labelId="demo-simple-select-label"
+                                size="small"
                                 fullWidth
-                                value={this.state.OrgCountry}>
+                                value={this.state.OrgCountry}
+                                style={{height: '40px'}}
+                                >
                                 {
                                     (this.state.countries && this.state.countries.length) ? this.state.countries.map((item, index) => {
                                         return <MenuItem key={index} value={item.name} onClick={(e) => this.handleCountrySelect(e)}>{item.name}</MenuItem>
@@ -932,9 +1117,11 @@ export default class ProviderRegister extends React.Component {
                                <span style={{float:"left"}}>City<sup style={{color:"red"}}>*</sup></span>
                                <Select id="citiesLabel"
                                 labelId="demo-simple-select-label"
+                                size="small"
                                 fullWidth
                                 variant="outlined"
                                 value={this.state.OrgCity}
+                                style={{height: '40px'}}
                             >
                                          
                                 {
@@ -953,6 +1140,7 @@ export default class ProviderRegister extends React.Component {
                                 <span style={{float:"left"}}>Address Line 1<sup style={{color:"red"}}>*</sup></span>
                                 <TextField
                                 fullWidth
+                                size="small"
                                 variant="outlined"
                                 placeholder="Address Line 1"
                                 type="text"
@@ -971,6 +1159,7 @@ export default class ProviderRegister extends React.Component {
                                 <span style={{float:"left"}}>Address Line 2<sup style={{color:"red"}}>*</sup></span>
                                 <TextField
                                 fullWidth
+                                size="small"
                                 variant="outlined"
                                 placeholder="Address Line 2"
                                 type="text"
@@ -989,6 +1178,7 @@ export default class ProviderRegister extends React.Component {
                                 <span style={{float:"left"}}>Organization Registation Number<sup style={{color:"red"}}>*</sup></span>
                                 <TextField
                                 fullWidth
+                                size="small"
                                 variant="outlined"
                                 placeholder="Enter your Organization Registation Number"
                                 type="text"
@@ -1009,6 +1199,7 @@ export default class ProviderRegister extends React.Component {
                                 <span style={{float:"left"}}>Type of Registration<sup style={{color:"red"}}>*</sup></span>
                                 <TextField
                                 fullWidth
+                                size="small"
                                 variant="outlined"
                                 placeholder="Enter Type of Registration"
                                 type="text"
@@ -1050,7 +1241,7 @@ export default class ProviderRegister extends React.Component {
                     <Button variant="outlined" color="primary" onClick={this.handleNext} style={{ marginRight: 30 }}>
                         {this.state.activeStep === this.state.steps.length - 1 ? 'Finish' : 'Next'}
                     </Button>
-                </Paper>
+                </div>
             )
         }
     }
@@ -1059,19 +1250,26 @@ export default class ProviderRegister extends React.Component {
         return (
             <div >
                 <HeaderContainer />
-                <Paper className="stepperShrink">
-                    <Stepper activeStep={this.state.activeStep} alternativeLabel elevation={0}>
-                        {
-                            this.state.steps.map((items, index) => {
-                                return (
-                                    <Step key={items}>
-                                        <StepLabel>{items}</StepLabel>
-                                    </Step>
-                                )
-                            })
-                        }
-                    </Stepper>
-                </Paper>
+
+                <div class="full_data_container box_shadow ">
+       
+                <Stepper activeStep={this.state.activeStep} alternativeLabel elevation={0} style={stepper_style}>
+                    {
+                        this.state.steps.map((items, index) => {
+                            return (
+                                <Step key={items}>
+
+                                    <StepLabel StepIconComponent={ColorlibStepIcon}>
+                                        <Typography variant="caption" style={{color: '#fff'}}>{items}</Typography>
+                                    </StepLabel>
+
+                                </Step>
+                            )
+                        })
+                    }
+                </Stepper>
+
+              
                 <div className="shrink" >
                     <GridContainer spacing={0} direction="column" alignItems="center" justify="center">
                         <GridItem xs={12} sm ={12} md = {8}> 
@@ -1100,6 +1298,11 @@ export default class ProviderRegister extends React.Component {
                         </React.Fragment>
                     }
                 />
+
+
+            </div>
+
+
             </div>
         )
     }
