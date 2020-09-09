@@ -8,18 +8,18 @@ phases:
     runtime-versions:
       nodejs: 10  
     commands:
-      - echo Installing Mocha...
-      - npm install -g mocha
+      - echo Installing
+      - npm install
   pre_build:
     commands:
       - echo Installing source NPM dependencies...
       - npm install
-      - npm install unit.js
+      - npm install app.js
   build:
     commands:
       - echo Build started on `date`
       - echo Compiling the Node.js code
-      - mocha test.js
+      - mocha testServer.js
   post_build:
     commands:
       - echo Build completed on `date`
@@ -30,7 +30,6 @@ phases:
 artifacts:
   files:
     - app.js
-    - index.html
     - package.json
     - node_modules/async/*
     - node_modules/lodash/*
