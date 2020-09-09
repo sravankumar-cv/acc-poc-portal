@@ -14,12 +14,12 @@ phases:
     commands:
       - echo Installing source NPM dependencies...
       - npm install
-      - npm install app.js
+      - npm install package.json
   build:
     commands:
       - echo Build started on `date`
-      - echo Compiling the Node.js code
-      - mocha testServer.js
+      - echo Compiling the package.json code
+      - mocha package.json
   post_build:
     commands:
       - echo Build completed on `date`
